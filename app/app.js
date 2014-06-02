@@ -190,7 +190,7 @@
     models: ['FhirBrowser.model.FhirType'],
     stores: ['FhirBrowser.store.FhirTypeStore'],
     autoCreateViewport: true,
-    aboutTarget: 'https://github.com/gotdan/fhirbrowser/blob/master/readme.mdc',
+    aboutTarget: 'https://github.com/gotdan/fhirbrowser/blob/master/readme.md',
     launch: function() {
       var panel, tree, treeMenu;
       this.hideMask();
