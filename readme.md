@@ -1,6 +1,6 @@
 # FHIR Browser
 
-# http://gotdan.github.io/fhirbrowser/index.html
+# http://gotdan.github.io/fhirbrowser/
 
 ## Overview
 
@@ -26,10 +26,10 @@ FHIR Browser code consists of two components, a JSON pre-processing script writt
 
 5. In the ```./app``` directory, compile the ExtJs library:
 
-```sencha -sdk ../ext compile -classpath=./ page -yui -in index.html -out ../build/index.html```
+```sencha compile -classpath=../dist/ext,./ exclude -all and include -recursive -file=app.js and concatenate -yui ../dist/app.js```
 
 
-**To run the pre-processor:**
+**To run the pre-processor**
 
 1. Make sure NodeJs and CoffeeScript are installed (steps 1 and 2 above)
 
