@@ -186,7 +186,7 @@ Ext.application
 		'FhirBrowser.store.FhirTypeStore'
 	]
 	autoCreateViewport: true
-	aboutTarget: 'http://www.google.com'
+	aboutTarget: 'https://github.com/gotdan/fhirbrowser/blob/master/readme.mdc'
 
 	launch: ->
 		@hideMask()	
