@@ -1,0 +1,418 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Procedure.text",
+			"parent": "Procedure",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Procedure.contained",
+			"parent": "Procedure",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Procedure.identifier",
+			"parent": "Procedure",
+			"short": "External Ids for this procedure",
+			"formal": "This records identifiers associated with this procedure that are defined by business processed and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "subject",
+			"path": "Procedure.subject",
+			"parent": "Procedure",
+			"short": "Who procedure was performed on",
+			"formal": "The person on whom the procedure was performed.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "type",
+			"path": "Procedure.type",
+			"parent": "Procedure",
+			"short": "Identification of the procedure",
+			"formal": "The specific procedure that is performed. Use text if the exact nature of the procedure can't be coded.",
+			"min": 1,
+			"max": "1",
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "bodySite",
+			"path": "Procedure.bodySite",
+			"parent": "Procedure",
+			"short": "Precise location details",
+			"formal": "Detailed and structured anatomical location information. Multiple locations are allowed - e.g. multiple punch biopsies of a lesion.",
+			"min": 0,
+			"max": "*",
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "indication",
+			"path": "Procedure.indication",
+			"parent": "Procedure",
+			"short": "Reason procedure performed",
+			"formal": "The reason why the procedure was performed. This may be due to a Condition, may be coded entity of some type, or may simply be present as text.",
+			"min": 0,
+			"max": "*",
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "performer",
+			"path": "Procedure.performer",
+			"parent": "Procedure",
+			"short": "The people who performed the procedure",
+			"formal": "Limited to 'real' people rather than equipment.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "person",
+					"path": "Procedure.performer.person",
+					"parent": "Procedure.performer",
+					"short": "The reference to the practitioner",
+					"formal": "The practitioner who was involved in the procedure.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "role",
+					"path": "Procedure.performer.role",
+					"parent": "Procedure.performer",
+					"short": "The role the person was in",
+					"formal": "E.g. surgeon, anaethetist, endoscopist.",
+					"min": 0,
+					"max": "1",
+					"type": "CodeableConcept"
+				}
+			]
+		},
+		{
+			"name": "date",
+			"path": "Procedure.date",
+			"parent": "Procedure",
+			"short": "The date the procedure was performed",
+			"formal": "The dates over which the procedure was performed. Allows a period to support complex procedures that span more that one date, and also allows for the length of the procedure to be captured.",
+			"min": 0,
+			"max": "1",
+			"type": "Period"
+		},
+		{
+			"name": "encounter",
+			"path": "Procedure.encounter",
+			"parent": "Procedure",
+			"short": "The encounter when procedure performed",
+			"formal": "The encounter during which the procedure was performed.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Encounter"
+		},
+		{
+			"name": "outcome",
+			"path": "Procedure.outcome",
+			"parent": "Procedure",
+			"short": "What was result of procedure?",
+			"formal": "What was the outcome of the procedure - did it resolve reasons why the procedure was performed?.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "report",
+			"path": "Procedure.report",
+			"parent": "Procedure",
+			"short": "Any report that results from the procedure",
+			"formal": "This could be a histology result. There could potentially be multiple reports - e.g. if this was a procedure that made multiple biopsies.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "DiagnosticReport"
+		},
+		{
+			"name": "complication",
+			"path": "Procedure.complication",
+			"parent": "Procedure",
+			"short": "Complication following the procedure",
+			"formal": "Any complications that occurred during the procedure, or in the immediate post-operative period. These are generally tracked separately from the notes, which typically will describe the procedure itself rather than any 'post procedure' issues.",
+			"min": 0,
+			"max": "*",
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "followUp",
+			"path": "Procedure.followUp",
+			"parent": "Procedure",
+			"short": "Instructions for follow up",
+			"formal": "If the procedure required specific follow up - e.g. removal of sutures. The followup may be represented as a simple note, or potentially could be more complex in which case the CarePlan resource can be used.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "relatedItem",
+			"path": "Procedure.relatedItem",
+			"parent": "Procedure",
+			"short": "A procedure that is related to this one",
+			"formal": "Procedures may be related to other items such as procedures or medications. For example treating wound dehiscence following a previous procedure.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "type",
+					"path": "Procedure.relatedItem.type",
+					"parent": "Procedure.relatedItem",
+					"short": "caused-by | because-of",
+					"formal": "The nature of the relationship.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "ProcedureRelationshipType",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/procedure-relationship-type"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "target",
+					"path": "Procedure.relatedItem.target",
+					"parent": "Procedure.relatedItem",
+					"short": "The related item - e.g. a procedure",
+					"formal": "The related item - e.g. a procedure.",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"reference": "AdverseReaction",
+					"children": [
+						{
+							"name": "AdverseReaction",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.AdverseReaction",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "AdverseReaction"
+						},
+						{
+							"name": "AllergyIntolerance",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.AllergyIntolerance",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "AllergyIntolerance"
+						},
+						{
+							"name": "CarePlan",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.CarePlan",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "CarePlan"
+						},
+						{
+							"name": "Condition",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.Condition",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Condition"
+						},
+						{
+							"name": "DeviceObservationReport",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.DeviceObservationReport",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "DeviceObservationReport"
+						},
+						{
+							"name": "DiagnosticReport",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.DiagnosticReport",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "DiagnosticReport"
+						},
+						{
+							"name": "FamilyHistory",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.FamilyHistory",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "FamilyHistory"
+						},
+						{
+							"name": "ImagingStudy",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.ImagingStudy",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "ImagingStudy"
+						},
+						{
+							"name": "Immunization",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.Immunization",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Immunization"
+						},
+						{
+							"name": "ImmunizationRecommendation",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.ImmunizationRecommendation",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "ImmunizationRecommendation"
+						},
+						{
+							"name": "MedicationAdministration",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.MedicationAdministration",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "MedicationAdministration"
+						},
+						{
+							"name": "MedicationDispense",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.MedicationDispense",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "MedicationDispense"
+						},
+						{
+							"name": "MedicationPrescription",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.MedicationPrescription",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "MedicationPrescription"
+						},
+						{
+							"name": "MedicationStatement",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.MedicationStatement",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "MedicationStatement"
+						},
+						{
+							"name": "Observation",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.Observation",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Observation"
+						},
+						{
+							"name": "Procedure",
+							"parent": "Procedure.relatedItem.target",
+							"path": "Procedure.relatedItem.target.Procedure",
+							"short": "The related item - e.g. a procedure",
+							"formal": "The related item - e.g. a procedure.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Procedure"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "notes",
+			"path": "Procedure.notes",
+			"parent": "Procedure",
+			"short": "Additional information about procedure",
+			"formal": "Any other notes about the procedure - e.g. the operative notes.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		}
+	],
+	"success": true
+}

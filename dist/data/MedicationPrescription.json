@@ -1,0 +1,468 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "MedicationPrescription.text",
+			"parent": "MedicationPrescription",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "MedicationPrescription.contained",
+			"parent": "MedicationPrescription",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "MedicationPrescription.identifier",
+			"parent": "MedicationPrescription",
+			"short": "External identifier",
+			"formal": "External identifier - one that would be used by another non-FHIR system - for example a re-imbursement system might issue its own id for each prescription that is created.  This is particularly important where FHIR only provides part of an erntire workflow process where records have to be tracked through an entire system.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "dateWritten",
+			"path": "MedicationPrescription.dateWritten",
+			"parent": "MedicationPrescription",
+			"short": "When prescription was authorized",
+			"formal": "The date (and perhaps time) when the prescription was written.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "status",
+			"path": "MedicationPrescription.status",
+			"parent": "MedicationPrescription",
+			"short": "active | on hold | completed | entered in error | stopped | superceded",
+			"formal": "A code specifying the state of the order.  Generally this will be active or completed state.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "MedicationPrescriptionStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/medication-prescription-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "patient",
+			"path": "MedicationPrescription.patient",
+			"parent": "MedicationPrescription",
+			"short": "Who prescription is for",
+			"formal": "A link to a resource representing the person to whom the medication will be given.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "prescriber",
+			"path": "MedicationPrescription.prescriber",
+			"parent": "MedicationPrescription",
+			"short": "Who ordered the medication(s)",
+			"formal": "The healthcare professional responsible for authorizing the prescription.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Practitioner"
+		},
+		{
+			"name": "encounter",
+			"path": "MedicationPrescription.encounter",
+			"parent": "MedicationPrescription",
+			"short": "Created during encounter / admission / stay",
+			"formal": "A link to a resource that identifies the particular occurrence of contact between patient and health care provider.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Encounter"
+		},
+		{
+			"name": "reason",
+			"path": "MedicationPrescription.reason[x]",
+			"parent": "MedicationPrescription",
+			"short": "Reason or indication for writing the prescription",
+			"formal": "Can be the reason or the indication for writing the prescription.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"children": [
+				{
+					"name": "reasonCodeableConcept",
+					"parent": "MedicationPrescription.reason[x]",
+					"path": "MedicationPrescription.reason[x].reasonCodeableConcept",
+					"short": "Reason or indication for writing the prescription",
+					"formal": "Can be the reason or the indication for writing the prescription.",
+					"min": 0,
+					"max": "1",
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "Condition",
+					"parent": "MedicationPrescription.reason[x]",
+					"path": "MedicationPrescription.reason[x].Condition",
+					"short": "Reason or indication for writing the prescription",
+					"formal": "Can be the reason or the indication for writing the prescription.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Condition"
+				}
+			]
+		},
+		{
+			"name": "medication",
+			"path": "MedicationPrescription.medication",
+			"parent": "MedicationPrescription",
+			"short": "Medication to be taken",
+			"formal": "Identifies the medication being administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Medication"
+		},
+		{
+			"name": "dosageInstruction",
+			"path": "MedicationPrescription.dosageInstruction",
+			"parent": "MedicationPrescription",
+			"short": "How medication should be taken",
+			"formal": "Indicates how the medication is to be used by the patient.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "text",
+					"path": "MedicationPrescription.dosageInstruction.text",
+					"parent": "MedicationPrescription.dosageInstruction",
+					"short": "Dosage instructions expressed as text",
+					"formal": "Free text dosage instructions for cases where the instructions are too complex to code.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "additionalInstructions",
+					"path": "MedicationPrescription.dosageInstruction.additionalInstructions",
+					"parent": "MedicationPrescription.dosageInstruction",
+					"short": "Supplemental instructions - e.g. \"with meals\"",
+					"formal": "Additional instructions such as \"Swallow with plenty of water\" which may or may not be coded.",
+					"min": 0,
+					"max": "1",
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "timing",
+					"path": "MedicationPrescription.dosageInstruction.timing[x]",
+					"parent": "MedicationPrescription.dosageInstruction",
+					"short": "When medication should be administered",
+					"formal": "The timing schedule for giving the medication to the patient.  The Schedule data type allows many different expressions, for example.  \"Every  8 hours\"; \"Three times a day\"; \"1/2 an hour before breakfast for 10 days from 23-Dec 2011:\";  \"15 Oct 2013, 17 Oct 2013 and 1 Nov 2013\".",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"children": [
+						{
+							"name": "timingDateTime",
+							"parent": "MedicationPrescription.dosageInstruction.timing[x]",
+							"path": "MedicationPrescription.dosageInstruction.timing[x].timingDateTime",
+							"short": "When medication should be administered",
+							"formal": "The timing schedule for giving the medication to the patient.  The Schedule data type allows many different expressions, for example.  \"Every  8 hours\"; \"Three times a day\"; \"1/2 an hour before breakfast for 10 days from 23-Dec 2011:\";  \"15 Oct 2013, 17 Oct 2013 and 1 Nov 2013\".",
+							"min": 0,
+							"max": "1",
+							"type": "dateTime",
+							"leaf": true
+						},
+						{
+							"name": "timingPeriod",
+							"parent": "MedicationPrescription.dosageInstruction.timing[x]",
+							"path": "MedicationPrescription.dosageInstruction.timing[x].timingPeriod",
+							"short": "When medication should be administered",
+							"formal": "The timing schedule for giving the medication to the patient.  The Schedule data type allows many different expressions, for example.  \"Every  8 hours\"; \"Three times a day\"; \"1/2 an hour before breakfast for 10 days from 23-Dec 2011:\";  \"15 Oct 2013, 17 Oct 2013 and 1 Nov 2013\".",
+							"min": 0,
+							"max": "1",
+							"type": "Period"
+						},
+						{
+							"name": "timingSchedule",
+							"parent": "MedicationPrescription.dosageInstruction.timing[x]",
+							"path": "MedicationPrescription.dosageInstruction.timing[x].timingSchedule",
+							"short": "When medication should be administered",
+							"formal": "The timing schedule for giving the medication to the patient.  The Schedule data type allows many different expressions, for example.  \"Every  8 hours\"; \"Three times a day\"; \"1/2 an hour before breakfast for 10 days from 23-Dec 2011:\";  \"15 Oct 2013, 17 Oct 2013 and 1 Nov 2013\".",
+							"min": 0,
+							"max": "1",
+							"type": "Schedule"
+						}
+					]
+				},
+				{
+					"name": "asNeeded",
+					"path": "MedicationPrescription.dosageInstruction.asNeeded[x]",
+					"parent": "MedicationPrescription.dosageInstruction",
+					"short": "Take \"as needed\" f(or x)",
+					"formal": "If set to true or if specified as a CodeableConcept, indicates that the medication is only taken when needed within the specified schedule rather than at every scheduled dose.  If a CodeableConcept is present, it indicates the pre-condition for taking the Medication.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "MedicationAsNeededReason",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"description": "A coded concept identifying the pre-condition that should hold prior to consuming a medication dose.  For example \"pain\", \"30 minutes prior to sexual intercourse\", \"on flare-up\", etc."
+					},
+					"type": "multitype",
+					"children": [
+						{
+							"name": "asNeededBoolean",
+							"parent": "MedicationPrescription.dosageInstruction.asNeeded[x]",
+							"path": "MedicationPrescription.dosageInstruction.asNeeded[x].asNeededBoolean",
+							"short": "Take \"as needed\" f(or x)",
+							"formal": "If set to true or if specified as a CodeableConcept, indicates that the medication is only taken when needed within the specified schedule rather than at every scheduled dose.  If a CodeableConcept is present, it indicates the pre-condition for taking the Medication.",
+							"min": 0,
+							"max": "1",
+							"type": "boolean",
+							"leaf": true
+						},
+						{
+							"name": "asNeededCodeableConcept",
+							"parent": "MedicationPrescription.dosageInstruction.asNeeded[x]",
+							"path": "MedicationPrescription.dosageInstruction.asNeeded[x].asNeededCodeableConcept",
+							"short": "Take \"as needed\" f(or x)",
+							"formal": "If set to true or if specified as a CodeableConcept, indicates that the medication is only taken when needed within the specified schedule rather than at every scheduled dose.  If a CodeableConcept is present, it indicates the pre-condition for taking the Medication.",
+							"min": 0,
+							"max": "1",
+							"type": "CodeableConcept"
+						}
+					]
+				},
+				{
+					"name": "site",
+					"path": "MedicationPrescription.dosageInstruction.site",
+					"parent": "MedicationPrescription.dosageInstruction",
+					"short": "Body site to administer to",
+					"formal": "A coded specification of the anatomic site where the medication first enters the body.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "MedicationAdministrationSite",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/approach-site-codes"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "route",
+					"path": "MedicationPrescription.dosageInstruction.route",
+					"parent": "MedicationPrescription.dosageInstruction",
+					"short": "How drug should enter body",
+					"formal": "A code specifying the route or physiological path of administration of a therapeutic agent into or onto a patient.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "RouteOfAdministration",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/route-codes"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "method",
+					"path": "MedicationPrescription.dosageInstruction.method",
+					"parent": "MedicationPrescription.dosageInstruction",
+					"short": "Technique for administering medication",
+					"formal": "A coded value indicating the method by which the medication is introduced into or onto the body. Most commonly used for injections.  Examples:  Slow Push; Deep IV.\n\nTerminologies used often pre-coordinate this term with the route and or form of administration.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "MedicationAdministrationMethod",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/administration-method-codes"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "doseQuantity",
+					"path": "MedicationPrescription.dosageInstruction.doseQuantity",
+					"parent": "MedicationPrescription.dosageInstruction",
+					"short": "Amount of medication per dose",
+					"formal": "The amount of therapeutic or other substance given at one administration event.",
+					"min": 0,
+					"max": "1",
+					"type": "Quantity"
+				},
+				{
+					"name": "rate",
+					"path": "MedicationPrescription.dosageInstruction.rate",
+					"parent": "MedicationPrescription.dosageInstruction",
+					"short": "Amount of medication per unit of time",
+					"formal": "Identifies the speed with which the substance is introduced into the subject. Typically the rate for an infusion. 200ml in 2 hours.",
+					"min": 0,
+					"max": "1",
+					"type": "Ratio"
+				},
+				{
+					"name": "maxDosePerPeriod",
+					"path": "MedicationPrescription.dosageInstruction.maxDosePerPeriod",
+					"parent": "MedicationPrescription.dosageInstruction",
+					"short": "Upper limit on medication per unit of time",
+					"formal": "The maximum total quantity of a therapeutic substance that may be administered to a subject over the period of time. E.g. 1000mg in 24 hours.",
+					"min": 0,
+					"max": "1",
+					"type": "Ratio"
+				}
+			]
+		},
+		{
+			"name": "dispense",
+			"path": "MedicationPrescription.dispense",
+			"parent": "MedicationPrescription",
+			"short": "Medication supply authorization",
+			"formal": "Deals with details of the dispense part of the order.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "medication",
+					"path": "MedicationPrescription.dispense.medication",
+					"parent": "MedicationPrescription.dispense",
+					"short": "Product to be supplied",
+					"formal": "Identifies the medication that is to be dispensed.  This may be a more specifically defined than the medicationPrescription.medication . This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Medication"
+				},
+				{
+					"name": "validityPeriod",
+					"path": "MedicationPrescription.dispense.validityPeriod",
+					"parent": "MedicationPrescription.dispense",
+					"short": "Time period supply is authorized for",
+					"formal": "Design Comments: This indicates the validity period of a prescription (stale dating the Prescription) \nIt reflects the prescriber perspective for the validity of the prescription. Dispenses must not be made against the prescription outside of this period. The lower-bound of the Dispensing Window signifies the earliest date that the prescription can be filled for the first time. If an upper-bound is not specified then the Prescription is open-ended or will default to a stale-date based on regulations. \nRationale: Indicates when the Prescription becomes valid, and when it ceases to be a dispensable Prescription.",
+					"min": 0,
+					"max": "1",
+					"type": "Period"
+				},
+				{
+					"name": "numberOfRepeatsAllowed",
+					"path": "MedicationPrescription.dispense.numberOfRepeatsAllowed",
+					"parent": "MedicationPrescription.dispense",
+					"short": "# of refills authorized",
+					"formal": "An integer indicating the number of repeats of the Dispense. \nUsageNotes: For example, the number of times the prescribed quantity is to be supplied including the initial standard fill.",
+					"min": 0,
+					"max": "1",
+					"type": "integer",
+					"leaf": true
+				},
+				{
+					"name": "quantity",
+					"path": "MedicationPrescription.dispense.quantity",
+					"parent": "MedicationPrescription.dispense",
+					"short": "Amount of medication to supply per dispense",
+					"formal": "The amount that is to be dispensed.",
+					"min": 0,
+					"max": "1",
+					"type": "Quantity"
+				},
+				{
+					"name": "expectedSupplyDuration",
+					"path": "MedicationPrescription.dispense.expectedSupplyDuration",
+					"parent": "MedicationPrescription.dispense",
+					"short": "Days supply per dispense",
+					"formal": "Identifies the period time over which the supplied product is expected to be used, or the length of time the dispense is expected to last. \nIn some situations, this attribute may be used instead of quantity to identify the amount supplied by how long it is expected to last, rather than the physical quantity issued, e.g. 90 days supply of medication (based on an ordered dosage) When possible, it is always better to specify quantity, as this tends to be more precise. expectedSupplyDuration will always be an estimate that can be influenced by external factors.",
+					"min": 0,
+					"max": "1",
+					"type": "Duration"
+				}
+			]
+		},
+		{
+			"name": "substitution",
+			"path": "MedicationPrescription.substitution",
+			"parent": "MedicationPrescription",
+			"short": "Any restrictions on medication substitution?",
+			"formal": "Indicates whether or not substitution can or should be part of the dispense. In some cases substitution must happen, in other cases substitution must not happen, and in others it does not matter. This block explains the prescriber's intent. If nothing is specified substitution may be done.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "type",
+					"path": "MedicationPrescription.substitution.type",
+					"parent": "MedicationPrescription.substitution",
+					"short": "generic | formulary +",
+					"formal": "A code signifying whether a different drug should be dispensed from what was prescribed.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "MedicationIntendedSubstitutionType",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/v3/vs/ActSubstanceAdminSubstitutionCode"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "reason",
+					"path": "MedicationPrescription.substitution.reason",
+					"parent": "MedicationPrescription.substitution",
+					"short": "Why should substitution (not) be made",
+					"formal": "Indicates the reason for the substitution, or why substitution must or must not be performed.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "MedicationIntendedSubstitutionReason",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/v3/vs/SubstanceAdminSubstitutionReason"
+						}
+					},
+					"type": "CodeableConcept"
+				}
+			]
+		}
+	],
+	"success": true
+}

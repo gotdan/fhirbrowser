@@ -1,0 +1,113 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Query.text",
+			"parent": "Query",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Query.contained",
+			"parent": "Query",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Query.identifier",
+			"parent": "Query",
+			"short": "Links query and its response(s)",
+			"formal": "Links query and its response(s).",
+			"min": 1,
+			"max": "1",
+			"type": "uri",
+			"leaf": true
+		},
+		{
+			"name": "response",
+			"path": "Query.response",
+			"parent": "Query",
+			"short": "If this is a response to a query",
+			"formal": "If this is a response to a query.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "identifier",
+					"path": "Query.response.identifier",
+					"parent": "Query.response",
+					"short": "Links response to source query",
+					"formal": "Links response to source query.",
+					"min": 1,
+					"max": "1",
+					"type": "uri",
+					"leaf": true
+				},
+				{
+					"name": "outcome",
+					"path": "Query.response.outcome",
+					"parent": "Query.response",
+					"short": "ok | limited | refused | error",
+					"formal": "Outcome of processing the query.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "QueryOutcome",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/query-outcome"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "total",
+					"path": "Query.response.total",
+					"parent": "Query.response",
+					"short": "Total number of matching records",
+					"formal": "Total number of matching records.",
+					"min": 0,
+					"max": "1",
+					"type": "integer",
+					"leaf": true
+				},
+				{
+					"name": "reference",
+					"path": "Query.response.reference",
+					"parent": "Query.response",
+					"short": "Resources that are the results of the search",
+					"formal": "Resources that are the results of the search.",
+					"min": 0,
+					"max": "*",
+					"type": "ResourceReference",
+					"reference": "Any"
+				}
+			]
+		}
+	],
+	"success": true
+}

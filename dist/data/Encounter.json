@@ -1,0 +1,504 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Encounter.text",
+			"parent": "Encounter",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Encounter.contained",
+			"parent": "Encounter",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Encounter.identifier",
+			"parent": "Encounter",
+			"short": "Identifier(s) by which this encounter is known",
+			"formal": "Identifier(s) by which this encounter is known.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "status",
+			"path": "Encounter.status",
+			"parent": "Encounter",
+			"short": "planned | in progress | onleave | finished | cancelled",
+			"formal": "planned | in progress | onleave | finished | cancelled.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "EncounterState",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/encounter-state"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "class",
+			"path": "Encounter.class",
+			"parent": "Encounter",
+			"short": "inpatient | outpatient | ambulatory | emergency +",
+			"formal": "inpatient | outpatient | ambulatory | emergency +.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "EncounterClass",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/encounter-class"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "type",
+			"path": "Encounter.type",
+			"parent": "Encounter",
+			"short": "Specific type of encounter",
+			"formal": "Specific type of encounter (e.g. e-mail consultation, surgical day-care, skilled nursing, rehabilitation).",
+			"min": 0,
+			"max": "*",
+			"binding": {
+				"name": "EncounterType",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/encounter-type"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "subject",
+			"path": "Encounter.subject",
+			"parent": "Encounter",
+			"short": "The patient present at the encounter",
+			"formal": "The patient present at the encounter.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "participant",
+			"path": "Encounter.participant",
+			"parent": "Encounter",
+			"short": "List of participants involved in the encounter",
+			"formal": "The main practitioner responsible for providing the service.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "type",
+					"path": "Encounter.participant.type",
+					"parent": "Encounter.participant",
+					"short": "Role of participant in encounter",
+					"formal": "Role of participant in encounter.",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "ParticipantType",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/encounter-participant-type"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "individual",
+					"path": "Encounter.participant.individual",
+					"parent": "Encounter.participant",
+					"short": "Persons involved in the encounter other than the patient",
+					"formal": "Persons involved in the encounter other than the patient.",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"reference": "Practitioner",
+					"children": [
+						{
+							"name": "Practitioner",
+							"parent": "Encounter.participant.individual",
+							"path": "Encounter.participant.individual.Practitioner",
+							"short": "Persons involved in the encounter other than the patient",
+							"formal": "Persons involved in the encounter other than the patient.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Practitioner"
+						},
+						{
+							"name": "RelatedPerson",
+							"parent": "Encounter.participant.individual",
+							"path": "Encounter.participant.individual.RelatedPerson",
+							"short": "Persons involved in the encounter other than the patient",
+							"formal": "Persons involved in the encounter other than the patient.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "RelatedPerson"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "period",
+			"path": "Encounter.period",
+			"parent": "Encounter",
+			"short": "The start and end time of the encounter",
+			"formal": "The start and end time of the encounter.",
+			"min": 0,
+			"max": "1",
+			"type": "Period"
+		},
+		{
+			"name": "length",
+			"path": "Encounter.length",
+			"parent": "Encounter",
+			"short": "Quantity of time the encounter lasted",
+			"formal": "Quantity of time the encounter lasted. This excludes the time during leaves of absence.",
+			"min": 0,
+			"max": "1",
+			"type": "Duration"
+		},
+		{
+			"name": "reason",
+			"path": "Encounter.reason",
+			"parent": "Encounter",
+			"short": "Reason the encounter takes place (code)",
+			"formal": "Reason the encounter takes place, expressed as a code. For admissions, this can be used for a coded admission diagnosis.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "EncounterReason",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/encounter-reason"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "indication",
+			"path": "Encounter.indication",
+			"parent": "Encounter",
+			"short": "Reason the encounter takes place (resource)",
+			"formal": "Reason the encounter takes place, as specified using information from another resource. For admissions, this is the admission diagnosis.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Any"
+		},
+		{
+			"name": "priority",
+			"path": "Encounter.priority",
+			"parent": "Encounter",
+			"short": "Indicates the urgency of the encounter",
+			"formal": "Indicates the urgency of the encounter.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "Priority",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/encounter-priority"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "hospitalization",
+			"path": "Encounter.hospitalization",
+			"parent": "Encounter",
+			"short": "Details about an admission to a clinic",
+			"formal": "Details about an admission to a clinic.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "preAdmissionIdentifier",
+					"path": "Encounter.hospitalization.preAdmissionIdentifier",
+					"parent": "Encounter.hospitalization",
+					"short": "Pre-admission identifier",
+					"formal": "Pre-admission identifier.",
+					"min": 0,
+					"max": "1",
+					"type": "Identifier"
+				},
+				{
+					"name": "origin",
+					"path": "Encounter.hospitalization.origin",
+					"parent": "Encounter.hospitalization",
+					"short": "The location from which the patient came before admission",
+					"formal": "The location from which the patient came before admission.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Location"
+				},
+				{
+					"name": "admitSource",
+					"path": "Encounter.hospitalization.admitSource",
+					"parent": "Encounter.hospitalization",
+					"short": "From where patient was admitted (physician referral, transfer)",
+					"formal": "From where patient was admitted (physician referral, transfer).",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "AdmitSource",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/encounter-admit-source"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "period",
+					"path": "Encounter.hospitalization.period",
+					"parent": "Encounter.hospitalization",
+					"short": "Period during which the patient was admitted",
+					"formal": "Period during which the patient was admitted.",
+					"min": 0,
+					"max": "1",
+					"type": "Period"
+				},
+				{
+					"name": "accomodation",
+					"path": "Encounter.hospitalization.accomodation",
+					"parent": "Encounter.hospitalization",
+					"short": "Where the patient stays during this encounter",
+					"formal": "Where the patient stays during this encounter.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "bed",
+							"path": "Encounter.hospitalization.accomodation.bed",
+							"parent": "Encounter.hospitalization.accomodation",
+							"short": "The bed that is assigned to the patient",
+							"formal": "The bed that is assigned to the patient.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Location"
+						},
+						{
+							"name": "period",
+							"path": "Encounter.hospitalization.accomodation.period",
+							"parent": "Encounter.hospitalization.accomodation",
+							"short": "Period during which the patient was assigned the bed",
+							"formal": "Period during which the patient was assigned the bed.",
+							"min": 0,
+							"max": "1",
+							"type": "Period"
+						}
+					]
+				},
+				{
+					"name": "diet",
+					"path": "Encounter.hospitalization.diet",
+					"parent": "Encounter.hospitalization",
+					"short": "Dietary restrictions for the patient",
+					"formal": "Dietary restrictions for the patient.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "PatientDiet",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/encounter-diet"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "specialCourtesy",
+					"path": "Encounter.hospitalization.specialCourtesy",
+					"parent": "Encounter.hospitalization",
+					"short": "Special courtesies (VIP, board member)",
+					"formal": "Special courtesies (VIP, board member).",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "Courtesies",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/encounter-special-courtesy"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "specialArrangement",
+					"path": "Encounter.hospitalization.specialArrangement",
+					"parent": "Encounter.hospitalization",
+					"short": "Wheelchair, translator, stretcher, etc",
+					"formal": "Wheelchair, translator, stretcher, etc.",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "Arrangements",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/encounter-special-arrangements"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "destination",
+					"path": "Encounter.hospitalization.destination",
+					"parent": "Encounter.hospitalization",
+					"short": "Location to which the patient is discharged",
+					"formal": "Location to which the patient is discharged.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Location"
+				},
+				{
+					"name": "dischargeDisposition",
+					"path": "Encounter.hospitalization.dischargeDisposition",
+					"parent": "Encounter.hospitalization",
+					"short": "Category or kind of location after discharge",
+					"formal": "Category or kind of location after discharge.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "DischargeDisp",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/encounter-discharge-disposition"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "dischargeDiagnosis",
+					"path": "Encounter.hospitalization.dischargeDiagnosis",
+					"parent": "Encounter.hospitalization",
+					"short": "The final diagnosis given a patient before release from the hospital after all testing, surgery, and workup are complete",
+					"formal": "The final diagnosis given a patient before release from the hospital after all testing, surgery, and workup are complete.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Any"
+				},
+				{
+					"name": "reAdmission",
+					"path": "Encounter.hospitalization.reAdmission",
+					"parent": "Encounter.hospitalization",
+					"short": "Is this hospitalization a readmission?",
+					"formal": "Whether this hospitalization is a readmission.",
+					"min": 0,
+					"max": "1",
+					"type": "boolean",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "location",
+			"path": "Encounter.location",
+			"parent": "Encounter",
+			"short": "List of locations the patient has been at",
+			"formal": "List of locations at which the patient has been.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "location",
+					"path": "Encounter.location.location",
+					"parent": "Encounter.location",
+					"short": "Location the encounter takes place",
+					"formal": "The location where the encounter takes place.",
+					"min": 1,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Location"
+				},
+				{
+					"name": "period",
+					"path": "Encounter.location.period",
+					"parent": "Encounter.location",
+					"short": "Time period during which the patient was present at the location",
+					"formal": "Time period during which the patient was present at the location.",
+					"min": 1,
+					"max": "1",
+					"type": "Period"
+				}
+			]
+		},
+		{
+			"name": "serviceProvider",
+			"path": "Encounter.serviceProvider",
+			"parent": "Encounter",
+			"short": "Department or team providing care",
+			"formal": "Department or team providing care.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Organization"
+		},
+		{
+			"name": "partOf",
+			"path": "Encounter.partOf",
+			"parent": "Encounter",
+			"short": "Another Encounter this encounter is part of",
+			"formal": "Another Encounter of which this encounter is a part of (administratively or in time).",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Encounter"
+		}
+	],
+	"success": true
+}

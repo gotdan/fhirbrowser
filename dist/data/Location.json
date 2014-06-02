@@ -1,0 +1,231 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Location.text",
+			"parent": "Location",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Location.contained",
+			"parent": "Location",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Location.identifier",
+			"parent": "Location",
+			"short": "Unique code or number identifying the location to its users",
+			"formal": "Unique code or number identifying the location to its users.",
+			"min": 0,
+			"max": "1",
+			"type": "Identifier"
+		},
+		{
+			"name": "name",
+			"path": "Location.name",
+			"parent": "Location",
+			"short": "Name of the location as used by humans",
+			"formal": "Name of the location as used by humans. Does not need to be unique.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "description",
+			"path": "Location.description",
+			"parent": "Location",
+			"short": "Description of the Location, which helps in finding or referencing the place",
+			"formal": "Description of the Location, which helps in finding or referencing the place.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "type",
+			"path": "Location.type",
+			"parent": "Location",
+			"short": "Indicates the type of function performed at the location",
+			"formal": "Indicates the type of function performed at the location.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "LocationType",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/v3/vs/ServiceDeliveryLocationRoleType"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "telecom",
+			"path": "Location.telecom",
+			"parent": "Location",
+			"short": "Contact details of the location",
+			"formal": "The contact details of communication devices available at the location. This can include phone numbers, fax numbers, mobile numbers, email addresses and web sites.",
+			"min": 0,
+			"max": "*",
+			"type": "Contact"
+		},
+		{
+			"name": "address",
+			"path": "Location.address",
+			"parent": "Location",
+			"short": "Physical location",
+			"formal": "Physical location.",
+			"min": 0,
+			"max": "1",
+			"type": "Address"
+		},
+		{
+			"name": "physicalType",
+			"path": "Location.physicalType",
+			"parent": "Location",
+			"short": "Physical form of the location",
+			"formal": "Physical form of the location, e.g. building, room, vehicle, road.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "PhysicalType",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/location-physical-type"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "position",
+			"path": "Location.position",
+			"parent": "Location",
+			"short": "The absolute geographic location",
+			"formal": "The absolute geographic location of the Location, expressed in a KML compatible manner (see notes below for KML).",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "longitude",
+					"path": "Location.position.longitude",
+					"parent": "Location.position",
+					"short": "Longitude as expressed in KML",
+					"formal": "Longitude. The value domain and the interpretation are the same as for the text of the longitude element in KML (see notes below).",
+					"min": 1,
+					"max": "1",
+					"type": "decimal",
+					"leaf": true
+				},
+				{
+					"name": "latitude",
+					"path": "Location.position.latitude",
+					"parent": "Location.position",
+					"short": "Latitude as expressed in KML",
+					"formal": "Latitude. The value domain and the interpretation are the same as for the text of the latitude element in KML (see notes below).",
+					"min": 1,
+					"max": "1",
+					"type": "decimal",
+					"leaf": true
+				},
+				{
+					"name": "altitude",
+					"path": "Location.position.altitude",
+					"parent": "Location.position",
+					"short": "Altitude as expressed in KML",
+					"formal": "Altitude. The value domain and the interpretation are the same as for the text of the altitude element in KML (see notes below).",
+					"min": 0,
+					"max": "1",
+					"type": "decimal",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "managingOrganization",
+			"path": "Location.managingOrganization",
+			"parent": "Location",
+			"short": "The organization that is responsible for the provisioning and upkeep of the location",
+			"formal": "The organization that is responsible for the provisioning and upkeep of the location.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Organization"
+		},
+		{
+			"name": "status",
+			"path": "Location.status",
+			"parent": "Location",
+			"short": "active | suspended | inactive",
+			"formal": "active | suspended | inactive.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "LocationStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/location-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "partOf",
+			"path": "Location.partOf",
+			"parent": "Location",
+			"short": "Another Location which this Location is physically part of",
+			"formal": "Another Location which this Location is physically part of.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Location"
+		},
+		{
+			"name": "mode",
+			"path": "Location.mode",
+			"parent": "Location",
+			"short": "instance | kind",
+			"formal": "Indicates whether a resource instance represents a specific location or a class of locations.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "LocationMode",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/location-mode"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		}
+	],
+	"success": true
+}

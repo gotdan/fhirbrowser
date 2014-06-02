@@ -1,0 +1,550 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Condition.text",
+			"parent": "Condition",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Condition.contained",
+			"parent": "Condition",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Condition.identifier",
+			"parent": "Condition",
+			"short": "External Ids for this condition",
+			"formal": "This records identifiers associated with this condition that are defined by business processed and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "subject",
+			"path": "Condition.subject",
+			"parent": "Condition",
+			"short": "Who has the condition?",
+			"formal": "Indicates the patient who the condition record is associated with.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "encounter",
+			"path": "Condition.encounter",
+			"parent": "Condition",
+			"short": "Encounter when condition first asserted",
+			"formal": "Encounter during which the condition was first asserted.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Encounter"
+		},
+		{
+			"name": "asserter",
+			"path": "Condition.asserter",
+			"parent": "Condition",
+			"short": "Person who asserts this condition",
+			"formal": "Person who takes responsibility for asserting the existence of the condition as part of the electronic record.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "Condition.asserter",
+					"path": "Condition.asserter.Practitioner",
+					"short": "Person who asserts this condition",
+					"formal": "Person who takes responsibility for asserting the existence of the condition as part of the electronic record.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Patient",
+					"parent": "Condition.asserter",
+					"path": "Condition.asserter.Patient",
+					"short": "Person who asserts this condition",
+					"formal": "Person who takes responsibility for asserting the existence of the condition as part of the electronic record.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				}
+			]
+		},
+		{
+			"name": "dateAsserted",
+			"path": "Condition.dateAsserted",
+			"parent": "Condition",
+			"short": "When first detected/suspected/entered",
+			"formal": "Estimated or actual date the condition/problem/diagnosis was first detected/suspected.",
+			"min": 0,
+			"max": "1",
+			"type": "date",
+			"leaf": true
+		},
+		{
+			"name": "code",
+			"path": "Condition.code",
+			"parent": "Condition",
+			"short": "Identification of the condition, problem or diagnosis",
+			"formal": "Identification of the condition, problem or diagnosis.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "ConditionKind",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/condition-code"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "category",
+			"path": "Condition.category",
+			"parent": "Condition",
+			"short": "E.g. complaint | symptom | finding | diagnosis",
+			"formal": "A category assigned to the condition. E.g. complaint | symptom | finding | diagnosis.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ConditionCategory",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/condition-category"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "status",
+			"path": "Condition.status",
+			"parent": "Condition",
+			"short": "provisional | working | confirmed | refuted",
+			"formal": "The clinical status of the condition.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "ConditionStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/condition-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "certainty",
+			"path": "Condition.certainty",
+			"parent": "Condition",
+			"short": "Degree of confidence",
+			"formal": "The degree of confidence that this condition is correct.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ConditionCertainty",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/condition-certainty"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "severity",
+			"path": "Condition.severity",
+			"parent": "Condition",
+			"short": "Subjective severity of condition",
+			"formal": "A subjective assessment of the severity of the condition as evaluated by the clinician.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ConditionSeverity",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/condition-severity"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "onset",
+			"path": "Condition.onset[x]",
+			"parent": "Condition",
+			"short": "Estimated or actual date, or age",
+			"formal": "Estimated or actual date the condition began, in the opinion of the clinician.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"children": [
+				{
+					"name": "onsetDate",
+					"parent": "Condition.onset[x]",
+					"path": "Condition.onset[x].onsetDate",
+					"short": "Estimated or actual date, or age",
+					"formal": "Estimated or actual date the condition began, in the opinion of the clinician.",
+					"min": 0,
+					"max": "1",
+					"type": "date",
+					"leaf": true
+				},
+				{
+					"name": "onsetAge",
+					"parent": "Condition.onset[x]",
+					"path": "Condition.onset[x].onsetAge",
+					"short": "Estimated or actual date, or age",
+					"formal": "Estimated or actual date the condition began, in the opinion of the clinician.",
+					"min": 0,
+					"max": "1",
+					"type": "Age"
+				}
+			]
+		},
+		{
+			"name": "abatement",
+			"path": "Condition.abatement[x]",
+			"parent": "Condition",
+			"short": "If/when in resolution/remission",
+			"formal": "The date or estimated date that the condition resolved or went into remission. This is called \"abatement\" because of the many overloaded connotations associated with \"remission\" or \"resolution\" - Conditions are never really resolved, but they can abate.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"children": [
+				{
+					"name": "abatementDate",
+					"parent": "Condition.abatement[x]",
+					"path": "Condition.abatement[x].abatementDate",
+					"short": "If/when in resolution/remission",
+					"formal": "The date or estimated date that the condition resolved or went into remission. This is called \"abatement\" because of the many overloaded connotations associated with \"remission\" or \"resolution\" - Conditions are never really resolved, but they can abate.",
+					"min": 0,
+					"max": "1",
+					"type": "date",
+					"leaf": true
+				},
+				{
+					"name": "abatementAge",
+					"parent": "Condition.abatement[x]",
+					"path": "Condition.abatement[x].abatementAge",
+					"short": "If/when in resolution/remission",
+					"formal": "The date or estimated date that the condition resolved or went into remission. This is called \"abatement\" because of the many overloaded connotations associated with \"remission\" or \"resolution\" - Conditions are never really resolved, but they can abate.",
+					"min": 0,
+					"max": "1",
+					"type": "Age"
+				},
+				{
+					"name": "abatementBoolean",
+					"parent": "Condition.abatement[x]",
+					"path": "Condition.abatement[x].abatementBoolean",
+					"short": "If/when in resolution/remission",
+					"formal": "The date or estimated date that the condition resolved or went into remission. This is called \"abatement\" because of the many overloaded connotations associated with \"remission\" or \"resolution\" - Conditions are never really resolved, but they can abate.",
+					"min": 0,
+					"max": "1",
+					"type": "boolean",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "stage",
+			"path": "Condition.stage",
+			"parent": "Condition",
+			"short": "Stage/grade, usually assessed formally",
+			"formal": "Clinical stage or grade of a condition. May include formal severity assessments.",
+			"min": 0,
+			"max": "1",
+			"constraint": [
+				{
+					"key": "1",
+					"name": "Stage rule",
+					"severity": "error",
+					"human": "Stage SHALL have summary or assessment",
+					"xpath": "exists(f:summary) or exists(f:assessment)"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "summary",
+					"path": "Condition.stage.summary",
+					"parent": "Condition.stage",
+					"short": "Simple summary (disease specific)",
+					"formal": "A simple summary of the stage such as \"Stage 3\". The determination of the stage is disease-specific.",
+					"min": 0,
+					"max": "1",
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "assessment",
+					"path": "Condition.stage.assessment",
+					"parent": "Condition.stage",
+					"short": "Formal record of assessment",
+					"formal": "Reference to a formal record of the evidence on which the staging assessment is based.",
+					"min": 0,
+					"max": "*",
+					"type": "ResourceReference",
+					"reference": "Any"
+				}
+			]
+		},
+		{
+			"name": "evidence",
+			"path": "Condition.evidence",
+			"parent": "Condition",
+			"short": "Supporting evidence",
+			"formal": "Supporting Evidence / manifestations that are the basis on which this condition is suspected or confirmed.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "2",
+					"name": "Evidence",
+					"severity": "error",
+					"human": "evidence SHALL have code or details",
+					"xpath": "exists(f:code) or exists(f:detail)"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "code",
+					"path": "Condition.evidence.code",
+					"parent": "Condition.evidence",
+					"short": "Manifestation/symptom",
+					"formal": "A manifestation or symptom that led to the recording of this condition.",
+					"min": 0,
+					"max": "1",
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "detail",
+					"path": "Condition.evidence.detail",
+					"parent": "Condition.evidence",
+					"short": "Supporting information found elsewhere",
+					"formal": "Links to other relevant information, including pathology reports.",
+					"min": 0,
+					"max": "*",
+					"type": "ResourceReference",
+					"reference": "Any"
+				}
+			]
+		},
+		{
+			"name": "location",
+			"path": "Condition.location",
+			"parent": "Condition",
+			"short": "Anatomical location, if relevant",
+			"formal": "The anatomical location where this condition manifests itself.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "3",
+					"name": "Location",
+					"severity": "error",
+					"human": "location SHALL have code or details",
+					"xpath": "exists(f:code) or exists(f:detail)"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "code",
+					"path": "Condition.location.code",
+					"parent": "Condition.location",
+					"short": "Location - may include laterality",
+					"formal": "Code that identifies the structural location.",
+					"min": 0,
+					"max": "1",
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "detail",
+					"path": "Condition.location.detail",
+					"parent": "Condition.location",
+					"short": "Precise location details",
+					"formal": "Detailed anatomical location information.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "relatedItem",
+			"path": "Condition.relatedItem",
+			"parent": "Condition",
+			"short": "Causes or precedents for this Condition",
+			"formal": "Further conditions, problems, diagnoses, procedures or events that are related in some way to this condition, or the substance that caused/triggered this Condition.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "4",
+					"name": "Relationship",
+					"severity": "error",
+					"human": "Relationship SHALL have either a code or a target",
+					"xpath": "exists(f:code) != exists(f:target)"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "type",
+					"path": "Condition.relatedItem.type",
+					"parent": "Condition.relatedItem",
+					"short": "due-to | following",
+					"formal": "The type of relationship that this condition has to the related item.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "ConditionRelationshipType",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/condition-relationship-type"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "code",
+					"path": "Condition.relatedItem.code",
+					"parent": "Condition.relatedItem",
+					"short": "Relationship target by means of a predefined code",
+					"formal": "Code that identifies the target of this relationship. The code takes the place of a detailed instance target.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "ConditionKind",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/condition-code"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "target",
+					"path": "Condition.relatedItem.target",
+					"parent": "Condition.relatedItem",
+					"short": "Relationship target resource",
+					"formal": "Target of the relationship.",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"reference": "Condition",
+					"children": [
+						{
+							"name": "Condition",
+							"parent": "Condition.relatedItem.target",
+							"path": "Condition.relatedItem.target.Condition",
+							"short": "Relationship target resource",
+							"formal": "Target of the relationship.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Condition"
+						},
+						{
+							"name": "Procedure",
+							"parent": "Condition.relatedItem.target",
+							"path": "Condition.relatedItem.target.Procedure",
+							"short": "Relationship target resource",
+							"formal": "Target of the relationship.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Procedure"
+						},
+						{
+							"name": "MedicationAdministration",
+							"parent": "Condition.relatedItem.target",
+							"path": "Condition.relatedItem.target.MedicationAdministration",
+							"short": "Relationship target resource",
+							"formal": "Target of the relationship.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "MedicationAdministration"
+						},
+						{
+							"name": "Immunization",
+							"parent": "Condition.relatedItem.target",
+							"path": "Condition.relatedItem.target.Immunization",
+							"short": "Relationship target resource",
+							"formal": "Target of the relationship.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Immunization"
+						},
+						{
+							"name": "MedicationStatement",
+							"parent": "Condition.relatedItem.target",
+							"path": "Condition.relatedItem.target.MedicationStatement",
+							"short": "Relationship target resource",
+							"formal": "Target of the relationship.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "MedicationStatement"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "notes",
+			"path": "Condition.notes",
+			"parent": "Condition",
+			"short": "Additional information about the Condition",
+			"formal": "Additional information about the Condition. This is a general notes/comments entry  for description of the Condition, its diagnosis and prognosis.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		}
+	],
+	"success": true
+}

@@ -1,0 +1,194 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "AllergyIntolerance.text",
+			"parent": "AllergyIntolerance",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "AllergyIntolerance.contained",
+			"parent": "AllergyIntolerance",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "AllergyIntolerance.identifier",
+			"parent": "AllergyIntolerance",
+			"short": "External Ids for this item",
+			"formal": "This records identifiers associated with this allergy/intolerance concern that are defined by business processed and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "criticality",
+			"path": "AllergyIntolerance.criticality",
+			"parent": "AllergyIntolerance",
+			"short": "fatal | high | medium | low",
+			"formal": "Criticality of the sensitivity.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "Criticality",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/criticality"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "sensitivityType",
+			"path": "AllergyIntolerance.sensitivityType",
+			"parent": "AllergyIntolerance",
+			"short": "allergy | intolerance | unknown",
+			"formal": "Type of the sensitivity.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "SensitivityType",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/sensitivitytype"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "recordedDate",
+			"path": "AllergyIntolerance.recordedDate",
+			"parent": "AllergyIntolerance",
+			"short": "When recorded",
+			"formal": "Date when the sensitivity was recorded.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "status",
+			"path": "AllergyIntolerance.status",
+			"parent": "AllergyIntolerance",
+			"short": "suspected | confirmed | refuted | resolved",
+			"formal": "Status of the sensitivity.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "SensitivityStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/sensitivitystatus"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "subject",
+			"path": "AllergyIntolerance.subject",
+			"parent": "AllergyIntolerance",
+			"short": "Who the sensitivity is for",
+			"formal": "The patient who has the allergy or intolerance.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "recorder",
+			"path": "AllergyIntolerance.recorder",
+			"parent": "AllergyIntolerance",
+			"short": "Who recorded the sensitivity",
+			"formal": "Indicates who has responsibility for the record.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "AllergyIntolerance.recorder",
+					"path": "AllergyIntolerance.recorder.Practitioner",
+					"short": "Who recorded the sensitivity",
+					"formal": "Indicates who has responsibility for the record.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Patient",
+					"parent": "AllergyIntolerance.recorder",
+					"path": "AllergyIntolerance.recorder.Patient",
+					"short": "Who recorded the sensitivity",
+					"formal": "Indicates who has responsibility for the record.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				}
+			]
+		},
+		{
+			"name": "substance",
+			"path": "AllergyIntolerance.substance",
+			"parent": "AllergyIntolerance",
+			"short": "The substance that causes the sensitivity",
+			"formal": "The substance that causes the sensitivity.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Substance"
+		},
+		{
+			"name": "reaction",
+			"path": "AllergyIntolerance.reaction",
+			"parent": "AllergyIntolerance",
+			"short": "Reactions associated with the sensitivity",
+			"formal": "Reactions associated with the sensitivity.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "AdverseReaction"
+		},
+		{
+			"name": "sensitivityTest",
+			"path": "AllergyIntolerance.sensitivityTest",
+			"parent": "AllergyIntolerance",
+			"short": "Observations that confirm or refute",
+			"formal": "Observations that confirm or refute the sensitivity.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "Observation"
+		}
+	],
+	"success": true
+}

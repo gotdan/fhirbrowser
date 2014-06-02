@@ -1,0 +1,146 @@
+{
+	"children": [
+		{
+			"name": "origin",
+			"path": "SampledData.origin",
+			"parent": "SampledData",
+			"short": "Zero value and units",
+			"formal": "The base quantity that a measured value of zero represents. In addition, this provides the units of the entire measurement series.",
+			"min": 1,
+			"max": "1",
+			"type": "Quantity",
+			"children": [
+				{
+					"name": "value",
+					"path": "Quantity.value",
+					"parent": "Quantity",
+					"short": "Numerical value (with implicit precision)",
+					"formal": "The value of the measured amount. The value includes an implicit precision in the presentation of the value.",
+					"min": 0,
+					"max": "1",
+					"type": "decimal",
+					"leaf": true
+				},
+				{
+					"name": "comparator",
+					"path": "Quantity.comparator",
+					"parent": "Quantity",
+					"short": "< | <= | >= | > - how to understand the value",
+					"formal": "How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues. E.g. if the comparator is \"<\" , then the real value is < stated value.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "QuantityCompararator",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/quantity-comparator"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "units",
+					"path": "Quantity.units",
+					"parent": "Quantity",
+					"short": "Unit representation",
+					"formal": "A human-readable form of the units.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "system",
+					"path": "Quantity.system",
+					"parent": "Quantity",
+					"short": "System that defines coded unit form",
+					"formal": "The identification of the system that provides the coded form of the unit.",
+					"min": 0,
+					"max": "1",
+					"type": "uri",
+					"leaf": true
+				},
+				{
+					"name": "code",
+					"path": "Quantity.code",
+					"parent": "Quantity",
+					"short": "Coded form of the unit",
+					"formal": "A computer processable form of the units in some unit representation system.",
+					"min": 0,
+					"max": "1",
+					"type": "code",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "period",
+			"path": "SampledData.period",
+			"parent": "SampledData",
+			"short": "Number of milliseconds between samples",
+			"formal": "The length of time between sampling times, measured in milliseconds.",
+			"min": 1,
+			"max": "1",
+			"type": "decimal",
+			"leaf": true
+		},
+		{
+			"name": "factor",
+			"path": "SampledData.factor",
+			"parent": "SampledData",
+			"short": "Multiply data by this before adding to origin",
+			"formal": "A correction factor that is applied to the sampled data points before they are added to the origin.",
+			"min": 0,
+			"max": "1",
+			"type": "decimal",
+			"leaf": true
+		},
+		{
+			"name": "lowerLimit",
+			"path": "SampledData.lowerLimit",
+			"parent": "SampledData",
+			"short": "Lower limit of detection",
+			"formal": "The lower limit of detection of the measured points. This is needed if any of the data points have the value \"L\" (lower than detection limit).",
+			"min": 0,
+			"max": "1",
+			"type": "decimal",
+			"leaf": true
+		},
+		{
+			"name": "upperLimit",
+			"path": "SampledData.upperLimit",
+			"parent": "SampledData",
+			"short": "Upper limit of detection",
+			"formal": "The upper limit of detection of the measured points. This is needed if any of the data points have the value \"U\" (higher than detection limit).",
+			"min": 0,
+			"max": "1",
+			"type": "decimal",
+			"leaf": true
+		},
+		{
+			"name": "dimensions",
+			"path": "SampledData.dimensions",
+			"parent": "SampledData",
+			"short": "Number of sample points at each time point",
+			"formal": "The number of sample points at each time point. If this value is greater than one, then the dimensions will be interlaced - all the sample points for a point in time will be recorded at once.",
+			"min": 1,
+			"max": "1",
+			"type": "integer",
+			"leaf": true
+		},
+		{
+			"name": "data",
+			"path": "SampledData.data",
+			"parent": "SampledData",
+			"short": "Decimal values with spaces, or \"E\" | \"U\" | \"L\"",
+			"formal": "A series of data points which are decimal values separated by a single space (character u20). The special values \"E\" (error), \"L\" (below detection limit) and \"U\" (above detection limit) can also be used in place of a decimal value.",
+			"min": 1,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		}
+	],
+	"success": true
+}

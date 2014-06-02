@@ -1,0 +1,522 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Observation.text",
+			"parent": "Observation",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Observation.contained",
+			"parent": "Observation",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "name",
+			"path": "Observation.name",
+			"parent": "Observation",
+			"short": "Type of observation (code / type)",
+			"formal": "Describes what was observed. Sometimes this is called the observation \"code\".",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "ObservationType",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/observation-codes"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "value",
+			"path": "Observation.value[x]",
+			"parent": "Observation",
+			"short": "Actual result",
+			"formal": "The information determined as a result of making the observation, if the information has a simple value.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"children": [
+				{
+					"name": "valueQuantity",
+					"parent": "Observation.value[x]",
+					"path": "Observation.value[x].valueQuantity",
+					"short": "Actual result",
+					"formal": "The information determined as a result of making the observation, if the information has a simple value.",
+					"min": 0,
+					"max": "1",
+					"type": "Quantity"
+				},
+				{
+					"name": "valueCodeableConcept",
+					"parent": "Observation.value[x]",
+					"path": "Observation.value[x].valueCodeableConcept",
+					"short": "Actual result",
+					"formal": "The information determined as a result of making the observation, if the information has a simple value.",
+					"min": 0,
+					"max": "1",
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "valueAttachment",
+					"parent": "Observation.value[x]",
+					"path": "Observation.value[x].valueAttachment",
+					"short": "Actual result",
+					"formal": "The information determined as a result of making the observation, if the information has a simple value.",
+					"min": 0,
+					"max": "1",
+					"type": "Attachment"
+				},
+				{
+					"name": "valueRatio",
+					"parent": "Observation.value[x]",
+					"path": "Observation.value[x].valueRatio",
+					"short": "Actual result",
+					"formal": "The information determined as a result of making the observation, if the information has a simple value.",
+					"min": 0,
+					"max": "1",
+					"type": "Ratio"
+				},
+				{
+					"name": "valuePeriod",
+					"parent": "Observation.value[x]",
+					"path": "Observation.value[x].valuePeriod",
+					"short": "Actual result",
+					"formal": "The information determined as a result of making the observation, if the information has a simple value.",
+					"min": 0,
+					"max": "1",
+					"type": "Period"
+				},
+				{
+					"name": "valueSampledData",
+					"parent": "Observation.value[x]",
+					"path": "Observation.value[x].valueSampledData",
+					"short": "Actual result",
+					"formal": "The information determined as a result of making the observation, if the information has a simple value.",
+					"min": 0,
+					"max": "1",
+					"type": "SampledData"
+				},
+				{
+					"name": "valueString",
+					"parent": "Observation.value[x]",
+					"path": "Observation.value[x].valueString",
+					"short": "Actual result",
+					"formal": "The information determined as a result of making the observation, if the information has a simple value.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "interpretation",
+			"path": "Observation.interpretation",
+			"parent": "Observation",
+			"short": "High, low, normal, etc.",
+			"formal": "The assessment made based on the result of the observation.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ObservationInterpretation",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/observation-interpretation"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "comments",
+			"path": "Observation.comments",
+			"parent": "Observation",
+			"short": "Comments about result",
+			"formal": "May include statements about significant, unexpected or unreliable values, or information about the source of the value where this may be relevant to the interpretation of the result.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "applies",
+			"path": "Observation.applies[x]",
+			"parent": "Observation",
+			"short": "Physiologically Relevant time/time-period for observation",
+			"formal": "The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \"physiologically relevant time\". This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"children": [
+				{
+					"name": "appliesDateTime",
+					"parent": "Observation.applies[x]",
+					"path": "Observation.applies[x].appliesDateTime",
+					"short": "Physiologically Relevant time/time-period for observation",
+					"formal": "The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \"physiologically relevant time\". This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "appliesPeriod",
+					"parent": "Observation.applies[x]",
+					"path": "Observation.applies[x].appliesPeriod",
+					"short": "Physiologically Relevant time/time-period for observation",
+					"formal": "The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \"physiologically relevant time\". This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself.",
+					"min": 0,
+					"max": "1",
+					"type": "Period"
+				}
+			]
+		},
+		{
+			"name": "issued",
+			"path": "Observation.issued",
+			"parent": "Observation",
+			"short": "Date/Time this was made available",
+			"formal": "Date/Time this was made available.",
+			"min": 0,
+			"max": "1",
+			"type": "instant",
+			"leaf": true
+		},
+		{
+			"name": "status",
+			"path": "Observation.status",
+			"parent": "Observation",
+			"short": "registered | preliminary | final | amended +",
+			"formal": "The status of the result value.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "ObservationStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/observation-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "reliability",
+			"path": "Observation.reliability",
+			"parent": "Observation",
+			"short": "ok | ongoing | early | questionable | calibrating | error +",
+			"formal": "An estimate of the degree to which quality issues have impacted on the value reported.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "ObservationReliability",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/observation-reliability"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "bodySite",
+			"path": "Observation.bodySite",
+			"parent": "Observation",
+			"short": "Observed body part",
+			"formal": "Indicates where on the subject's body the observation was made.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "BodySite",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/body-site"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "method",
+			"path": "Observation.method",
+			"parent": "Observation",
+			"short": "How it was done",
+			"formal": "Indicates the mechanism used to perform the observation.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ObservationMethod",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/observation-methods"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "identifier",
+			"path": "Observation.identifier",
+			"parent": "Observation",
+			"short": "Unique Id for this particular observation",
+			"formal": "A unique identifier for the simple observation.",
+			"min": 0,
+			"max": "1",
+			"type": "Identifier"
+		},
+		{
+			"name": "subject",
+			"path": "Observation.subject",
+			"parent": "Observation",
+			"short": "Who and/or what this is about",
+			"formal": "The thing the observation is being made about.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "Observation.subject",
+					"path": "Observation.subject.Patient",
+					"short": "Who and/or what this is about",
+					"formal": "The thing the observation is being made about.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Group",
+					"parent": "Observation.subject",
+					"path": "Observation.subject.Group",
+					"short": "Who and/or what this is about",
+					"formal": "The thing the observation is being made about.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Group"
+				},
+				{
+					"name": "Device",
+					"parent": "Observation.subject",
+					"path": "Observation.subject.Device",
+					"short": "Who and/or what this is about",
+					"formal": "The thing the observation is being made about.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "Location",
+					"parent": "Observation.subject",
+					"path": "Observation.subject.Location",
+					"short": "Who and/or what this is about",
+					"formal": "The thing the observation is being made about.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Location"
+				}
+			]
+		},
+		{
+			"name": "specimen",
+			"path": "Observation.specimen",
+			"parent": "Observation",
+			"short": "Specimen used for this observation",
+			"formal": "The specimen that was used when this observation was made.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Specimen"
+		},
+		{
+			"name": "performer",
+			"path": "Observation.performer",
+			"parent": "Observation",
+			"short": "Who did the observation",
+			"formal": "Who was responsible for asserting the observed value as \"true\".",
+			"min": 0,
+			"max": "*",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "Observation.performer",
+					"path": "Observation.performer.Practitioner",
+					"short": "Who did the observation",
+					"formal": "Who was responsible for asserting the observed value as \"true\".",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Device",
+					"parent": "Observation.performer",
+					"path": "Observation.performer.Device",
+					"short": "Who did the observation",
+					"formal": "Who was responsible for asserting the observed value as \"true\".",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "Organization",
+					"parent": "Observation.performer",
+					"path": "Observation.performer.Organization",
+					"short": "Who did the observation",
+					"formal": "Who was responsible for asserting the observed value as \"true\".",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Organization"
+				}
+			]
+		},
+		{
+			"name": "referenceRange",
+			"path": "Observation.referenceRange",
+			"parent": "Observation",
+			"short": "Provides guide for interpretation",
+			"formal": "Guidance on how to interpret the value by comparison to a normal or recommended range.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "3",
+					"name": "reference range",
+					"severity": "error",
+					"human": "Must have at least a low or a high (and no comparators)",
+					"xpath": "(exists(f:low) or exists(f:high)) and not(exists(f:low/f:comparator)) and not(exists(f:high/f:comparator))"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "low",
+					"path": "Observation.referenceRange.low",
+					"parent": "Observation.referenceRange",
+					"short": "Low Range, if relevant",
+					"formal": "The value of the low bound of the reference range. If this is omitted, the low bound of the reference range is assumed to be meaningless. E.g. <2.3.",
+					"min": 0,
+					"max": "1",
+					"type": "Quantity"
+				},
+				{
+					"name": "high",
+					"path": "Observation.referenceRange.high",
+					"parent": "Observation.referenceRange",
+					"short": "High Range, if relevant",
+					"formal": "The value of the high bound of the reference range. If this is omitted, the high bound of the reference range is assumed to be meaningless. E.g. >5.",
+					"min": 0,
+					"max": "1",
+					"type": "Quantity"
+				},
+				{
+					"name": "meaning",
+					"path": "Observation.referenceRange.meaning",
+					"parent": "Observation.referenceRange",
+					"short": "Indicates the meaning/use of this range of this range",
+					"formal": "Code for the meaning of the reference range.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "ObservationRangeMeaning",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/referencerange-meaning"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "age",
+					"path": "Observation.referenceRange.age",
+					"parent": "Observation.referenceRange",
+					"short": "Applicable age range, if relevant",
+					"formal": "The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so.",
+					"min": 0,
+					"max": "1",
+					"type": "Range"
+				}
+			]
+		},
+		{
+			"name": "related",
+			"path": "Observation.related",
+			"parent": "Observation",
+			"short": "Observations related to this observation",
+			"formal": "Related observations - either components, or previous observations, or statements of derivation.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "type",
+					"path": "Observation.related.type",
+					"parent": "Observation.related",
+					"short": "has-component | has-member | derived-from | sequel-to | replaces | qualified-by | interfered-by",
+					"formal": "A code specifying the kind of relationship that exists with the target observation.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "ObservationRelationshipType",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/observation-relationshiptypes"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "target",
+					"path": "Observation.related.target",
+					"parent": "Observation.related",
+					"short": "Observation that is related to this one",
+					"formal": "A reference to the observation that is related to this observation.",
+					"min": 1,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Observation"
+				}
+			]
+		}
+	],
+	"success": true
+}

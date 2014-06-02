@@ -1,0 +1,575 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "SecurityEvent.text",
+			"parent": "SecurityEvent",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "SecurityEvent.contained",
+			"parent": "SecurityEvent",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "event",
+			"path": "SecurityEvent.event",
+			"parent": "SecurityEvent",
+			"short": "What was done",
+			"formal": "Identifies the name, action type, time, and disposition of the audited event.",
+			"min": 1,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "type",
+					"path": "SecurityEvent.event.type",
+					"parent": "SecurityEvent.event",
+					"short": "Type/identifier of event",
+					"formal": "Identifier for a family of the event.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "SecurityEventType",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/security-event-type"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "subtype",
+					"path": "SecurityEvent.event.subtype",
+					"parent": "SecurityEvent.event",
+					"short": "More specific type/id for the event",
+					"formal": "Identifier for the category of event.",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "SecurityEventSubType",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/security-event-sub-type"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "action",
+					"path": "SecurityEvent.event.action",
+					"parent": "SecurityEvent.event",
+					"short": "Type of action performed during the event",
+					"formal": "Indicator for type of action performed during the event that generated the audit.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "SecurityEventAction",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/security-event-action"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "dateTime",
+					"path": "SecurityEvent.event.dateTime",
+					"parent": "SecurityEvent.event",
+					"short": "Time when the event occurred on source",
+					"formal": "The time when the event occurred on the source.",
+					"min": 1,
+					"max": "1",
+					"type": "instant",
+					"leaf": true
+				},
+				{
+					"name": "outcome",
+					"path": "SecurityEvent.event.outcome",
+					"parent": "SecurityEvent.event",
+					"short": "Whether the event succeeded or failed",
+					"formal": "Indicates whether the event succeeded or failed.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "SecurityEventOutcome",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/security-event-outcome"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "outcomeDesc",
+					"path": "SecurityEvent.event.outcomeDesc",
+					"parent": "SecurityEvent.event",
+					"short": "Description of the event outcome",
+					"formal": "A free text description of the outcome of the event.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "participant",
+			"path": "SecurityEvent.participant",
+			"parent": "SecurityEvent",
+			"short": "A person, a hardware device or software process",
+			"formal": "A person, a hardware device or software process.",
+			"min": 1,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "3",
+					"name": "Participant Identification",
+					"severity": "error",
+					"human": "Either a userId or a reference, but not both",
+					"xpath": "exists(f:userId) != exists(f:reference)"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "role",
+					"path": "SecurityEvent.participant.role",
+					"parent": "SecurityEvent.participant",
+					"short": "User roles (e.g. local RBAC codes)",
+					"formal": "Specification of the role(s) the user plays when performing the event. Usually the codes used in this element are local codes defined by the role-based access control security system used in the local context.",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "DICOMRoleId",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/dicm-402-roleid"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "reference",
+					"path": "SecurityEvent.participant.reference",
+					"parent": "SecurityEvent.participant",
+					"short": "Direct reference to resource",
+					"formal": "Direct reference to a resource that identifies the participant.",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"reference": "Practitioner",
+					"children": [
+						{
+							"name": "Practitioner",
+							"parent": "SecurityEvent.participant.reference",
+							"path": "SecurityEvent.participant.reference.Practitioner",
+							"short": "Direct reference to resource",
+							"formal": "Direct reference to a resource that identifies the participant.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Practitioner"
+						},
+						{
+							"name": "Patient",
+							"parent": "SecurityEvent.participant.reference",
+							"path": "SecurityEvent.participant.reference.Patient",
+							"short": "Direct reference to resource",
+							"formal": "Direct reference to a resource that identifies the participant.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Patient"
+						},
+						{
+							"name": "Device",
+							"parent": "SecurityEvent.participant.reference",
+							"path": "SecurityEvent.participant.reference.Device",
+							"short": "Direct reference to resource",
+							"formal": "Direct reference to a resource that identifies the participant.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Device"
+						}
+					]
+				},
+				{
+					"name": "userId",
+					"path": "SecurityEvent.participant.userId",
+					"parent": "SecurityEvent.participant",
+					"short": "Unique identifier for the user",
+					"formal": "Unique identifier for the user actively participating in the event.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "altId",
+					"path": "SecurityEvent.participant.altId",
+					"parent": "SecurityEvent.participant",
+					"short": "Alternative User id e.g. authentication",
+					"formal": "Alternative Participant Identifier. For a human, this should be a user identifier text string from authentication system. This identifier would be one known to a common authentication system (e.g., single sign-on), if available.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "name",
+					"path": "SecurityEvent.participant.name",
+					"parent": "SecurityEvent.participant",
+					"short": "Human-meaningful name for the user",
+					"formal": "Human-meaningful name for the user.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "requestor",
+					"path": "SecurityEvent.participant.requestor",
+					"parent": "SecurityEvent.participant",
+					"short": "Whether user is initiator",
+					"formal": "Indicator that the user is or is not the requestor, or initiator, for the event being audited.",
+					"min": 1,
+					"max": "1",
+					"type": "boolean",
+					"leaf": true
+				},
+				{
+					"name": "media",
+					"path": "SecurityEvent.participant.media",
+					"parent": "SecurityEvent.participant",
+					"short": "Type of media",
+					"formal": "Type of media involved. Used when the event is about exporting/importing onto media.",
+					"min": 0,
+					"max": "1",
+					"type": "Coding"
+				},
+				{
+					"name": "network",
+					"path": "SecurityEvent.participant.network",
+					"parent": "SecurityEvent.participant",
+					"short": "Logical network location for application activity",
+					"formal": "Logical network location for application activity, if the activity has a network location.",
+					"min": 0,
+					"max": "1",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "identifier",
+							"path": "SecurityEvent.participant.network.identifier",
+							"parent": "SecurityEvent.participant.network",
+							"short": "Identifier for the network access point of the user device",
+							"formal": "An identifier for the network access point of the user device for the audit event.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "type",
+							"path": "SecurityEvent.participant.network.type",
+							"parent": "SecurityEvent.participant.network",
+							"short": "The type of network access point",
+							"formal": "An identifier for the type of network access point that originated the audit event.",
+							"min": 0,
+							"max": "1",
+							"binding": {
+								"name": "SecurityEventParticipantNetworkType",
+								"isExtensible": false,
+								"conformance": "required",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/network-type"
+								}
+							},
+							"type": "code",
+							"leaf": true
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "source",
+			"path": "SecurityEvent.source",
+			"parent": "SecurityEvent",
+			"short": "Application systems and processes",
+			"formal": "Application systems and processes.",
+			"min": 1,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "site",
+					"path": "SecurityEvent.source.site",
+					"parent": "SecurityEvent.source",
+					"short": "Logical source location within the enterprise",
+					"formal": "Logical source location within the healthcare enterprise network.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "identifier",
+					"path": "SecurityEvent.source.identifier",
+					"parent": "SecurityEvent.source",
+					"short": "The id of source where event originated",
+					"formal": "Identifier of the source where the event originated.",
+					"min": 1,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "type",
+					"path": "SecurityEvent.source.type",
+					"parent": "SecurityEvent.source",
+					"short": "The type of source where event originated",
+					"formal": "Code specifying the type of source where event originated.",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "SecurityEventSourceType",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/security-source-type"
+						}
+					},
+					"type": "Coding"
+				}
+			]
+		},
+		{
+			"name": "object",
+			"path": "SecurityEvent.object",
+			"parent": "SecurityEvent",
+			"short": "Specific instances of data or objects that have been accessed",
+			"formal": "Specific instances of data or objects that have been accessed.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "2",
+					"name": "Object Identification",
+					"severity": "error",
+					"human": "Either an identifier or a reference, but not both",
+					"xpath": "exists(f:identifier) != exists(f:reference)"
+				},
+				{
+					"key": "1",
+					"name": "Object Name",
+					"severity": "error",
+					"human": "Either a name or a query (or both)",
+					"xpath": "not(exists(f:name)) or not(exists(f:query))"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "identifier",
+					"path": "SecurityEvent.object.identifier",
+					"parent": "SecurityEvent.object",
+					"short": "Specific instance of object (e.g. versioned)",
+					"formal": "Identifies a specific instance of the participant object. The reference should always be version specific.",
+					"min": 0,
+					"max": "1",
+					"type": "Identifier"
+				},
+				{
+					"name": "reference",
+					"path": "SecurityEvent.object.reference",
+					"parent": "SecurityEvent.object",
+					"short": "Specific instance of resource (e.g. versioned)",
+					"formal": "Identifies a specific instance of the participant object. The reference should always be version specific.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Any"
+				},
+				{
+					"name": "type",
+					"path": "SecurityEvent.object.type",
+					"parent": "SecurityEvent.object",
+					"short": "Object type being audited",
+					"formal": "Object type being audited.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "SecurityEventObjectType",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/object-type"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "role",
+					"path": "SecurityEvent.object.role",
+					"parent": "SecurityEvent.object",
+					"short": "Functional application role of Object",
+					"formal": "Code representing the functional application role of Participant Object being audited.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "SecurityEventObjectRole",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/object-role"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "lifecycle",
+					"path": "SecurityEvent.object.lifecycle",
+					"parent": "SecurityEvent.object",
+					"short": "Life-cycle stage for the object",
+					"formal": "Identifier for the data life-cycle stage for the participant object.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "SecurityEventObjectLifecycle",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/object-lifecycle"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "sensitivity",
+					"path": "SecurityEvent.object.sensitivity",
+					"parent": "SecurityEvent.object",
+					"short": "Policy-defined sensitivity for the object",
+					"formal": "Denotes policy-defined sensitivity for the Participant Object ID such as VIP, HIV status, mental health status or similar topics.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "SecurityEventObjectSensitivity",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/security-event-sensitivity"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "name",
+					"path": "SecurityEvent.object.name",
+					"parent": "SecurityEvent.object",
+					"short": "Instance-specific descriptor for Object",
+					"formal": "An instance-specific descriptor of the Participant Object ID audited, such as a person's name.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "description",
+					"path": "SecurityEvent.object.description",
+					"parent": "SecurityEvent.object",
+					"short": "Descriptive text",
+					"formal": "Text that describes the object in more detail.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "query",
+					"path": "SecurityEvent.object.query",
+					"parent": "SecurityEvent.object",
+					"short": "Actual query for object",
+					"formal": "The actual query for a query-type participant object.",
+					"min": 0,
+					"max": "1",
+					"type": "base64Binary",
+					"leaf": true
+				},
+				{
+					"name": "detail",
+					"path": "SecurityEvent.object.detail",
+					"parent": "SecurityEvent.object",
+					"short": "Additional Information about the Object",
+					"formal": "Additional Information about the Object.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "type",
+							"path": "SecurityEvent.object.detail.type",
+							"parent": "SecurityEvent.object.detail",
+							"short": "Name of the property",
+							"formal": "Name of the property.",
+							"min": 1,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "value",
+							"path": "SecurityEvent.object.detail.value",
+							"parent": "SecurityEvent.object.detail",
+							"short": "Property value",
+							"formal": "Property value.",
+							"min": 1,
+							"max": "1",
+							"type": "base64Binary",
+							"leaf": true
+						}
+					]
+				}
+			]
+		}
+	],
+	"success": true
+}

@@ -1,0 +1,189 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "OrderResponse.text",
+			"parent": "OrderResponse",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "OrderResponse.contained",
+			"parent": "OrderResponse",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "OrderResponse.identifier",
+			"parent": "OrderResponse",
+			"short": "Identifiers assigned to this order by the orderer or by the receiver",
+			"formal": "Identifiers assigned to this order. The identifiers are usually assigned by the system responding to the order, but they may be provided or added to by other systems.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "request",
+			"path": "OrderResponse.request",
+			"parent": "OrderResponse",
+			"short": "The order that this is a response to",
+			"formal": "A reference to the order that this is in response to.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Order"
+		},
+		{
+			"name": "date",
+			"path": "OrderResponse.date",
+			"parent": "OrderResponse",
+			"short": "When the response was made",
+			"formal": "The date and time at which this order response was made (created/posted).",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "who",
+			"path": "OrderResponse.who",
+			"parent": "OrderResponse",
+			"short": "Who made the response",
+			"formal": "The person, organization, or device credited with making the response.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "OrderResponse.who",
+					"path": "OrderResponse.who.Practitioner",
+					"short": "Who made the response",
+					"formal": "The person, organization, or device credited with making the response.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Organization",
+					"parent": "OrderResponse.who",
+					"path": "OrderResponse.who.Organization",
+					"short": "Who made the response",
+					"formal": "The person, organization, or device credited with making the response.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Organization"
+				},
+				{
+					"name": "Device",
+					"parent": "OrderResponse.who",
+					"path": "OrderResponse.who.Device",
+					"short": "Who made the response",
+					"formal": "The person, organization, or device credited with making the response.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				}
+			]
+		},
+		{
+			"name": "authority",
+			"path": "OrderResponse.authority[x]",
+			"parent": "OrderResponse",
+			"short": "If required by policy",
+			"formal": "A reference to an authority policy that is the reason for the response. Usually this is used when the order is rejected, to provide a reason for rejection.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"children": [
+				{
+					"name": "authorityCodeableConcept",
+					"parent": "OrderResponse.authority[x]",
+					"path": "OrderResponse.authority[x].authorityCodeableConcept",
+					"short": "If required by policy",
+					"formal": "A reference to an authority policy that is the reason for the response. Usually this is used when the order is rejected, to provide a reason for rejection.",
+					"min": 0,
+					"max": "1",
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "Any",
+					"parent": "OrderResponse.authority[x]",
+					"path": "OrderResponse.authority[x].Any",
+					"short": "If required by policy",
+					"formal": "A reference to an authority policy that is the reason for the response. Usually this is used when the order is rejected, to provide a reason for rejection.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Any"
+				}
+			]
+		},
+		{
+			"name": "code",
+			"path": "OrderResponse.code",
+			"parent": "OrderResponse",
+			"short": "pending | review | rejected | error | accepted | cancelled | replaced | aborted | complete",
+			"formal": "What this response says about the status of the original order.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "OrderOutcomeStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/order-outcome-code"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "description",
+			"path": "OrderResponse.description",
+			"parent": "OrderResponse",
+			"short": "Additional description of the response",
+			"formal": "Additional description about the response - e.g. a text description provided by a human user when making decisions about the order.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "fulfillment",
+			"path": "OrderResponse.fulfillment",
+			"parent": "OrderResponse",
+			"short": "Details of the outcome of performing the order",
+			"formal": "Links to resources that provide details of the outcome of performing the order. E.g. Diagnostic Reports in a response that is made to an order that referenced a diagnostic order.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "Any"
+		}
+	],
+	"success": true
+}

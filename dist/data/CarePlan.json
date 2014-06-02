@@ -1,0 +1,651 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "CarePlan.text",
+			"parent": "CarePlan",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "CarePlan.contained",
+			"parent": "CarePlan",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "CarePlan.identifier",
+			"parent": "CarePlan",
+			"short": "External Ids for this plan",
+			"formal": "This records identifiers associated with this care plan that are defined by business processed and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "patient",
+			"path": "CarePlan.patient",
+			"parent": "CarePlan",
+			"short": "Who care plan is for",
+			"formal": "Identifies the patient/subject whose intended care is described by the plan.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "status",
+			"path": "CarePlan.status",
+			"parent": "CarePlan",
+			"short": "planned | active | completed",
+			"formal": "Indicates whether the plan is currently being acted upon, represents future intentions or is now just historical record.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "CarePlanStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/care-plan-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "period",
+			"path": "CarePlan.period",
+			"parent": "CarePlan",
+			"short": "Time period plan covers",
+			"formal": "Indicates when the plan did (or is intended to) come into effect and end.",
+			"min": 0,
+			"max": "1",
+			"type": "Period"
+		},
+		{
+			"name": "modified",
+			"path": "CarePlan.modified",
+			"parent": "CarePlan",
+			"short": "When last updated",
+			"formal": "Identifies the most recent date on which the plan has been revised.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "concern",
+			"path": "CarePlan.concern",
+			"parent": "CarePlan",
+			"short": "Health issues this plan addresses",
+			"formal": "Identifies the conditions/problems/concerns/diagnoses/etc. whose management and/or mitigation are handled by this plan.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "Condition"
+		},
+		{
+			"name": "participant",
+			"path": "CarePlan.participant",
+			"parent": "CarePlan",
+			"short": "Who's involved in plan?",
+			"formal": "Identifies all people and organizations who are expected to be involved in the care envisioned by this plan.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "role",
+					"path": "CarePlan.participant.role",
+					"parent": "CarePlan.participant",
+					"short": "Type of involvement",
+					"formal": "Indicates specific responsibility of an individual within the care plan.  E.g. \"Primary physician\", \"Team coordinator\", \"Caregiver\", etc.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "CarePlanParticipantRole",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"description": "Indicates specific responsibility of an individual within the care plan.  E.g. \"Primary physician\", \"Team coordinator\", \"Caregiver\", etc."
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "member",
+					"path": "CarePlan.participant.member",
+					"parent": "CarePlan.participant",
+					"short": "Who is involved",
+					"formal": "The specific person or organization who is participating/expected to participate in the care plan.",
+					"min": 1,
+					"max": "1",
+					"type": "multitype",
+					"reference": "Practitioner",
+					"children": [
+						{
+							"name": "Practitioner",
+							"parent": "CarePlan.participant.member",
+							"path": "CarePlan.participant.member.Practitioner",
+							"short": "Who is involved",
+							"formal": "The specific person or organization who is participating/expected to participate in the care plan.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Practitioner"
+						},
+						{
+							"name": "RelatedPerson",
+							"parent": "CarePlan.participant.member",
+							"path": "CarePlan.participant.member.RelatedPerson",
+							"short": "Who is involved",
+							"formal": "The specific person or organization who is participating/expected to participate in the care plan.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "RelatedPerson"
+						},
+						{
+							"name": "Patient",
+							"parent": "CarePlan.participant.member",
+							"path": "CarePlan.participant.member.Patient",
+							"short": "Who is involved",
+							"formal": "The specific person or organization who is participating/expected to participate in the care plan.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Patient"
+						},
+						{
+							"name": "Organization",
+							"parent": "CarePlan.participant.member",
+							"path": "CarePlan.participant.member.Organization",
+							"short": "Who is involved",
+							"formal": "The specific person or organization who is participating/expected to participate in the care plan.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Organization"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "goal",
+			"path": "CarePlan.goal",
+			"parent": "CarePlan",
+			"short": "Desired outcome of plan",
+			"formal": "Describes the intended objective(s) of carrying out the Care Plan.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "description",
+					"path": "CarePlan.goal.description",
+					"parent": "CarePlan.goal",
+					"short": "What's the desired outcome?",
+					"formal": "Human-readable description of a specific desired objective of the care plan.",
+					"min": 1,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "status",
+					"path": "CarePlan.goal.status",
+					"parent": "CarePlan.goal",
+					"short": "in progress | achieved | sustaining | cancelled",
+					"formal": "Indicates whether the goal has been reached and is still considered relevant.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "CarePlanGoalStatus",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/care-plan-goal-status"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "notes",
+					"path": "CarePlan.goal.notes",
+					"parent": "CarePlan.goal",
+					"short": "Comments about the goal",
+					"formal": "Any comments related to the goal.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "concern",
+					"path": "CarePlan.goal.concern",
+					"parent": "CarePlan.goal",
+					"short": "Health issues this goal addresses",
+					"formal": "The identified conditions that this goal relates to - the condition that caused it to be created, or that it is intended to address.",
+					"min": 0,
+					"max": "*",
+					"type": "ResourceReference",
+					"reference": "Condition"
+				}
+			]
+		},
+		{
+			"name": "activity",
+			"path": "CarePlan.activity",
+			"parent": "CarePlan",
+			"short": "Action to occur as part of plan",
+			"formal": "Identifies a planned action to occur as part of the plan.  For example, a medication to be used, lab tests to perform, self-monitoring, education, etc.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "goal",
+					"path": "CarePlan.activity.goal",
+					"parent": "CarePlan.activity",
+					"short": "Goals this activity relates to",
+					"formal": "Internal reference that identifies the goals that this activity is intended to contribute towards meeting.",
+					"min": 0,
+					"max": "*",
+					"type": "idref"
+				},
+				{
+					"name": "status",
+					"path": "CarePlan.activity.status",
+					"parent": "CarePlan.activity",
+					"short": "not started | scheduled | in progress | on hold | completed | cancelled",
+					"formal": "Identifies what progress is being made for the specific activity.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "CarePlanActivityStatus",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/care-plan-activity-status"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "prohibited",
+					"path": "CarePlan.activity.prohibited",
+					"parent": "CarePlan.activity",
+					"short": "Do NOT do",
+					"formal": "If true, indicates that the described activity is one that must NOT be engaged in when following the plan.",
+					"min": 1,
+					"max": "1",
+					"type": "boolean",
+					"leaf": true
+				},
+				{
+					"name": "actionResulting",
+					"path": "CarePlan.activity.actionResulting",
+					"parent": "CarePlan.activity",
+					"short": "Appointments, orders, etc.",
+					"formal": "Resources that describe follow-on actions resulting from the plan, such as drug prescriptions, encounter records, appointments, etc.",
+					"min": 0,
+					"max": "*",
+					"type": "ResourceReference",
+					"reference": "Any"
+				},
+				{
+					"name": "notes",
+					"path": "CarePlan.activity.notes",
+					"parent": "CarePlan.activity",
+					"short": "Comments about the activity",
+					"formal": "Notes about the execution of the activity.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "detail",
+					"path": "CarePlan.activity.detail",
+					"parent": "CarePlan.activity",
+					"short": "Activity details defined in specific resource",
+					"formal": "The details of the proposed activity represented in a specific resource.",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"reference": "Procedure",
+					"children": [
+						{
+							"name": "Procedure",
+							"parent": "CarePlan.activity.detail",
+							"path": "CarePlan.activity.detail.Procedure",
+							"short": "Activity details defined in specific resource",
+							"formal": "The details of the proposed activity represented in a specific resource.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Procedure"
+						},
+						{
+							"name": "MedicationPrescription",
+							"parent": "CarePlan.activity.detail",
+							"path": "CarePlan.activity.detail.MedicationPrescription",
+							"short": "Activity details defined in specific resource",
+							"formal": "The details of the proposed activity represented in a specific resource.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "MedicationPrescription"
+						},
+						{
+							"name": "DiagnosticOrder",
+							"parent": "CarePlan.activity.detail",
+							"path": "CarePlan.activity.detail.DiagnosticOrder",
+							"short": "Activity details defined in specific resource",
+							"formal": "The details of the proposed activity represented in a specific resource.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "DiagnosticOrder"
+						},
+						{
+							"name": "Encounter",
+							"parent": "CarePlan.activity.detail",
+							"path": "CarePlan.activity.detail.Encounter",
+							"short": "Activity details defined in specific resource",
+							"formal": "The details of the proposed activity represented in a specific resource.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Encounter"
+						}
+					]
+				},
+				{
+					"name": "simple",
+					"path": "CarePlan.activity.simple",
+					"parent": "CarePlan.activity",
+					"short": "Activity details summarised here",
+					"formal": "A simple summary of details suitable for a general care plan system (e.g. form driven) that doesn't know about specific resources such as procedure etc.",
+					"min": 0,
+					"max": "1",
+					"constraint": [
+						{
+							"key": "3",
+							"name": "details by reference, or simple details",
+							"severity": "error",
+							"human": "Only provide a detail reference, or a simple detail summary",
+							"xpath": "not(exists(f:detail)) or not(exists(f:simple))"
+						},
+						{
+							"key": "2",
+							"name": "quantity for supply",
+							"severity": "error",
+							"human": "Quantity can only be specified if activity category is supply",
+							"xpath": "(f:category/@value=('supply')) = exists(f:quantity)"
+						},
+						{
+							"key": "1",
+							"name": "dose for food or drug",
+							"severity": "error",
+							"human": "DailyDose can only be specified if activity category is drug or food",
+							"xpath": "(f:category/@value=('drug','diet')) = exists(f:dailyAmount)"
+						}
+					],
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "category",
+							"path": "CarePlan.activity.simple.category",
+							"parent": "CarePlan.activity.simple",
+							"short": "diet | drug | encounter | observation | procedure | supply | other",
+							"formal": "High-level categorization of the type of activity in a care plan.",
+							"min": 1,
+							"max": "1",
+							"binding": {
+								"name": "CarePlanActivityCategory",
+								"isExtensible": false,
+								"conformance": "required",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/care-plan-activity-category"
+								}
+							},
+							"type": "code",
+							"leaf": true
+						},
+						{
+							"name": "code",
+							"path": "CarePlan.activity.simple.code",
+							"parent": "CarePlan.activity.simple",
+							"short": "Detail type of activity",
+							"formal": "Detailed description of the type of activity.  E.g. What lab test, what procedure, what kind of encounter.",
+							"min": 0,
+							"max": "1",
+							"binding": {
+								"name": "CarePlanActivityType",
+								"isExtensible": true,
+								"conformance": "preferred",
+								"description": "Detailed description of the type of activity.  E.g. What lab test, what procedure, what kind of encounter."
+							},
+							"type": "CodeableConcept"
+						},
+						{
+							"name": "timing",
+							"path": "CarePlan.activity.simple.timing[x]",
+							"parent": "CarePlan.activity.simple",
+							"short": "When activity is to occur",
+							"formal": "The period, timing or frequency upon which the described activity is to occur.",
+							"min": 0,
+							"max": "1",
+							"type": "multitype",
+							"children": [
+								{
+									"name": "timingSchedule",
+									"parent": "CarePlan.activity.simple.timing[x]",
+									"path": "CarePlan.activity.simple.timing[x].timingSchedule",
+									"short": "When activity is to occur",
+									"formal": "The period, timing or frequency upon which the described activity is to occur.",
+									"min": 0,
+									"max": "1",
+									"type": "Schedule"
+								},
+								{
+									"name": "timingPeriod",
+									"parent": "CarePlan.activity.simple.timing[x]",
+									"path": "CarePlan.activity.simple.timing[x].timingPeriod",
+									"short": "When activity is to occur",
+									"formal": "The period, timing or frequency upon which the described activity is to occur.",
+									"min": 0,
+									"max": "1",
+									"type": "Period"
+								},
+								{
+									"name": "timingString",
+									"parent": "CarePlan.activity.simple.timing[x]",
+									"path": "CarePlan.activity.simple.timing[x].timingString",
+									"short": "When activity is to occur",
+									"formal": "The period, timing or frequency upon which the described activity is to occur.",
+									"min": 0,
+									"max": "1",
+									"type": "string",
+									"leaf": true
+								}
+							]
+						},
+						{
+							"name": "location",
+							"path": "CarePlan.activity.simple.location",
+							"parent": "CarePlan.activity.simple",
+							"short": "Where it should happen",
+							"formal": "Identifies the facility where the activity will occur.  E.g. home, hospital, specific clinic, etc.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Location"
+						},
+						{
+							"name": "performer",
+							"path": "CarePlan.activity.simple.performer",
+							"parent": "CarePlan.activity.simple",
+							"short": "Who's responsible?",
+							"formal": "Identifies who's expected to be involved in the activity.",
+							"min": 0,
+							"max": "*",
+							"type": "multitype",
+							"reference": "Practitioner",
+							"children": [
+								{
+									"name": "Practitioner",
+									"parent": "CarePlan.activity.simple.performer",
+									"path": "CarePlan.activity.simple.performer.Practitioner",
+									"short": "Who's responsible?",
+									"formal": "Identifies who's expected to be involved in the activity.",
+									"min": 0,
+									"max": "1",
+									"type": "ResourceReference",
+									"reference": "Practitioner"
+								},
+								{
+									"name": "Organization",
+									"parent": "CarePlan.activity.simple.performer",
+									"path": "CarePlan.activity.simple.performer.Organization",
+									"short": "Who's responsible?",
+									"formal": "Identifies who's expected to be involved in the activity.",
+									"min": 0,
+									"max": "1",
+									"type": "ResourceReference",
+									"reference": "Organization"
+								},
+								{
+									"name": "RelatedPerson",
+									"parent": "CarePlan.activity.simple.performer",
+									"path": "CarePlan.activity.simple.performer.RelatedPerson",
+									"short": "Who's responsible?",
+									"formal": "Identifies who's expected to be involved in the activity.",
+									"min": 0,
+									"max": "1",
+									"type": "ResourceReference",
+									"reference": "RelatedPerson"
+								},
+								{
+									"name": "Patient",
+									"parent": "CarePlan.activity.simple.performer",
+									"path": "CarePlan.activity.simple.performer.Patient",
+									"short": "Who's responsible?",
+									"formal": "Identifies who's expected to be involved in the activity.",
+									"min": 0,
+									"max": "1",
+									"type": "ResourceReference",
+									"reference": "Patient"
+								}
+							]
+						},
+						{
+							"name": "product",
+							"path": "CarePlan.activity.simple.product",
+							"parent": "CarePlan.activity.simple",
+							"short": "What's administered/supplied",
+							"formal": "Identifies the food, drug or other product being consumed or supplied in the activity.",
+							"min": 0,
+							"max": "1",
+							"type": "multitype",
+							"reference": "Medication",
+							"children": [
+								{
+									"name": "Medication",
+									"parent": "CarePlan.activity.simple.product",
+									"path": "CarePlan.activity.simple.product.Medication",
+									"short": "What's administered/supplied",
+									"formal": "Identifies the food, drug or other product being consumed or supplied in the activity.",
+									"min": 0,
+									"max": "1",
+									"type": "ResourceReference",
+									"reference": "Medication"
+								},
+								{
+									"name": "Substance",
+									"parent": "CarePlan.activity.simple.product",
+									"path": "CarePlan.activity.simple.product.Substance",
+									"short": "What's administered/supplied",
+									"formal": "Identifies the food, drug or other product being consumed or supplied in the activity.",
+									"min": 0,
+									"max": "1",
+									"type": "ResourceReference",
+									"reference": "Substance"
+								}
+							]
+						},
+						{
+							"name": "dailyAmount",
+							"path": "CarePlan.activity.simple.dailyAmount",
+							"parent": "CarePlan.activity.simple",
+							"short": "How much consumed/day?",
+							"formal": "Identifies the quantity expected to be consumed in a given day.",
+							"min": 0,
+							"max": "1",
+							"type": "Quantity"
+						},
+						{
+							"name": "quantity",
+							"path": "CarePlan.activity.simple.quantity",
+							"parent": "CarePlan.activity.simple",
+							"short": "How much is administered/supplied/consumed",
+							"formal": "Identifies the quantity expected to be supplied.",
+							"min": 0,
+							"max": "1",
+							"type": "Quantity"
+						},
+						{
+							"name": "details",
+							"path": "CarePlan.activity.simple.details",
+							"parent": "CarePlan.activity.simple",
+							"short": "Extra info on activity occurrence",
+							"formal": "This provides a textual description of constraints on the activity occurrence, including relation to other activities.  It may also include objectives, pre-conditions and end-conditions.  Finally, it may convey specifics about the activity such as body site, method, route, etc.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "notes",
+			"path": "CarePlan.notes",
+			"parent": "CarePlan",
+			"short": "Comments about the plan",
+			"formal": "General notes about the care plan not covered elsewhere.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		}
+	],
+	"success": true
+}

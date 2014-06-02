@@ -1,0 +1,13 @@
+OperationOutcome.text.status
+OperationOutcome.text.div
+OperationOutcome.contained[]
+OperationOutcome.issue[].severity
+OperationOutcome.issue[].type.system
+OperationOutcome.issue[].type.version
+OperationOutcome.issue[].type.code
+OperationOutcome.issue[].type.display
+OperationOutcome.issue[].type.primary
+OperationOutcome.issue[].type.valueSet.reference
+OperationOutcome.issue[].type.valueSet.display
+OperationOutcome.issue[].details
+OperationOutcome.issue[].location[]

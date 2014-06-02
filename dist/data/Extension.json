@@ -1,0 +1,26 @@
+{
+	"children": [
+		{
+			"name": "url",
+			"path": "Extension.url",
+			"parent": "Extension",
+			"short": "identifies the meaning of the extension",
+			"formal": "Source of the definition for the extension code - a logical name or a URL.",
+			"min": 1,
+			"max": "1",
+			"type": "uri",
+			"leaf": true
+		},
+		{
+			"name": "value",
+			"path": "Extension.value[x]",
+			"parent": "Extension",
+			"short": "Value of extension",
+			"formal": "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).",
+			"min": 0,
+			"max": "1",
+			"type": "*"
+		}
+	],
+	"success": true
+}

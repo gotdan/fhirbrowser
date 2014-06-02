@@ -1,0 +1,455 @@
+{
+	"children": [
+		{
+			"name": "Attribution",
+			"children": [
+				{
+					"name": "Organization",
+					"path": "Organization",
+					"parent": "",
+					"short": "A grouping of people or organizations with a common purpose",
+					"formal": "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc.",
+					"min": 1,
+					"max": "1",
+					"constraint": [
+						{
+							"key": "1",
+							"name": "AtLeastANameOrId",
+							"severity": "error",
+							"human": "The organization SHALL at least have a name or an id, and possibly more than one",
+							"xpath": "count(f:identifier | f:name) > 0"
+						}
+					],
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Patient",
+					"path": "Patient",
+					"parent": "",
+					"short": "Information about a person or animal receiving health care services",
+					"formal": "Demographics and other administrative information about a person or animal receiving care or other health-related services.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Practitioner",
+					"path": "Practitioner",
+					"parent": "",
+					"short": "A person with a  formal responsibility in the provisioning of healthcare or related services",
+					"formal": "A person who is directly or indirectly involved in the provisioning of healthcare.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "RelatedPerson",
+					"path": "RelatedPerson",
+					"parent": "",
+					"short": "An person that is related to a patient, but who is not a direct target of care",
+					"formal": "Information about a person that is involved in the care for a patient, but who is not the target of healthcare, nor has a formal responsibility in the care process.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				}
+			]
+		},
+		{
+			"name": "Device Interactions",
+			"children": [
+				{
+					"name": "DeviceObservationReport",
+					"path": "DeviceObservationReport",
+					"parent": "",
+					"short": "Describes the data produced by a device at a point in time",
+					"formal": "Describes the data produced by a device at a point in time.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				}
+			]
+		},
+		{
+			"name": "Diagnostics",
+			"children": [
+				{
+					"name": "DiagnosticOrder",
+					"path": "DiagnosticOrder",
+					"parent": "",
+					"short": "A request for a diagnostic service",
+					"formal": "A request for a diagnostic investigation service to be performed.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "DiagnosticReport",
+					"path": "DiagnosticReport",
+					"parent": "",
+					"short": "A Diagnostic report - a combination of request information, atomic results, images, interpretation, as well as formatted reports",
+					"formal": "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretation, and formatted representation of diagnostic reports.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "ImagingStudy",
+					"path": "ImagingStudy",
+					"parent": "",
+					"short": "A set of images produced in single study (one or more series of references images)",
+					"formal": "Manifest of a set of images produced in study. The set of images may include every image in the study, or it may be an incomplete sample, such as a list of key images.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Observation",
+					"path": "Observation",
+					"parent": "",
+					"short": "Measurements and simple assertions",
+					"formal": "Measurements and simple assertions made about a patient, device or other subject.",
+					"min": 1,
+					"max": "1",
+					"constraint": [
+						{
+							"key": "2",
+							"name": "reference range for quantity",
+							"severity": "error",
+							"human": "Can only have normal range if value is a quantity",
+							"xpath": "exists(f:valueQuantity) or not(exists(f:normalRange))"
+						}
+					],
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Specimen",
+					"path": "Specimen",
+					"parent": "",
+					"short": "Sample for analysis",
+					"formal": "Sample for analysis.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				}
+			]
+		},
+		{
+			"name": "Entities",
+			"children": [
+				{
+					"name": "Device",
+					"path": "Device",
+					"parent": "",
+					"short": "An instance of a manufactured thing that is used in the provision of healthcare",
+					"formal": "This resource identifies an instance of a manufactured thing that is used in the provision of healthcare without being substantially changed through that activity. The device may be a machine, an insert, a computer, an application, etc. This includes durable (reusable) medical equipment as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Group",
+					"path": "Group",
+					"parent": "",
+					"short": "Group of multiple entities",
+					"formal": "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized.  I.e. A collection of entities that isn't an Organization.",
+					"min": 1,
+					"max": "1",
+					"constraint": [
+						{
+							"key": "1",
+							"name": "No members for non-actual",
+							"severity": "error",
+							"human": "Can only have members if group is \"actual\"",
+							"xpath": "f:actual/@value='true' or not(exists(f:member))"
+						},
+						{
+							"key": "4",
+							"name": "No more members than quantity",
+							"severity": "error",
+							"human": "Can't have more members associated with the group than the value specified for \"quantity\"",
+							"xpath": "not(f:quantity) or not(f:member) or not(f:quantity>count(f:member))"
+						}
+					],
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Location",
+					"path": "Location",
+					"parent": "",
+					"short": "Details and position information for a physical place",
+					"formal": "Details and position information for a physical place where services are provided  and resources and participants may be stored, found, contained or accommodated.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Substance",
+					"path": "Substance",
+					"parent": "",
+					"short": "A homogeneous material with a definite composition",
+					"formal": "A homogeneous material with a definite composition.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				}
+			]
+		},
+		{
+			"name": "General",
+			"children": [
+				{
+					"name": "AdverseReaction",
+					"path": "AdverseReaction",
+					"parent": "",
+					"short": "Specific reactions to a substance",
+					"formal": "Records an unexpected reaction suspected to be related to the exposure of the reaction subject to a substance.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "AllergyIntolerance",
+					"path": "AllergyIntolerance",
+					"parent": "",
+					"short": "Drug, food, environmental and others",
+					"formal": "Indicates the patient has a susceptibility to an adverse reaction upon exposure to a specified substance.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "CarePlan",
+					"path": "CarePlan",
+					"parent": "",
+					"short": "Healthcare plan for patient",
+					"formal": "Describes the intention of how one or more practitioners intend to deliver care for a particular patient for a period of time, possibly limited to care for a specific condition or set of conditions.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Condition",
+					"path": "Condition",
+					"parent": "",
+					"short": "Detailed information about conditions, problems or diagnoses",
+					"formal": "Use to record detailed information about conditions, problems or diagnoses recognized by a clinician. There are many uses including: recording a Diagnosis during an Encounter; populating a problem List or a Summary Statement, such as a Discharge Summary.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "FamilyHistory",
+					"path": "FamilyHistory",
+					"parent": "",
+					"short": "Information about patient's relatives, relevant for patient",
+					"formal": "Significant health events and conditions for people related to the subject relevant in the context of care for the subject.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Procedure",
+					"path": "Procedure",
+					"parent": "",
+					"short": "An action that is performed on a patient",
+					"formal": "An action that is performed on a patient. This can be a physical 'thing' like an operation, or less invasive like counseling or hypnotherapy.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Questionnaire",
+					"path": "Questionnaire",
+					"parent": "",
+					"short": "A structured set of questions and their answers",
+					"formal": "A structured set of questions and their answers. The Questionnaire may contain questions, answers or both. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the underlying questions.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				}
+			]
+		},
+		{
+			"name": "Medications",
+			"children": [
+				{
+					"name": "Immunization",
+					"path": "Immunization",
+					"parent": "",
+					"short": "Immunization event information",
+					"formal": "Immunization event information.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "ImmunizationRecommendation",
+					"path": "ImmunizationRecommendation",
+					"parent": "",
+					"short": "Immunization profile",
+					"formal": "A patient's point-of-time immunization status and recommendation with optional supporting justification.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Medication",
+					"path": "Medication",
+					"parent": "",
+					"short": "Definition of a Medication",
+					"formal": "Primarily used for identification and definition of Medication, but also covers ingredients and packaging.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "MedicationAdministration",
+					"path": "MedicationAdministration",
+					"parent": "",
+					"short": "Administration of medication to a patient",
+					"formal": "Describes the event of a patient being given a dose of a medication.  This may be as simple as swallowing a tablet or it may be a long running infusion.\n\nRelated resources tie this event to the authorizing prescription, and the specific encounter between patient and health care practitioner.",
+					"min": 1,
+					"max": "1",
+					"constraint": [
+						{
+							"key": "2",
+							"name": "Not given reason",
+							"severity": "error",
+							"human": "Reason not given is only permitted if wasNotGiven is true",
+							"xpath": "not(exists(f:reasonNotGiven)) or f:wasNotGiven='true'"
+						}
+					],
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "MedicationDispense",
+					"path": "MedicationDispense",
+					"parent": "",
+					"short": "Dispensing a medication to a named patient",
+					"formal": "Dispensing a medication to a named patient.  This includes a description of the supply provided and the instructions for administering the medication.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "MedicationPrescription",
+					"path": "MedicationPrescription",
+					"parent": "",
+					"short": "Prescription of medication to for patient",
+					"formal": "An order for both supply of the medication and the instructions for administration of the medicine to a patient.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "MedicationStatement",
+					"path": "MedicationStatement",
+					"parent": "",
+					"short": "Administration of medication to a patient",
+					"formal": "A record of medication being taken by a patient, or that the medication has been given to a patient where the record is the result of a report from the patient or another clinician.",
+					"min": 1,
+					"max": "1",
+					"constraint": [
+						{
+							"key": "1",
+							"name": "Not given reason",
+							"severity": "error",
+							"human": "Reason not given is only permitted if wasNotGiven is true",
+							"xpath": "not(exists(f:reasonNotGiven)) or f:wasNotGiven='true'"
+						}
+					],
+					"type": "Resource",
+					"extendable": true
+				}
+			]
+		},
+		{
+			"name": "Workflow Management",
+			"children": [
+				{
+					"name": "Alert",
+					"path": "Alert",
+					"parent": "",
+					"short": "Key information to flag to healthcare providers",
+					"formal": "Prospective warnings of potential issues when providing care to the patient.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Encounter",
+					"path": "Encounter",
+					"parent": "",
+					"short": "An interaction during which services are provided to the patient",
+					"formal": "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Order",
+					"path": "Order",
+					"parent": "",
+					"short": "A request to perform an action",
+					"formal": "A request to perform an action.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "OrderResponse",
+					"path": "OrderResponse",
+					"parent": "",
+					"short": "A response to an order",
+					"formal": "A response to an order.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				},
+				{
+					"name": "Supply",
+					"path": "Supply",
+					"parent": "",
+					"short": "A supply -  request and provision",
+					"formal": "A supply - a  request for something, and provision of what is supplied.",
+					"min": 1,
+					"max": "1",
+					"type": "Resource",
+					"extendable": true
+				}
+			]
+		}
+	],
+	"success": true
+}

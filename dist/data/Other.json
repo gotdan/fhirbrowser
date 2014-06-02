@@ -1,0 +1,133 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Other.text",
+			"parent": "Other",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Other.contained",
+			"parent": "Other",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Other.identifier",
+			"parent": "Other",
+			"short": "Business identifier",
+			"formal": "Identifier assigned to the resource for business purposes, outside the context of FHIR.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "code",
+			"path": "Other.code",
+			"parent": "Other",
+			"short": "Kind of Resource",
+			"formal": "Identifies the 'type' of resource - equivalent to the resource name for other resources.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "OtherResourceType",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/other-resource-type"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "subject",
+			"path": "Other.subject",
+			"parent": "Other",
+			"short": "Identifies the",
+			"formal": "Identifies the patient, practitioner, device or any other resource that is the \"focus\" of this resoruce.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Any"
+		},
+		{
+			"name": "author",
+			"path": "Other.author",
+			"parent": "Other",
+			"short": "Who created",
+			"formal": "Indicates who was responsible for creating the resource instance.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "Other.author",
+					"path": "Other.author.Practitioner",
+					"short": "Who created",
+					"formal": "Indicates who was responsible for creating the resource instance.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Patient",
+					"parent": "Other.author",
+					"path": "Other.author.Patient",
+					"short": "Who created",
+					"formal": "Indicates who was responsible for creating the resource instance.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "RelatedPerson",
+					"parent": "Other.author",
+					"path": "Other.author.RelatedPerson",
+					"short": "Who created",
+					"formal": "Indicates who was responsible for creating the resource instance.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "RelatedPerson"
+				}
+			]
+		},
+		{
+			"name": "created",
+			"path": "Other.created",
+			"parent": "Other",
+			"short": "When created",
+			"formal": "Identifies when the resource was first created.",
+			"min": 0,
+			"max": "1",
+			"type": "date",
+			"leaf": true
+		}
+	],
+	"success": true
+}

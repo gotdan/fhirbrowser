@@ -1,0 +1,27 @@
+{
+	"children": [
+		{
+			"name": "reference",
+			"path": "ResourceReference.reference",
+			"parent": "ResourceReference",
+			"short": "Relative, internal or absolute URL reference",
+			"formal": "A reference to a location at which the other resource is found. The reference may a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "display",
+			"path": "ResourceReference.display",
+			"parent": "ResourceReference",
+			"short": "Text alternative for the resource",
+			"formal": "Plain text narrative that identifies the resource in addition to the resource reference.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		}
+	],
+	"success": true
+}

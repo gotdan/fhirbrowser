@@ -1,0 +1,324 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "FamilyHistory.text",
+			"parent": "FamilyHistory",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "FamilyHistory.contained",
+			"parent": "FamilyHistory",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "FamilyHistory.identifier",
+			"parent": "FamilyHistory",
+			"short": "External Id(s) for this record",
+			"formal": "This records identifiers associated with this family history record that are defined by business processes and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "subject",
+			"path": "FamilyHistory.subject",
+			"parent": "FamilyHistory",
+			"short": "Patient history is about",
+			"formal": "The person who this history concerns.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "note",
+			"path": "FamilyHistory.note",
+			"parent": "FamilyHistory",
+			"short": "Additional details not covered elsewhere",
+			"formal": "Conveys information about family history not specific to individual relations.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "relation",
+			"path": "FamilyHistory.relation",
+			"parent": "FamilyHistory",
+			"short": "Relative described by history",
+			"formal": "The related person. Each FamilyHistory resource contains the entire family history for a single person.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "name",
+					"path": "FamilyHistory.relation.name",
+					"parent": "FamilyHistory.relation",
+					"short": "The family member described",
+					"formal": "This will either be a name or a description.  E.g. \"Aunt Susan\", \"my cousin with the red hair\".",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "relationship",
+					"path": "FamilyHistory.relation.relationship",
+					"parent": "FamilyHistory.relation",
+					"short": "Relationship to the subject",
+					"formal": "The type of relationship this person has to the patient (father, mother, brother etc.).",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "FamilialRelationship",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/v3/vs/FamilyMember"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "born",
+					"path": "FamilyHistory.relation.born[x]",
+					"parent": "FamilyHistory.relation",
+					"short": "(approximate) date of birth",
+					"formal": "The actual or approximate date of birth of the relative.",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"children": [
+						{
+							"name": "bornPeriod",
+							"parent": "FamilyHistory.relation.born[x]",
+							"path": "FamilyHistory.relation.born[x].bornPeriod",
+							"short": "(approximate) date of birth",
+							"formal": "The actual or approximate date of birth of the relative.",
+							"min": 0,
+							"max": "1",
+							"type": "Period"
+						},
+						{
+							"name": "bornDate",
+							"parent": "FamilyHistory.relation.born[x]",
+							"path": "FamilyHistory.relation.born[x].bornDate",
+							"short": "(approximate) date of birth",
+							"formal": "The actual or approximate date of birth of the relative.",
+							"min": 0,
+							"max": "1",
+							"type": "date",
+							"leaf": true
+						},
+						{
+							"name": "bornString",
+							"parent": "FamilyHistory.relation.born[x]",
+							"path": "FamilyHistory.relation.born[x].bornString",
+							"short": "(approximate) date of birth",
+							"formal": "The actual or approximate date of birth of the relative.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						}
+					]
+				},
+				{
+					"name": "deceased",
+					"path": "FamilyHistory.relation.deceased[x]",
+					"parent": "FamilyHistory.relation",
+					"short": "Dead? How old/when?",
+					"formal": "If this resource is indicating that the related person is deceased, then an indicator of whether the person is deceased (yes) or not (no) or the age or age range or description of age at death - can be indicated here. If the reason for death is known, then it can be indicated in the outcome code of the condition - in this case the deceased property should still be set.",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"children": [
+						{
+							"name": "deceasedBoolean",
+							"parent": "FamilyHistory.relation.deceased[x]",
+							"path": "FamilyHistory.relation.deceased[x].deceasedBoolean",
+							"short": "Dead? How old/when?",
+							"formal": "If this resource is indicating that the related person is deceased, then an indicator of whether the person is deceased (yes) or not (no) or the age or age range or description of age at death - can be indicated here. If the reason for death is known, then it can be indicated in the outcome code of the condition - in this case the deceased property should still be set.",
+							"min": 0,
+							"max": "1",
+							"type": "boolean",
+							"leaf": true
+						},
+						{
+							"name": "deceasedAge",
+							"parent": "FamilyHistory.relation.deceased[x]",
+							"path": "FamilyHistory.relation.deceased[x].deceasedAge",
+							"short": "Dead? How old/when?",
+							"formal": "If this resource is indicating that the related person is deceased, then an indicator of whether the person is deceased (yes) or not (no) or the age or age range or description of age at death - can be indicated here. If the reason for death is known, then it can be indicated in the outcome code of the condition - in this case the deceased property should still be set.",
+							"min": 0,
+							"max": "1",
+							"type": "Age"
+						},
+						{
+							"name": "deceasedRange",
+							"parent": "FamilyHistory.relation.deceased[x]",
+							"path": "FamilyHistory.relation.deceased[x].deceasedRange",
+							"short": "Dead? How old/when?",
+							"formal": "If this resource is indicating that the related person is deceased, then an indicator of whether the person is deceased (yes) or not (no) or the age or age range or description of age at death - can be indicated here. If the reason for death is known, then it can be indicated in the outcome code of the condition - in this case the deceased property should still be set.",
+							"min": 0,
+							"max": "1",
+							"type": "Range"
+						},
+						{
+							"name": "deceasedDate",
+							"parent": "FamilyHistory.relation.deceased[x]",
+							"path": "FamilyHistory.relation.deceased[x].deceasedDate",
+							"short": "Dead? How old/when?",
+							"formal": "If this resource is indicating that the related person is deceased, then an indicator of whether the person is deceased (yes) or not (no) or the age or age range or description of age at death - can be indicated here. If the reason for death is known, then it can be indicated in the outcome code of the condition - in this case the deceased property should still be set.",
+							"min": 0,
+							"max": "1",
+							"type": "date",
+							"leaf": true
+						},
+						{
+							"name": "deceasedString",
+							"parent": "FamilyHistory.relation.deceased[x]",
+							"path": "FamilyHistory.relation.deceased[x].deceasedString",
+							"short": "Dead? How old/when?",
+							"formal": "If this resource is indicating that the related person is deceased, then an indicator of whether the person is deceased (yes) or not (no) or the age or age range or description of age at death - can be indicated here. If the reason for death is known, then it can be indicated in the outcome code of the condition - in this case the deceased property should still be set.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						}
+					]
+				},
+				{
+					"name": "note",
+					"path": "FamilyHistory.relation.note",
+					"parent": "FamilyHistory.relation",
+					"short": "General note about related person",
+					"formal": "This property allows a non condition-specific note to the made about the related person. Ideally, the note would be in the condition property, but this is not always possible.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "condition",
+					"path": "FamilyHistory.relation.condition",
+					"parent": "FamilyHistory.relation",
+					"short": "Condition that the related person had",
+					"formal": "The significant Conditions (or condition) that the family member had. This is a repeating section to allow a system to represent more than one condition per resource, though there is nothing stopping multiple resources - one per condition.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "type",
+							"path": "FamilyHistory.relation.condition.type",
+							"parent": "FamilyHistory.relation.condition",
+							"short": "Condition suffered by relation",
+							"formal": "The actual condition specified. Could be a coded condition (like MI or Diabetes) or a less specific string like 'cancer' depending on how much is known about the condition and the capabilities of the creating system.",
+							"min": 1,
+							"max": "1",
+							"type": "CodeableConcept"
+						},
+						{
+							"name": "outcome",
+							"path": "FamilyHistory.relation.condition.outcome",
+							"parent": "FamilyHistory.relation.condition",
+							"short": "deceased | permanent disability | etc.",
+							"formal": "Indicates what happened as a result of this condition.  If the condition resulted in death, deceased date is captured on the relation.",
+							"min": 0,
+							"max": "1",
+							"binding": {
+								"name": "ConditionOutcome",
+								"isExtensible": true,
+								"conformance": "preferred",
+								"description": "The result of the condition for the patient.  E.g. death, permanent disability, temporary disability, etc."
+							},
+							"type": "CodeableConcept"
+						},
+						{
+							"name": "onset",
+							"path": "FamilyHistory.relation.condition.onset[x]",
+							"parent": "FamilyHistory.relation.condition",
+							"short": "When condition first manifested",
+							"formal": "Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.",
+							"min": 0,
+							"max": "1",
+							"type": "multitype",
+							"children": [
+								{
+									"name": "onsetAge",
+									"parent": "FamilyHistory.relation.condition.onset[x]",
+									"path": "FamilyHistory.relation.condition.onset[x].onsetAge",
+									"short": "When condition first manifested",
+									"formal": "Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.",
+									"min": 0,
+									"max": "1",
+									"type": "Age"
+								},
+								{
+									"name": "onsetRange",
+									"parent": "FamilyHistory.relation.condition.onset[x]",
+									"path": "FamilyHistory.relation.condition.onset[x].onsetRange",
+									"short": "When condition first manifested",
+									"formal": "Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.",
+									"min": 0,
+									"max": "1",
+									"type": "Range"
+								},
+								{
+									"name": "onsetString",
+									"parent": "FamilyHistory.relation.condition.onset[x]",
+									"path": "FamilyHistory.relation.condition.onset[x].onsetString",
+									"short": "When condition first manifested",
+									"formal": "Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.",
+									"min": 0,
+									"max": "1",
+									"type": "string",
+									"leaf": true
+								}
+							]
+						},
+						{
+							"name": "note",
+							"path": "FamilyHistory.relation.condition.note",
+							"parent": "FamilyHistory.relation.condition",
+							"short": "Extra information about condition",
+							"formal": "An area where general notes can be placed about this specific condition.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						}
+					]
+				}
+			]
+		}
+	],
+	"success": true
+}

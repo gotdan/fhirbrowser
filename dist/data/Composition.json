@@ -1,0 +1,548 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Composition.text",
+			"parent": "Composition",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Composition.contained",
+			"parent": "Composition",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Composition.identifier",
+			"parent": "Composition",
+			"short": "Logical identifier of composition (version-independent)",
+			"formal": "Logical Identifier for the composition, assigned when created. This identifier stays constant as the composition is changed over time.",
+			"min": 0,
+			"max": "1",
+			"type": "Identifier"
+		},
+		{
+			"name": "date",
+			"path": "Composition.date",
+			"parent": "Composition",
+			"short": "Composition editing time",
+			"formal": "The composition editing time, when the composition was last logically changed by the author.",
+			"min": 1,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "type",
+			"path": "Composition.type",
+			"parent": "Composition",
+			"short": "Kind of composition (LOINC if possible)",
+			"formal": "Specifies the particular kind of composition (e.g. History and Physical, Discharge Summary, Progress Note). This usually equates to the purpose of making the composition.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "DocumentType",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/doc-codes"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "class",
+			"path": "Composition.class",
+			"parent": "Composition",
+			"short": "Categorization of Composition",
+			"formal": "A categorization for the type of the composition. This may be implied by or derived from the code specified in the Composition Type.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "DocumentClass",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/xds-typecodes"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "title",
+			"path": "Composition.title",
+			"parent": "Composition",
+			"short": "Human Readable name/title",
+			"formal": "Official human-readable label for the composition.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "status",
+			"path": "Composition.status",
+			"parent": "Composition",
+			"short": "preliminary | final | appended | amended | entered in error",
+			"formal": "The workflow/clinical status of this composition. The status is a marker for the clinical standing of the document.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "CompositionStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/composition-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "confidentiality",
+			"path": "Composition.confidentiality",
+			"parent": "Composition",
+			"short": "As defined by affinity domain",
+			"formal": "The code specifying the level of confidentiality of the Composition.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "DocumentConfidentiality",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/v3/vs/Confidentiality"
+				}
+			},
+			"type": "Coding"
+		},
+		{
+			"name": "subject",
+			"path": "Composition.subject",
+			"parent": "Composition",
+			"short": "Who and/or what the composition is about",
+			"formal": "Who or what the composition is about. The composition can be about a person, (patient or healthcare practitioner), a device (I.e. machine) or even a group of subjects (such as a document about a herd of livestock, or a set of patients that share a common exposure).",
+			"min": 1,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "Composition.subject",
+					"path": "Composition.subject.Patient",
+					"short": "Who and/or what the composition is about",
+					"formal": "Who or what the composition is about. The composition can be about a person, (patient or healthcare practitioner), a device (I.e. machine) or even a group of subjects (such as a document about a herd of livestock, or a set of patients that share a common exposure).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Practitioner",
+					"parent": "Composition.subject",
+					"path": "Composition.subject.Practitioner",
+					"short": "Who and/or what the composition is about",
+					"formal": "Who or what the composition is about. The composition can be about a person, (patient or healthcare practitioner), a device (I.e. machine) or even a group of subjects (such as a document about a herd of livestock, or a set of patients that share a common exposure).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Group",
+					"parent": "Composition.subject",
+					"path": "Composition.subject.Group",
+					"short": "Who and/or what the composition is about",
+					"formal": "Who or what the composition is about. The composition can be about a person, (patient or healthcare practitioner), a device (I.e. machine) or even a group of subjects (such as a document about a herd of livestock, or a set of patients that share a common exposure).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Group"
+				},
+				{
+					"name": "Device",
+					"parent": "Composition.subject",
+					"path": "Composition.subject.Device",
+					"short": "Who and/or what the composition is about",
+					"formal": "Who or what the composition is about. The composition can be about a person, (patient or healthcare practitioner), a device (I.e. machine) or even a group of subjects (such as a document about a herd of livestock, or a set of patients that share a common exposure).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "Location",
+					"parent": "Composition.subject",
+					"path": "Composition.subject.Location",
+					"short": "Who and/or what the composition is about",
+					"formal": "Who or what the composition is about. The composition can be about a person, (patient or healthcare practitioner), a device (I.e. machine) or even a group of subjects (such as a document about a herd of livestock, or a set of patients that share a common exposure).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Location"
+				}
+			]
+		},
+		{
+			"name": "author",
+			"path": "Composition.author",
+			"parent": "Composition",
+			"short": "Who and/or what authored the composition",
+			"formal": "Identifies who is responsible for the information in the composition.  (Not necessarily who typed it in.).",
+			"min": 1,
+			"max": "*",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "Composition.author",
+					"path": "Composition.author.Practitioner",
+					"short": "Who and/or what authored the composition",
+					"formal": "Identifies who is responsible for the information in the composition.  (Not necessarily who typed it in.).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Device",
+					"parent": "Composition.author",
+					"path": "Composition.author.Device",
+					"short": "Who and/or what authored the composition",
+					"formal": "Identifies who is responsible for the information in the composition.  (Not necessarily who typed it in.).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "Patient",
+					"parent": "Composition.author",
+					"path": "Composition.author.Patient",
+					"short": "Who and/or what authored the composition",
+					"formal": "Identifies who is responsible for the information in the composition.  (Not necessarily who typed it in.).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "RelatedPerson",
+					"parent": "Composition.author",
+					"path": "Composition.author.RelatedPerson",
+					"short": "Who and/or what authored the composition",
+					"formal": "Identifies who is responsible for the information in the composition.  (Not necessarily who typed it in.).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "RelatedPerson"
+				}
+			]
+		},
+		{
+			"name": "attester",
+			"path": "Composition.attester",
+			"parent": "Composition",
+			"short": "Attests to accuracy of composition",
+			"formal": "A participant who has attested to the accuracy of the composition/document.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "mode",
+					"path": "Composition.attester.mode",
+					"parent": "Composition.attester",
+					"short": "personal | professional | legal | official",
+					"formal": "The type of attestation the authenticator offers.",
+					"min": 1,
+					"max": "*",
+					"binding": {
+						"name": "CompositionAttestationMode",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/composition-attestation-mode"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "time",
+					"path": "Composition.attester.time",
+					"parent": "Composition.attester",
+					"short": "When composition attested",
+					"formal": "When composition was attested by the party.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "party",
+					"path": "Composition.attester.party",
+					"parent": "Composition.attester",
+					"short": "Who attested the composition",
+					"formal": "Who attested the composition in the specified way.",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"reference": "Patient",
+					"children": [
+						{
+							"name": "Patient",
+							"parent": "Composition.attester.party",
+							"path": "Composition.attester.party.Patient",
+							"short": "Who attested the composition",
+							"formal": "Who attested the composition in the specified way.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Patient"
+						},
+						{
+							"name": "Practitioner",
+							"parent": "Composition.attester.party",
+							"path": "Composition.attester.party.Practitioner",
+							"short": "Who attested the composition",
+							"formal": "Who attested the composition in the specified way.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Practitioner"
+						},
+						{
+							"name": "Organization",
+							"parent": "Composition.attester.party",
+							"path": "Composition.attester.party.Organization",
+							"short": "Who attested the composition",
+							"formal": "Who attested the composition in the specified way.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Organization"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "custodian",
+			"path": "Composition.custodian",
+			"parent": "Composition",
+			"short": "Org which maintains the composition",
+			"formal": "Identifies the organization or group who is responsible for ongoing maintenance of and access to the composition/document information.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Organization"
+		},
+		{
+			"name": "event",
+			"path": "Composition.event",
+			"parent": "Composition",
+			"short": "The clinical event/act/item being documented",
+			"formal": "The main event/act/item, such as a colonoscopy or an appendectomy, being documented.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "code",
+					"path": "Composition.event.code",
+					"parent": "Composition.event",
+					"short": "Code(s) that apply to the event being documented",
+					"formal": "This list of codes represents the main clinical acts, such as a colonoscopy or an appendectomy, being documented. In some cases, the event is inherent in the typeCode, such as a \"History and Physical Report\" in which the procedure being documented is necessarily a \"History and Physical\" act.",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "DocumentEventType",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/v3/vs/ActCode"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "period",
+					"path": "Composition.event.period",
+					"parent": "Composition.event",
+					"short": "The period covered by the documentation",
+					"formal": "The period of time covered by the documentation. There is no assertion that the documentation is a complete representation for this period, only that it documents events during this time.",
+					"min": 0,
+					"max": "1",
+					"type": "Period"
+				},
+				{
+					"name": "detail",
+					"path": "Composition.event.detail",
+					"parent": "Composition.event",
+					"short": "Full details for the event(s) the composition consents",
+					"formal": "Full details for the event(s) the composition/documentation consents.",
+					"min": 0,
+					"max": "*",
+					"type": "ResourceReference",
+					"reference": "Any"
+				}
+			]
+		},
+		{
+			"name": "encounter",
+			"path": "Composition.encounter",
+			"parent": "Composition",
+			"short": "Context of the conposition",
+			"formal": "Describes the clinical encounter or type of care this documentation is associated with.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Encounter"
+		},
+		{
+			"name": "section",
+			"path": "Composition.section",
+			"parent": "Composition",
+			"short": "Composition is broken into sections",
+			"formal": "The root of the sections that make up the composition.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "2",
+					"name": "Section Rule",
+					"severity": "error",
+					"human": "A section SHALL have content or one or more sections, but not both.",
+					"xpath": "exists(f:content) != exists(f:section)"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "title",
+					"path": "Composition.section.title",
+					"parent": "Composition.section",
+					"short": "Label for section",
+					"formal": "The heading for this particular section.  This will be part of the rendered content for the document.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "code",
+					"path": "Composition.section.code",
+					"parent": "Composition.section",
+					"short": "Classification of section (recommended)",
+					"formal": "A code identifying the kind of content contained within the section.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "CompositionSectionType",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/doc-section-codes"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "subject",
+					"path": "Composition.section.subject",
+					"parent": "Composition.section",
+					"short": "If section different to composition",
+					"formal": "Identifies the primary subject of the section.",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"reference": "Patient",
+					"children": [
+						{
+							"name": "Patient",
+							"parent": "Composition.section.subject",
+							"path": "Composition.section.subject.Patient",
+							"short": "If section different to composition",
+							"formal": "Identifies the primary subject of the section.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Patient"
+						},
+						{
+							"name": "Group",
+							"parent": "Composition.section.subject",
+							"path": "Composition.section.subject.Group",
+							"short": "If section different to composition",
+							"formal": "Identifies the primary subject of the section.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Group"
+						},
+						{
+							"name": "Device",
+							"parent": "Composition.section.subject",
+							"path": "Composition.section.subject.Device",
+							"short": "If section different to composition",
+							"formal": "Identifies the primary subject of the section.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Device"
+						}
+					]
+				},
+				{
+					"name": "content",
+					"path": "Composition.section.content",
+					"parent": "Composition.section",
+					"short": "The actual data for the section",
+					"formal": "Identifies the discrete data that provides the content for the section.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Any"
+				},
+				{
+					"name": "section",
+					"path": "Composition.section.section",
+					"parent": "Composition.section",
+					"short": "Nested Section",
+					"formal": "A nested sub-section within this section.",
+					"min": 0,
+					"max": "*",
+					"type": "none"
+				}
+			]
+		}
+	],
+	"success": true
+}

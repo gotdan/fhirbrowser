@@ -1,0 +1,94 @@
+{
+	"children": [
+		{
+			"name": "contentType",
+			"path": "Attachment.contentType",
+			"parent": "Attachment",
+			"short": "Mime type of the content, with charset etc.",
+			"formal": "Identifies the type of the data in the attachment and allows a method to be chosen to interpret or render the data. Includes mime type parameters such as charset where appropriate.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "MimeType",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceUri": "http://www.rfc-editor.org/bcp/bcp13.txt"
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "language",
+			"path": "Attachment.language",
+			"parent": "Attachment",
+			"short": "Human language of the content (BCP-47)",
+			"formal": "The human language of the content. The value can be any valid value according to BCP 47.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "Language",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceUri": "http://tools.ietf.org/html/bcp47"
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "data",
+			"path": "Attachment.data",
+			"parent": "Attachment",
+			"short": "Data inline, base64ed",
+			"formal": "The actual data of the attachment - a sequence of bytes. In XML, represented using base64.",
+			"min": 0,
+			"max": "1",
+			"type": "base64Binary",
+			"leaf": true
+		},
+		{
+			"name": "url",
+			"path": "Attachment.url",
+			"parent": "Attachment",
+			"short": "Uri where the data can be found",
+			"formal": "An alternative location where the data can be accessed.",
+			"min": 0,
+			"max": "1",
+			"type": "uri",
+			"leaf": true
+		},
+		{
+			"name": "size",
+			"path": "Attachment.size",
+			"parent": "Attachment",
+			"short": "Number of bytes of content (if url provided)",
+			"formal": "The number of bytes of data that make up this attachment.",
+			"min": 0,
+			"max": "1",
+			"type": "integer",
+			"leaf": true
+		},
+		{
+			"name": "hash",
+			"path": "Attachment.hash",
+			"parent": "Attachment",
+			"short": "Hash of the data (sha-1, base64ed )",
+			"formal": "The calculated hash of the data using SHA-1. Represented using base64.",
+			"min": 0,
+			"max": "1",
+			"type": "base64Binary",
+			"leaf": true
+		},
+		{
+			"name": "title",
+			"path": "Attachment.title",
+			"parent": "Attachment",
+			"short": "Label to display in place of the data",
+			"formal": "A label or set of text to display in place of the data.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		}
+	],
+	"success": true
+}

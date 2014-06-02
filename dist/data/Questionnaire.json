@@ -1,0 +1,515 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Questionnaire.text",
+			"parent": "Questionnaire",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Questionnaire.contained",
+			"parent": "Questionnaire",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "status",
+			"path": "Questionnaire.status",
+			"parent": "Questionnaire",
+			"short": "draft | published | retired | in progress | completed | amended",
+			"formal": "The lifecycle status of the questionnaire as a whole.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "QuestionnaireStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/questionnaire-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "authored",
+			"path": "Questionnaire.authored",
+			"parent": "Questionnaire",
+			"short": "Date this version was authored",
+			"formal": "The date and/or time that this version of the questionnaire was authored.",
+			"min": 1,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "subject",
+			"path": "Questionnaire.subject",
+			"parent": "Questionnaire",
+			"short": "The subject of the questions",
+			"formal": "The subject of the questionnaires: this is the patient that the answers apply to, but this person is not necessarily the source of information.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "Questionnaire.subject",
+					"path": "Questionnaire.subject.Patient",
+					"short": "The subject of the questions",
+					"formal": "The subject of the questionnaires: this is the patient that the answers apply to, but this person is not necessarily the source of information.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "RelatedPerson",
+					"parent": "Questionnaire.subject",
+					"path": "Questionnaire.subject.RelatedPerson",
+					"short": "The subject of the questions",
+					"formal": "The subject of the questionnaires: this is the patient that the answers apply to, but this person is not necessarily the source of information.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "RelatedPerson"
+				}
+			]
+		},
+		{
+			"name": "author",
+			"path": "Questionnaire.author",
+			"parent": "Questionnaire",
+			"short": "Person who received and recorded the answers",
+			"formal": "Person who received the answers to the questions in the Questionnaire and recorded them in the system.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "Questionnaire.author",
+					"path": "Questionnaire.author.Practitioner",
+					"short": "Person who received and recorded the answers",
+					"formal": "Person who received the answers to the questions in the Questionnaire and recorded them in the system.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Patient",
+					"parent": "Questionnaire.author",
+					"path": "Questionnaire.author.Patient",
+					"short": "Person who received and recorded the answers",
+					"formal": "Person who received the answers to the questions in the Questionnaire and recorded them in the system.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "RelatedPerson",
+					"parent": "Questionnaire.author",
+					"path": "Questionnaire.author.RelatedPerson",
+					"short": "Person who received and recorded the answers",
+					"formal": "Person who received the answers to the questions in the Questionnaire and recorded them in the system.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "RelatedPerson"
+				}
+			]
+		},
+		{
+			"name": "source",
+			"path": "Questionnaire.source",
+			"parent": "Questionnaire",
+			"short": "The person who answered the questions",
+			"formal": "The person who answered the questions about the subject. Only used when this is not the subject him/herself.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "Questionnaire.source",
+					"path": "Questionnaire.source.Patient",
+					"short": "The person who answered the questions",
+					"formal": "The person who answered the questions about the subject. Only used when this is not the subject him/herself.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Practitioner",
+					"parent": "Questionnaire.source",
+					"path": "Questionnaire.source.Practitioner",
+					"short": "The person who answered the questions",
+					"formal": "The person who answered the questions about the subject. Only used when this is not the subject him/herself.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "RelatedPerson",
+					"parent": "Questionnaire.source",
+					"path": "Questionnaire.source.RelatedPerson",
+					"short": "The person who answered the questions",
+					"formal": "The person who answered the questions about the subject. Only used when this is not the subject him/herself.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "RelatedPerson"
+				}
+			]
+		},
+		{
+			"name": "name",
+			"path": "Questionnaire.name",
+			"parent": "Questionnaire",
+			"short": "Name/code for a predefined list of questions",
+			"formal": "Structured name for a predefined list of questions this questionnaire is responding to.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "QuestionnaireName",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/questionnaire-name"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "identifier",
+			"path": "Questionnaire.identifier",
+			"parent": "Questionnaire",
+			"short": "External Ids for this questionnaire",
+			"formal": "This records identifiers associated with this question/answer set that are defined by business processed and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "encounter",
+			"path": "Questionnaire.encounter",
+			"parent": "Questionnaire",
+			"short": "Primary encounter during which the answers were collected",
+			"formal": "Encounter during which this questionnaire answers were collected. When there were multiple encounters, this is the one considered most relevant to the context of the answers.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Encounter"
+		},
+		{
+			"name": "group",
+			"path": "Questionnaire.group",
+			"parent": "Questionnaire",
+			"short": "Grouped questions",
+			"formal": "A group of questions to a possibly similarly grouped set of questions in the questionnaire.",
+			"min": 0,
+			"max": "1",
+			"constraint": [
+				{
+					"key": "3",
+					"name": "GroupHaveSubOrQuestions",
+					"severity": "error",
+					"human": "Groups may either contain questions or groups but not both",
+					"xpath": "not(exists(f:group) and exists(f:question))"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "name",
+					"path": "Questionnaire.group.name",
+					"parent": "Questionnaire.group",
+					"short": "Code or name of the section on a questionnaire",
+					"formal": "Structured name for a section of a predefined list of questions this questionnaire is responding to.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "QuestionnaireGroupName",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/questionnaire-group-name"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "header",
+					"path": "Questionnaire.group.header",
+					"parent": "Questionnaire.group",
+					"short": "Text that is displayed above the contents of the group",
+					"formal": "Text that is displayed above the contents of the group.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "text",
+					"path": "Questionnaire.group.text",
+					"parent": "Questionnaire.group",
+					"short": "Additional text for the group",
+					"formal": "Additional text for the group, used for display purposes.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "subject",
+					"path": "Questionnaire.group.subject",
+					"parent": "Questionnaire.group",
+					"short": "The subject this group's answers are about",
+					"formal": "More specific subject this section's answers are about, details the subject given in Questionnaire.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Any"
+				},
+				{
+					"name": "group",
+					"path": "Questionnaire.group.group",
+					"parent": "Questionnaire.group",
+					"short": "Nested questionnaire group",
+					"formal": "A sub-group within a group. The ordering of groups within this group is relevant.",
+					"min": 0,
+					"max": "*",
+					"type": "none"
+				},
+				{
+					"name": "question",
+					"path": "Questionnaire.group.question",
+					"parent": "Questionnaire.group",
+					"short": "Questions in this group",
+					"formal": "Set of questions within this group. The order of questions within the group is relevant.",
+					"min": 0,
+					"max": "*",
+					"constraint": [
+						{
+							"key": "2",
+							"name": "MustHaveNameOrText",
+							"severity": "error",
+							"human": "Must supply a name, a question's text or both",
+							"xpath": "count(f:name) + count(f:text) >= 1"
+						},
+						{
+							"key": "1",
+							"name": "SimpleChoiceOrData",
+							"severity": "error",
+							"human": "Must supply either a simple answer, a choice, data or nothing",
+							"xpath": "count(f:data) + count(f:choice) + count(f:answer) <= 1"
+						}
+					],
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "name",
+							"path": "Questionnaire.group.question.name",
+							"parent": "Questionnaire.group.question",
+							"short": "Code or name of the question",
+							"formal": "Structured name for the question that identifies this question within the Questionnaire or Group.",
+							"min": 0,
+							"max": "1",
+							"binding": {
+								"name": "QuestionName",
+								"isExtensible": true,
+								"conformance": "example",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/questionnaire-question-name"
+								}
+							},
+							"type": "CodeableConcept"
+						},
+						{
+							"name": "text",
+							"path": "Questionnaire.group.question.text",
+							"parent": "Questionnaire.group.question",
+							"short": "Text of the question as it is shown to the user",
+							"formal": "Text of the question as it is shown to the user.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "answer",
+							"path": "Questionnaire.group.question.answer[x]",
+							"parent": "Questionnaire.group.question",
+							"short": "Single-valued answer to the question",
+							"formal": "Single-valued answer to the question.",
+							"min": 0,
+							"max": "1",
+							"type": "multitype",
+							"children": [
+								{
+									"name": "answerDecimal",
+									"parent": "Questionnaire.group.question.answer[x]",
+									"path": "Questionnaire.group.question.answer[x].answerDecimal",
+									"short": "Single-valued answer to the question",
+									"formal": "Single-valued answer to the question.",
+									"min": 0,
+									"max": "1",
+									"type": "decimal",
+									"leaf": true
+								},
+								{
+									"name": "answerInteger",
+									"parent": "Questionnaire.group.question.answer[x]",
+									"path": "Questionnaire.group.question.answer[x].answerInteger",
+									"short": "Single-valued answer to the question",
+									"formal": "Single-valued answer to the question.",
+									"min": 0,
+									"max": "1",
+									"type": "integer",
+									"leaf": true
+								},
+								{
+									"name": "answerBoolean",
+									"parent": "Questionnaire.group.question.answer[x]",
+									"path": "Questionnaire.group.question.answer[x].answerBoolean",
+									"short": "Single-valued answer to the question",
+									"formal": "Single-valued answer to the question.",
+									"min": 0,
+									"max": "1",
+									"type": "boolean",
+									"leaf": true
+								},
+								{
+									"name": "answerDate",
+									"parent": "Questionnaire.group.question.answer[x]",
+									"path": "Questionnaire.group.question.answer[x].answerDate",
+									"short": "Single-valued answer to the question",
+									"formal": "Single-valued answer to the question.",
+									"min": 0,
+									"max": "1",
+									"type": "date",
+									"leaf": true
+								},
+								{
+									"name": "answerString",
+									"parent": "Questionnaire.group.question.answer[x]",
+									"path": "Questionnaire.group.question.answer[x].answerString",
+									"short": "Single-valued answer to the question",
+									"formal": "Single-valued answer to the question.",
+									"min": 0,
+									"max": "1",
+									"type": "string",
+									"leaf": true
+								},
+								{
+									"name": "answerDateTime",
+									"parent": "Questionnaire.group.question.answer[x]",
+									"path": "Questionnaire.group.question.answer[x].answerDateTime",
+									"short": "Single-valued answer to the question",
+									"formal": "Single-valued answer to the question.",
+									"min": 0,
+									"max": "1",
+									"type": "dateTime",
+									"leaf": true
+								},
+								{
+									"name": "answerInstant",
+									"parent": "Questionnaire.group.question.answer[x]",
+									"path": "Questionnaire.group.question.answer[x].answerInstant",
+									"short": "Single-valued answer to the question",
+									"formal": "Single-valued answer to the question.",
+									"min": 0,
+									"max": "1",
+									"type": "instant",
+									"leaf": true
+								}
+							]
+						},
+						{
+							"name": "choice",
+							"path": "Questionnaire.group.question.choice",
+							"parent": "Questionnaire.group.question",
+							"short": "Selected options",
+							"formal": "Selections made by the user from the list of options.",
+							"min": 0,
+							"max": "*",
+							"type": "Coding"
+						},
+						{
+							"name": "options",
+							"path": "Questionnaire.group.question.options",
+							"parent": "Questionnaire.group.question",
+							"short": "Valueset containing the possible options",
+							"formal": "Reference to a valueset containing the possible options.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "ValueSet"
+						},
+						{
+							"name": "data",
+							"path": "Questionnaire.group.question.data[x]",
+							"parent": "Questionnaire.group.question",
+							"short": "Structured answer",
+							"formal": "Structured answer in the form of a FHIR Resource or datatype.",
+							"min": 0,
+							"max": "1",
+							"type": "*"
+						},
+						{
+							"name": "remarks",
+							"path": "Questionnaire.group.question.remarks",
+							"parent": "Questionnaire.group.question",
+							"short": "Remarks about the answer given",
+							"formal": "The remark contains information about the answer given. This is additional information about the answer the author wishes to convey, but should not be used to contain information that is part of the answer itself.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "group",
+							"path": "Questionnaire.group.question.group",
+							"parent": "Questionnaire.group.question",
+							"short": "Nested questionnaire group",
+							"formal": "Nested group, containing nested question for this question. The order of groups within the question is relevant.",
+							"min": 0,
+							"max": "*",
+							"type": "none"
+						}
+					]
+				}
+			]
+		}
+	],
+	"success": true
+}

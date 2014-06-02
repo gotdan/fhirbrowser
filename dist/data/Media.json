@@ -1,0 +1,257 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Media.text",
+			"parent": "Media",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Media.contained",
+			"parent": "Media",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "type",
+			"path": "Media.type",
+			"parent": "Media",
+			"short": "photo | video | audio",
+			"formal": "Whether the media is a photo (still image), an audio recording, or a video recording.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "MediaType",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/media-type"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "subtype",
+			"path": "Media.subtype",
+			"parent": "Media",
+			"short": "The type of acquisition equipment/process",
+			"formal": "Details of the type of the media - usually, how it was acquired (what type of device). If images sourced from a DICOM system, are wrapped in a Media resource, then this is the modality.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "MediaSubtype",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/media-subtype"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "identifier",
+			"path": "Media.identifier",
+			"parent": "Media",
+			"short": "Identifier(s) for the image",
+			"formal": "Identifiers associated with the image - these may include identifiers for the image itself, identifiers for the context of its collection (e.g. series ids) and context ids such as accession numbers or other workflow identifiers.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "dateTime",
+			"path": "Media.dateTime",
+			"parent": "Media",
+			"short": "When the media was taken/recorded (end)",
+			"formal": "When the media was originally recorded. For video and audio, if the length of the recording is not insignificant, this is the end of the recording.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "subject",
+			"path": "Media.subject",
+			"parent": "Media",
+			"short": "Who/What this Media is a record of",
+			"formal": "Who/What this Media is a record of.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "Media.subject",
+					"path": "Media.subject.Patient",
+					"short": "Who/What this Media is a record of",
+					"formal": "Who/What this Media is a record of.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Practitioner",
+					"parent": "Media.subject",
+					"path": "Media.subject.Practitioner",
+					"short": "Who/What this Media is a record of",
+					"formal": "Who/What this Media is a record of.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Group",
+					"parent": "Media.subject",
+					"path": "Media.subject.Group",
+					"short": "Who/What this Media is a record of",
+					"formal": "Who/What this Media is a record of.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Group"
+				},
+				{
+					"name": "Device",
+					"parent": "Media.subject",
+					"path": "Media.subject.Device",
+					"short": "Who/What this Media is a record of",
+					"formal": "Who/What this Media is a record of.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "Specimen",
+					"parent": "Media.subject",
+					"path": "Media.subject.Specimen",
+					"short": "Who/What this Media is a record of",
+					"formal": "Who/What this Media is a record of.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Specimen"
+				}
+			]
+		},
+		{
+			"name": "operator",
+			"path": "Media.operator",
+			"parent": "Media",
+			"short": "The person who generated the image",
+			"formal": "The person who administered the collection of the image.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Practitioner"
+		},
+		{
+			"name": "view",
+			"path": "Media.view",
+			"parent": "Media",
+			"short": "Imaging view e.g Lateral or Antero-posterior",
+			"formal": "The name of the imaging view e.g Lateral or Antero-posterior (AP).",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "MediaView",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/media-view"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "deviceName",
+			"path": "Media.deviceName",
+			"parent": "Media",
+			"short": "Name of the device/manufacturer",
+			"formal": "The name of the device / manufacturer of the device  that was used to make the recording.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "height",
+			"path": "Media.height",
+			"parent": "Media",
+			"short": "Height of the image in pixels(photo/video)",
+			"formal": "Height of the image in pixels(photo/video).",
+			"min": 0,
+			"max": "1",
+			"type": "integer",
+			"leaf": true
+		},
+		{
+			"name": "width",
+			"path": "Media.width",
+			"parent": "Media",
+			"short": "Width of the image in pixels (photo/video)",
+			"formal": "Width of the image in pixels (photo/video).",
+			"min": 0,
+			"max": "1",
+			"type": "integer",
+			"leaf": true
+		},
+		{
+			"name": "frames",
+			"path": "Media.frames",
+			"parent": "Media",
+			"short": "Number of frames if > 1 (photo)",
+			"formal": "The number of frames in a photo. This is used with a multi-page fax, or an imaging acquisition context that takes multiple slices in a single image, or an animated gif. If there is more than one frame, this SHALL have a value in order to alert interface software that a multi-frame capable rendering widget is required.",
+			"min": 0,
+			"max": "1",
+			"type": "integer",
+			"leaf": true
+		},
+		{
+			"name": "length",
+			"path": "Media.length",
+			"parent": "Media",
+			"short": "Length in seconds (audio / video)",
+			"formal": "The length of the recording in seconds - for audio and video.",
+			"min": 0,
+			"max": "1",
+			"type": "integer",
+			"leaf": true
+		},
+		{
+			"name": "content",
+			"path": "Media.content",
+			"parent": "Media",
+			"short": "Actual Media - reference or data",
+			"formal": "The actual content of the media - inline or by direct reference to the media source file.",
+			"min": 1,
+			"max": "1",
+			"type": "Attachment"
+		}
+	],
+	"success": true
+}

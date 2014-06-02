@@ -1,0 +1,229 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Order.text",
+			"parent": "Order",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Order.contained",
+			"parent": "Order",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Order.identifier",
+			"parent": "Order",
+			"short": "Identifiers assigned to this order by the orderer or by the receiver",
+			"formal": "Identifiers assigned to this order by the orderer or by the receiver.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "date",
+			"path": "Order.date",
+			"parent": "Order",
+			"short": "When the order was made",
+			"formal": "When the order was made.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "subject",
+			"path": "Order.subject",
+			"parent": "Order",
+			"short": "Patient this order is about",
+			"formal": "Patient this order is about.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "source",
+			"path": "Order.source",
+			"parent": "Order",
+			"short": "Who initiated the order",
+			"formal": "Who initiated the order.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Practitioner"
+		},
+		{
+			"name": "target",
+			"path": "Order.target",
+			"parent": "Order",
+			"short": "Who is intended to fulfill the order",
+			"formal": "Who is intended to fulfill the order.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Organization",
+			"children": [
+				{
+					"name": "Organization",
+					"parent": "Order.target",
+					"path": "Order.target.Organization",
+					"short": "Who is intended to fulfill the order",
+					"formal": "Who is intended to fulfill the order.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Organization"
+				},
+				{
+					"name": "Device",
+					"parent": "Order.target",
+					"path": "Order.target.Device",
+					"short": "Who is intended to fulfill the order",
+					"formal": "Who is intended to fulfill the order.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "Practitioner",
+					"parent": "Order.target",
+					"path": "Order.target.Practitioner",
+					"short": "Who is intended to fulfill the order",
+					"formal": "Who is intended to fulfill the order.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				}
+			]
+		},
+		{
+			"name": "reason",
+			"path": "Order.reason[x]",
+			"parent": "Order",
+			"short": "Text - why the order was made",
+			"formal": "Text - why the order was made.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"children": [
+				{
+					"name": "reasonCodeableConcept",
+					"parent": "Order.reason[x]",
+					"path": "Order.reason[x].reasonCodeableConcept",
+					"short": "Text - why the order was made",
+					"formal": "Text - why the order was made.",
+					"min": 0,
+					"max": "1",
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "Any",
+					"parent": "Order.reason[x]",
+					"path": "Order.reason[x].Any",
+					"short": "Text - why the order was made",
+					"formal": "Text - why the order was made.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Any"
+				}
+			]
+		},
+		{
+			"name": "authority",
+			"path": "Order.authority",
+			"parent": "Order",
+			"short": "If required by policy",
+			"formal": "If required by policy.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Any"
+		},
+		{
+			"name": "when",
+			"path": "Order.when",
+			"parent": "Order",
+			"short": "When order should be fulfilled",
+			"formal": "When order should be fulfilled.",
+			"min": 0,
+			"max": "1",
+			"constraint": [
+				{
+					"key": "1",
+					"name": "Scheduling Details",
+					"severity": "error",
+					"human": "Provide a code or a schedule, but not both",
+					"xpath": "exists(f:code) != exists(f:schedule)"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "code",
+					"path": "Order.when.code",
+					"parent": "Order.when",
+					"short": "Code specifies when request should be done. The code may simply be a priority code",
+					"formal": "Code specifies when request should be done. The code may simply be a priority code.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "RequestedTime",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"description": "When a requested action should be performed.  E.g. STAT, daily, evenings, etc."
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "schedule",
+					"path": "Order.when.schedule",
+					"parent": "Order.when",
+					"short": "A formal schedule",
+					"formal": "A formal schedule.",
+					"min": 0,
+					"max": "1",
+					"type": "Schedule"
+				}
+			]
+		},
+		{
+			"name": "detail",
+			"path": "Order.detail",
+			"parent": "Order",
+			"short": "What action is being ordered",
+			"formal": "What action is being ordered.",
+			"min": 1,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "Any"
+		}
+	],
+	"success": true
+}

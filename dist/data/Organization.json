@@ -1,0 +1,226 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Organization.text",
+			"parent": "Organization",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Organization.contained",
+			"parent": "Organization",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Organization.identifier",
+			"parent": "Organization",
+			"short": "Identifies this organization  across multiple systems",
+			"formal": "Identifier for the organization that is used to identify the organization across multiple disparate systems.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "name",
+			"path": "Organization.name",
+			"parent": "Organization",
+			"short": "Name used for the organization",
+			"formal": "A name associated with the organization.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "type",
+			"path": "Organization.type",
+			"parent": "Organization",
+			"short": "Kind of organization",
+			"formal": "The kind of organization that this is.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "OrganizationType",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/organization-type"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "telecom",
+			"path": "Organization.telecom",
+			"parent": "Organization",
+			"short": "A contact detail for the organization",
+			"formal": "A contact detail for the organization.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "3",
+					"name": "NoHomeUseTelecom",
+					"severity": "error",
+					"human": "The telecom of an organization can never be of use 'home'",
+					"xpath": "count(f:use[@value='home']) = 0"
+				}
+			],
+			"type": "Contact"
+		},
+		{
+			"name": "address",
+			"path": "Organization.address",
+			"parent": "Organization",
+			"short": "An address for the organization",
+			"formal": "An address for the organization.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "2",
+					"name": "NoHomeUseAddress",
+					"severity": "error",
+					"human": "An address of an organization can never be of use 'home'",
+					"xpath": "count(f:use[@value='home']) = 0"
+				}
+			],
+			"type": "Address"
+		},
+		{
+			"name": "partOf",
+			"path": "Organization.partOf",
+			"parent": "Organization",
+			"short": "The organization of which this organization forms a part",
+			"formal": "The organization of which this organization forms a part.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Organization"
+		},
+		{
+			"name": "contact",
+			"path": "Organization.contact",
+			"parent": "Organization",
+			"short": "Contact for the organization for a certain purpose",
+			"formal": "Contact for the organization for a certain purpose.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "purpose",
+					"path": "Organization.contact.purpose",
+					"parent": "Organization.contact",
+					"short": "The type of contact",
+					"formal": "Indicates a purpose for which the contact can be reached.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "ContactPartyType",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/contactentity-type"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "name",
+					"path": "Organization.contact.name",
+					"parent": "Organization.contact",
+					"short": "A name associated with the contact",
+					"formal": "A name associated with the contact.",
+					"min": 0,
+					"max": "1",
+					"type": "HumanName"
+				},
+				{
+					"name": "telecom",
+					"path": "Organization.contact.telecom",
+					"parent": "Organization.contact",
+					"short": "Contact details (telephone, email, etc)  for a contact",
+					"formal": "A contact detail (e.g. a telephone number or an email address) by which the party may be contacted.",
+					"min": 0,
+					"max": "*",
+					"type": "Contact"
+				},
+				{
+					"name": "address",
+					"path": "Organization.contact.address",
+					"parent": "Organization.contact",
+					"short": "Visiting or postal addresses for the contact",
+					"formal": "Visiting or postal addresses for the contact.",
+					"min": 0,
+					"max": "1",
+					"type": "Address"
+				},
+				{
+					"name": "gender",
+					"path": "Organization.contact.gender",
+					"parent": "Organization.contact",
+					"short": "Gender for administrative purposes",
+					"formal": "Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "AdministrativeGender",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/administrative-gender"
+						}
+					},
+					"type": "CodeableConcept"
+				}
+			]
+		},
+		{
+			"name": "location",
+			"path": "Organization.location",
+			"parent": "Organization",
+			"short": "Location(s) the organization uses to provide services",
+			"formal": "Location(s) the organization uses to provide services.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "Location"
+		},
+		{
+			"name": "active",
+			"path": "Organization.active",
+			"parent": "Organization",
+			"short": "Whether the organization's record is still in active use",
+			"formal": "Whether the organization's record is still in active use.",
+			"min": 0,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		}
+	],
+	"success": true
+}

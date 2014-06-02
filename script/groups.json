@@ -1,0 +1,49 @@
+{
+	"Attribution": [
+		"Organization",
+		"Patient",
+		"Practitioner",
+		"RelatedPerson"
+	],
+	"Device Interactions": [
+		"DeviceObservationReport"
+	],
+	"Diagnostics": [
+		"DiagnosticOrder",
+		"DiagnosticReport",
+		"ImagingStudy",
+		"Observation",
+		"Specimen"
+	],
+	"Entities": [
+		"Device",
+		"Group",
+		"Location",
+		"Substance"
+	],
+	"General": [
+		"AdverseReaction",
+		"AllergyIntolerance",
+		"CarePlan",
+		"Condition",
+		"FamilyHistory",
+		"Procedure",
+		"Questionnaire"
+	],
+	"Medications": [
+		"Immunization",
+		"ImmunizationRecommendation",
+		"Medication",
+		"MedicationAdministration",
+		"MedicationDispense",
+		"MedicationPrescription",
+		"MedicationStatement"
+	],
+	"Workflow Management": [
+		"Alert",
+		"Encounter",
+		"Order",
+		"OrderResponse",
+		"Supply"
+	]
+}

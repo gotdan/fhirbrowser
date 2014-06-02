@@ -1,0 +1,346 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "ConceptMap.text",
+			"parent": "ConceptMap",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "ConceptMap.contained",
+			"parent": "ConceptMap",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "ConceptMap.identifier",
+			"parent": "ConceptMap",
+			"short": "Logical id to reference this concept map",
+			"formal": "The identifier that is used to identify this concept map when it is referenced in a specification, model, design or an instance (should be globally unique OID, UUID, or URI).",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "version",
+			"path": "ConceptMap.version",
+			"parent": "ConceptMap",
+			"short": "Logical id for this version of the concept map",
+			"formal": "The identifier that is used to identify this version of the concept map when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the profile author manually and the value should be a timestamp.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "name",
+			"path": "ConceptMap.name",
+			"parent": "ConceptMap",
+			"short": "Informal name for this concept map",
+			"formal": "A free text natural language name describing the concept map.",
+			"min": 1,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "publisher",
+			"path": "ConceptMap.publisher",
+			"parent": "ConceptMap",
+			"short": "Name of the publisher (Organization or individual)",
+			"formal": "The name of the individual or organization that published the concept map.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "telecom",
+			"path": "ConceptMap.telecom",
+			"parent": "ConceptMap",
+			"short": "Contact information of the publisher",
+			"formal": "Contacts of the publisher to assist a user in finding and communicating with the publisher.",
+			"min": 0,
+			"max": "*",
+			"type": "Contact"
+		},
+		{
+			"name": "description",
+			"path": "ConceptMap.description",
+			"parent": "ConceptMap",
+			"short": "Human language description of the concept map",
+			"formal": "A free text natural language description of the use of the concept map - reason for definition, conditions of use, etc.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "copyright",
+			"path": "ConceptMap.copyright",
+			"parent": "ConceptMap",
+			"short": "About the concept map or its content",
+			"formal": "A copyright statement relating to the concept map and/or its contents.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "status",
+			"path": "ConceptMap.status",
+			"parent": "ConceptMap",
+			"short": "draft | active | retired",
+			"formal": "The status of the concept map.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "ValueSetStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/valueset-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "experimental",
+			"path": "ConceptMap.experimental",
+			"parent": "ConceptMap",
+			"short": "If for testing purposes, not real usage",
+			"formal": "This ConceptMap was authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.",
+			"min": 0,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "date",
+			"path": "ConceptMap.date",
+			"parent": "ConceptMap",
+			"short": "Date for given status",
+			"formal": "The date that the concept map status was last changed.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "source",
+			"path": "ConceptMap.source",
+			"parent": "ConceptMap",
+			"short": "Identifies the source value set which is being mapped",
+			"formal": "The source value set that specifies the concepts that are being mapped.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "ValueSet"
+		},
+		{
+			"name": "target",
+			"path": "ConceptMap.target",
+			"parent": "ConceptMap",
+			"short": "Provides context to the mappings",
+			"formal": "The target value set provides context to the mappings. Note that the mapping is made between concepts, not between value sets, but the value set provides important context about how the concept mapping choices are made.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "ValueSet"
+		},
+		{
+			"name": "concept",
+			"path": "ConceptMap.concept",
+			"parent": "ConceptMap",
+			"short": "Mappings for a concept from the source valueset",
+			"formal": "Mappings for a concept from the source valueset.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "system",
+					"path": "ConceptMap.concept.system",
+					"parent": "ConceptMap.concept",
+					"short": "System that defines the concept being mapped",
+					"formal": "System that defines the concept being mapped.",
+					"min": 1,
+					"max": "1",
+					"type": "uri",
+					"leaf": true
+				},
+				{
+					"name": "code",
+					"path": "ConceptMap.concept.code",
+					"parent": "ConceptMap.concept",
+					"short": "Identifies concept being mapped",
+					"formal": "Identifies concept being mapped.",
+					"min": 0,
+					"max": "1",
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "dependsOn",
+					"path": "ConceptMap.concept.dependsOn",
+					"parent": "ConceptMap.concept",
+					"short": "Other concepts required for this mapping (from context)",
+					"formal": "A set of additional dependencies for this mapping to hold. This mapping is only applicable if the specified concept can be resolved, and it has the specified value.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "concept",
+							"path": "ConceptMap.concept.dependsOn.concept",
+							"parent": "ConceptMap.concept.dependsOn",
+							"short": "Reference to element/field/valueset provides the context",
+							"formal": "A reference to a specific concept that holds a coded value. This can be an element in a FHIR resource, or a specific reference to a data element in a different specification (e.g. v2) or a general reference to a kind of data field, or a reference to a value set with an appropriately narrow definition.",
+							"min": 1,
+							"max": "1",
+							"type": "uri",
+							"leaf": true
+						},
+						{
+							"name": "system",
+							"path": "ConceptMap.concept.dependsOn.system",
+							"parent": "ConceptMap.concept.dependsOn",
+							"short": "System for a concept in the referenced concept",
+							"formal": "System for a concept in the referenced concept.",
+							"min": 1,
+							"max": "1",
+							"type": "uri",
+							"leaf": true
+						},
+						{
+							"name": "code",
+							"path": "ConceptMap.concept.dependsOn.code",
+							"parent": "ConceptMap.concept.dependsOn",
+							"short": "Code for a concept in the referenced concept",
+							"formal": "Code for a concept in the referenced concept.",
+							"min": 1,
+							"max": "1",
+							"type": "code",
+							"leaf": true
+						}
+					]
+				},
+				{
+					"name": "map",
+					"path": "ConceptMap.concept.map",
+					"parent": "ConceptMap.concept",
+					"short": "A concept from the target value set that this concept maps to",
+					"formal": "A concept from the target value set that this concept maps to.",
+					"min": 0,
+					"max": "*",
+					"constraint": [
+						{
+							"key": "2",
+							"severity": "error",
+							"human": "If a code is provided, a system SHALL be provided",
+							"xpath": "exists(f:system) or not(exists(f:code))"
+						},
+						{
+							"key": "1",
+							"severity": "error",
+							"human": "If the map is narrower, there SHALL be some comments",
+							"xpath": "exists(f:comments) or ((f:equivalence/@value != 'narrower') and (f:equivalence/@value != 'inexact'))"
+						}
+					],
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "system",
+							"path": "ConceptMap.concept.map.system",
+							"parent": "ConceptMap.concept.map",
+							"short": "System of the target",
+							"formal": "System of the target.",
+							"min": 0,
+							"max": "1",
+							"type": "uri",
+							"leaf": true
+						},
+						{
+							"name": "code",
+							"path": "ConceptMap.concept.map.code",
+							"parent": "ConceptMap.concept.map",
+							"short": "Code that identifies the target concept",
+							"formal": "Code that identifies the target concept.",
+							"min": 0,
+							"max": "1",
+							"type": "code",
+							"leaf": true
+						},
+						{
+							"name": "equivalence",
+							"path": "ConceptMap.concept.map.equivalence",
+							"parent": "ConceptMap.concept.map",
+							"short": "equal | equivalent | wider | subsumes | narrower | specialises | inexact | unmatched | disjoint",
+							"formal": "equal | equivalent | wider | subsumes | narrower | specialises | inexact | unmatched | disjoint.",
+							"min": 1,
+							"max": "1",
+							"binding": {
+								"name": "ConceptMapEquivalence",
+								"isExtensible": false,
+								"conformance": "required",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/concept-equivalence"
+								}
+							},
+							"type": "code",
+							"leaf": true
+						},
+						{
+							"name": "comments",
+							"path": "ConceptMap.concept.map.comments",
+							"parent": "ConceptMap.concept.map",
+							"short": "Description of status/issues in mapping",
+							"formal": "Description of status/issues in mapping.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "product",
+							"path": "ConceptMap.concept.map.product",
+							"parent": "ConceptMap.concept.map",
+							"short": "Other concepts that this mapping also produces",
+							"formal": "A set of additional outcomes from this mapping to other value sets. To properly execute this mapping, the specified value set must be mapped to some data element or source that is in context. The mapping may still be useful without a place for the additional data elements, but the equivalence cannot be relied on.",
+							"min": 0,
+							"max": "*",
+							"type": "none"
+						}
+					]
+				}
+			]
+		}
+	],
+	"success": true
+}

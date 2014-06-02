@@ -1,0 +1,9 @@
+Query.text.status
+Query.text.div
+Query.contained[]
+Query.identifier
+Query.response.identifier
+Query.response.outcome
+Query.response.total
+Query.response.reference[].reference
+Query.response.reference[].display

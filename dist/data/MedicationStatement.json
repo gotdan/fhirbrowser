@@ -1,0 +1,265 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "MedicationStatement.text",
+			"parent": "MedicationStatement",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "MedicationStatement.contained",
+			"parent": "MedicationStatement",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "MedicationStatement.identifier",
+			"parent": "MedicationStatement",
+			"short": "External Identifier",
+			"formal": "External identifier - FHIR will generate its own internal IDs (probably URLs) which do not need to be explicitly managed by the resource.  The identifier here is one that would be used by another non-FHIR system - for example an automated medication pump would provide a record each time it operated; an administration while the patient was off the ward might be made with a different system and entered after the event.  Particularly important if these records have to be updated.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "patient",
+			"path": "MedicationStatement.patient",
+			"parent": "MedicationStatement",
+			"short": "Who was/is taking medication",
+			"formal": "The person or animal who is /was taking the medication.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "wasNotGiven",
+			"path": "MedicationStatement.wasNotGiven",
+			"parent": "MedicationStatement",
+			"short": "True if medication is/was not being taken",
+			"formal": "Set this to true if the record is saying that the medication was NOT taken.",
+			"min": 0,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "reasonNotGiven",
+			"path": "MedicationStatement.reasonNotGiven",
+			"parent": "MedicationStatement",
+			"short": "True if asserting medication was not given",
+			"formal": "A code indicating why the medication was not taken.",
+			"min": 0,
+			"max": "*",
+			"binding": {
+				"name": "MedicationAdministrationNegationReason",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/reason-medication-not-given-codes"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "whenGiven",
+			"path": "MedicationStatement.whenGiven",
+			"parent": "MedicationStatement",
+			"short": "Over what period was medication consumed?",
+			"formal": "The interval of time during which it is being asserted that the patient was taking the medication.",
+			"min": 0,
+			"max": "1",
+			"type": "Period"
+		},
+		{
+			"name": "medication",
+			"path": "MedicationStatement.medication",
+			"parent": "MedicationStatement",
+			"short": "What medication was taken?",
+			"formal": "Identifies the medication being administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Medication"
+		},
+		{
+			"name": "device",
+			"path": "MedicationStatement.device",
+			"parent": "MedicationStatement",
+			"short": "E.g. infusion pump",
+			"formal": "An identifier or a link to a resource that identifies a device used in administering the medication to the patient.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "Device"
+		},
+		{
+			"name": "dosage",
+			"path": "MedicationStatement.dosage",
+			"parent": "MedicationStatement",
+			"short": "Details of how medication was taken",
+			"formal": "Indicates how the medication is/was used by the patient.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "timing",
+					"path": "MedicationStatement.dosage.timing",
+					"parent": "MedicationStatement.dosage",
+					"short": "When/how often was medication taken?",
+					"formal": "The timing schedule for giving the medication to the patient.  The Schedule data type allows many different expressions, for example.  \"Every  8 hours\"; \"Three times a day\"; \"1/2 an hour before breakfast for 10 days from 23-Dec 2011:\";  \"15 Oct 2013, 17 Oct 2013 and 1 Nov 2013\".",
+					"min": 0,
+					"max": "1",
+					"type": "Schedule"
+				},
+				{
+					"name": "asNeeded",
+					"path": "MedicationStatement.dosage.asNeeded[x]",
+					"parent": "MedicationStatement.dosage",
+					"short": "Take \"as needed\" f(or x)",
+					"formal": "If set to true or if specified as a CodeableConcept, indicates that the medication is only taken when needed within the specified schedule rather than at every scheduled dose.  If a CodeableConcept is present, it indicates the pre-condition for taking the Medication.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "MedicationAsNeededReason",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"description": "A coded concept identifying the pre-condition that should hold prior to consuming a medication dose.  For example \"pain\", \"30 minutes prior to sexual intercourse\", \"on flare-up\", etc."
+					},
+					"type": "multitype",
+					"children": [
+						{
+							"name": "asNeededBoolean",
+							"parent": "MedicationStatement.dosage.asNeeded[x]",
+							"path": "MedicationStatement.dosage.asNeeded[x].asNeededBoolean",
+							"short": "Take \"as needed\" f(or x)",
+							"formal": "If set to true or if specified as a CodeableConcept, indicates that the medication is only taken when needed within the specified schedule rather than at every scheduled dose.  If a CodeableConcept is present, it indicates the pre-condition for taking the Medication.",
+							"min": 0,
+							"max": "1",
+							"type": "boolean",
+							"leaf": true
+						},
+						{
+							"name": "asNeededCodeableConcept",
+							"parent": "MedicationStatement.dosage.asNeeded[x]",
+							"path": "MedicationStatement.dosage.asNeeded[x].asNeededCodeableConcept",
+							"short": "Take \"as needed\" f(or x)",
+							"formal": "If set to true or if specified as a CodeableConcept, indicates that the medication is only taken when needed within the specified schedule rather than at every scheduled dose.  If a CodeableConcept is present, it indicates the pre-condition for taking the Medication.",
+							"min": 0,
+							"max": "1",
+							"type": "CodeableConcept"
+						}
+					]
+				},
+				{
+					"name": "site",
+					"path": "MedicationStatement.dosage.site",
+					"parent": "MedicationStatement.dosage",
+					"short": "Where on body was medication administered?",
+					"formal": "A coded specification of the anatomic site where the medication first enters the body.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "MedicationAdministrationSite",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/approach-site-codes"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "route",
+					"path": "MedicationStatement.dosage.route",
+					"parent": "MedicationStatement.dosage",
+					"short": "How did the medication enter the body?",
+					"formal": "A code specifying the route or physiological path of administration of a therapeutic agent into or onto a subject.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "RouteOfAdministration",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/route-codes"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "method",
+					"path": "MedicationStatement.dosage.method",
+					"parent": "MedicationStatement.dosage",
+					"short": "Technique used to administer medication",
+					"formal": "A coded value indicating the method by which the medication is introduced into or onto the body. Most commonly used for injections.  Examples:  Slow Push; Deep IV.\n\nTerminologies used often pre-coordinate this term with the route and or form of administration.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "MedicationAdministrationMethod",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/administration-method-codes"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "quantity",
+					"path": "MedicationStatement.dosage.quantity",
+					"parent": "MedicationStatement.dosage",
+					"short": "Amount administered in one dose",
+					"formal": "The amount of therapeutic or other substance given at one administration event.",
+					"min": 0,
+					"max": "1",
+					"type": "Quantity"
+				},
+				{
+					"name": "rate",
+					"path": "MedicationStatement.dosage.rate",
+					"parent": "MedicationStatement.dosage",
+					"short": "Dose quantity per unit of time",
+					"formal": "Identifies the speed with which the substance is introduced into the subject. Typically the rate for an infusion. 200ml in 2 hours.",
+					"min": 0,
+					"max": "1",
+					"type": "Ratio"
+				},
+				{
+					"name": "maxDosePerPeriod",
+					"path": "MedicationStatement.dosage.maxDosePerPeriod",
+					"parent": "MedicationStatement.dosage",
+					"short": "Maximum dose that was consumed per unit of time",
+					"formal": "The maximum total quantity of a therapeutic substance that may be administered to a subject over the period of time. E.g. 1000mg in 24 hours.",
+					"min": 0,
+					"max": "1",
+					"type": "Ratio"
+				}
+			]
+		}
+	],
+	"success": true
+}
