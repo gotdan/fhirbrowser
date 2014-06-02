@@ -1,0 +1,88 @@
+{
+	"children": [
+		{
+			"name": "system",
+			"path": "Contact.system",
+			"parent": "Contact",
+			"short": "phone | fax | email | url",
+			"formal": "Telecommunications form for contact - what communications system is required to make use of the contact.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ContactSystem",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/contact-system"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "value",
+			"path": "Contact.value",
+			"parent": "Contact",
+			"short": "The actual contact details",
+			"formal": "The actual contact details, in a form that is meaningful to the designated communication system (i.e. phone number or email address).",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "use",
+			"path": "Contact.use",
+			"parent": "Contact",
+			"short": "home | work | temp | old | mobile - purpose of this address",
+			"formal": "Identifies the purpose for the address.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ContactUse",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/contact-use"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "period",
+			"path": "Contact.period",
+			"parent": "Contact",
+			"short": "Time period when the contact was/is in use",
+			"formal": "Time period when the contact was/is in use.",
+			"min": 0,
+			"max": "1",
+			"type": "Period",
+			"children": [
+				{
+					"name": "start",
+					"path": "Period.start",
+					"parent": "Period",
+					"short": "Starting time with inclusive boundary",
+					"formal": "The start of the period. The boundary is inclusive.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "end",
+					"path": "Period.end",
+					"parent": "Period",
+					"short": "End time with inclusive boundary, if not ongoing",
+					"formal": "The end of the period. If the end of the period is missing, it means that the period is ongoing.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				}
+			]
+		}
+	],
+	"success": true
+}

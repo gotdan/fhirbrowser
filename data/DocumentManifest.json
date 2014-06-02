@@ -1,0 +1,362 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "DocumentManifest.text",
+			"parent": "DocumentManifest",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "DocumentManifest.contained",
+			"parent": "DocumentManifest",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "masterIdentifier",
+			"path": "DocumentManifest.masterIdentifier",
+			"parent": "DocumentManifest",
+			"short": "Unique Identifier for the set of documents",
+			"formal": "A single identifier that uniquely identifies this manifest. Principally used to refer to the manifest in non-FHIR contexts.",
+			"min": 1,
+			"max": "1",
+			"type": "Identifier"
+		},
+		{
+			"name": "identifier",
+			"path": "DocumentManifest.identifier",
+			"parent": "DocumentManifest",
+			"short": "Other identifiers for the manifest",
+			"formal": "Other identifiers associated with the document, including version independent, source record and workflow related identifiers.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "subject",
+			"path": "DocumentManifest.subject",
+			"parent": "DocumentManifest",
+			"short": "The subject of the set of documents",
+			"formal": "Who or what the set of documents is about. The documents can be about a person, (patient or healthcare practitioner), a device (i.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure). If the documents cross more than one subject, then more than one subject is allowed here (unusual use case).",
+			"min": 1,
+			"max": "*",
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "DocumentManifest.subject",
+					"path": "DocumentManifest.subject.Patient",
+					"short": "The subject of the set of documents",
+					"formal": "Who or what the set of documents is about. The documents can be about a person, (patient or healthcare practitioner), a device (i.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure). If the documents cross more than one subject, then more than one subject is allowed here (unusual use case).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Practitioner",
+					"parent": "DocumentManifest.subject",
+					"path": "DocumentManifest.subject.Practitioner",
+					"short": "The subject of the set of documents",
+					"formal": "Who or what the set of documents is about. The documents can be about a person, (patient or healthcare practitioner), a device (i.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure). If the documents cross more than one subject, then more than one subject is allowed here (unusual use case).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Group",
+					"parent": "DocumentManifest.subject",
+					"path": "DocumentManifest.subject.Group",
+					"short": "The subject of the set of documents",
+					"formal": "Who or what the set of documents is about. The documents can be about a person, (patient or healthcare practitioner), a device (i.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure). If the documents cross more than one subject, then more than one subject is allowed here (unusual use case).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Group"
+				},
+				{
+					"name": "Device",
+					"parent": "DocumentManifest.subject",
+					"path": "DocumentManifest.subject.Device",
+					"short": "The subject of the set of documents",
+					"formal": "Who or what the set of documents is about. The documents can be about a person, (patient or healthcare practitioner), a device (i.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure). If the documents cross more than one subject, then more than one subject is allowed here (unusual use case).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				}
+			]
+		},
+		{
+			"name": "recipient",
+			"path": "DocumentManifest.recipient",
+			"parent": "DocumentManifest",
+			"short": "Intended to get notified about this set of documents",
+			"formal": "A patient, practitioner, or organization for which this set of documents is intended.",
+			"min": 0,
+			"max": "*",
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "DocumentManifest.recipient",
+					"path": "DocumentManifest.recipient.Patient",
+					"short": "Intended to get notified about this set of documents",
+					"formal": "A patient, practitioner, or organization for which this set of documents is intended.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Practitioner",
+					"parent": "DocumentManifest.recipient",
+					"path": "DocumentManifest.recipient.Practitioner",
+					"short": "Intended to get notified about this set of documents",
+					"formal": "A patient, practitioner, or organization for which this set of documents is intended.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Organization",
+					"parent": "DocumentManifest.recipient",
+					"path": "DocumentManifest.recipient.Organization",
+					"short": "Intended to get notified about this set of documents",
+					"formal": "A patient, practitioner, or organization for which this set of documents is intended.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Organization"
+				}
+			]
+		},
+		{
+			"name": "type",
+			"path": "DocumentManifest.type",
+			"parent": "DocumentManifest",
+			"short": "What kind of document set this is",
+			"formal": "Specifies the kind of this set of documents (e.g. Patient Summary, Discharge Summary, Prescription, etc.). The type of a set of documents may be the same as one of the documents in it - especially if there is only one - but it may be wider.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "DocumentSetType",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/docset-codes"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "author",
+			"path": "DocumentManifest.author",
+			"parent": "DocumentManifest",
+			"short": "Who and/or what authored the document",
+			"formal": "Identifies who is responsible for adding the information to the document.",
+			"min": 0,
+			"max": "*",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "DocumentManifest.author",
+					"path": "DocumentManifest.author.Practitioner",
+					"short": "Who and/or what authored the document",
+					"formal": "Identifies who is responsible for adding the information to the document.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Device",
+					"parent": "DocumentManifest.author",
+					"path": "DocumentManifest.author.Device",
+					"short": "Who and/or what authored the document",
+					"formal": "Identifies who is responsible for adding the information to the document.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "Patient",
+					"parent": "DocumentManifest.author",
+					"path": "DocumentManifest.author.Patient",
+					"short": "Who and/or what authored the document",
+					"formal": "Identifies who is responsible for adding the information to the document.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "RelatedPerson",
+					"parent": "DocumentManifest.author",
+					"path": "DocumentManifest.author.RelatedPerson",
+					"short": "Who and/or what authored the document",
+					"formal": "Identifies who is responsible for adding the information to the document.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "RelatedPerson"
+				}
+			]
+		},
+		{
+			"name": "created",
+			"path": "DocumentManifest.created",
+			"parent": "DocumentManifest",
+			"short": "When this document manifest created",
+			"formal": "When the document manifest was created for submission to the server (not necessarily the same thing as the actual resource last modified time, since it may be modified, replicated etc).",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "source",
+			"path": "DocumentManifest.source",
+			"parent": "DocumentManifest",
+			"short": "The source system/application/software",
+			"formal": "Identifies the source system, application, or software that produced the document manifest.",
+			"min": 0,
+			"max": "1",
+			"type": "uri",
+			"leaf": true
+		},
+		{
+			"name": "status",
+			"path": "DocumentManifest.status",
+			"parent": "DocumentManifest",
+			"short": "current | superceded | entered in error",
+			"formal": "The status of this document manifest.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "DocumentReferenceStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/document-reference-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "supercedes",
+			"path": "DocumentManifest.supercedes",
+			"parent": "DocumentManifest",
+			"short": "If this document manifest replaces another",
+			"formal": "Whether this document manifest replaces another.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "DocumentManifest"
+		},
+		{
+			"name": "description",
+			"path": "DocumentManifest.description",
+			"parent": "DocumentManifest",
+			"short": "Human-readable description (title)",
+			"formal": "Human-readable description of the source document. This is sometimes known as the \"title\".",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "confidentiality",
+			"path": "DocumentManifest.confidentiality",
+			"parent": "DocumentManifest",
+			"short": "Sensitivity of set of documents",
+			"formal": "A code specifying the level of confidentiality of this set of Documents.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "DocumentConfidentiality",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/v3/vs/Confidentiality"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "content",
+			"path": "DocumentManifest.content",
+			"parent": "DocumentManifest",
+			"short": "Contents of this set of documents",
+			"formal": "The list of resources that describe the parts of this document reference. Usually, these would be document references, but direct references to binary attachments and images are also allowed.",
+			"min": 1,
+			"max": "*",
+			"type": "multitype",
+			"reference": "DocumentReference",
+			"children": [
+				{
+					"name": "DocumentReference",
+					"parent": "DocumentManifest.content",
+					"path": "DocumentManifest.content.DocumentReference",
+					"short": "Contents of this set of documents",
+					"formal": "The list of resources that describe the parts of this document reference. Usually, these would be document references, but direct references to binary attachments and images are also allowed.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "DocumentReference"
+				},
+				{
+					"name": "Binary",
+					"parent": "DocumentManifest.content",
+					"path": "DocumentManifest.content.Binary",
+					"short": "Contents of this set of documents",
+					"formal": "The list of resources that describe the parts of this document reference. Usually, these would be document references, but direct references to binary attachments and images are also allowed.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Binary"
+				},
+				{
+					"name": "Media",
+					"parent": "DocumentManifest.content",
+					"path": "DocumentManifest.content.Media",
+					"short": "Contents of this set of documents",
+					"formal": "The list of resources that describe the parts of this document reference. Usually, these would be document references, but direct references to binary attachments and images are also allowed.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Media"
+				}
+			]
+		}
+	],
+	"success": true
+}

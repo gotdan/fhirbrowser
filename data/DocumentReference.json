@@ -1,0 +1,609 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "DocumentReference.text",
+			"parent": "DocumentReference",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "DocumentReference.contained",
+			"parent": "DocumentReference",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "masterIdentifier",
+			"path": "DocumentReference.masterIdentifier",
+			"parent": "DocumentReference",
+			"short": "Master Version Specific Identifier",
+			"formal": "Document identifier as assigned by the source of the document. This identifier is specific to this version of the document. This unique identifier may be used elsewhere to identify this version of the document.",
+			"min": 1,
+			"max": "1",
+			"type": "Identifier"
+		},
+		{
+			"name": "identifier",
+			"path": "DocumentReference.identifier",
+			"parent": "DocumentReference",
+			"short": "Other identifiers for the document",
+			"formal": "Other identifiers associated with the document, including version independent, source record and workflow related identifiers.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "subject",
+			"path": "DocumentReference.subject",
+			"parent": "DocumentReference",
+			"short": "Who|what is the subject of the document",
+			"formal": "Who or what the document is about. The document can be about a person, (patient or healthcare practitioner), a device (I.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure).",
+			"min": 1,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "DocumentReference.subject",
+					"path": "DocumentReference.subject.Patient",
+					"short": "Who|what is the subject of the document",
+					"formal": "Who or what the document is about. The document can be about a person, (patient or healthcare practitioner), a device (I.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Practitioner",
+					"parent": "DocumentReference.subject",
+					"path": "DocumentReference.subject.Practitioner",
+					"short": "Who|what is the subject of the document",
+					"formal": "Who or what the document is about. The document can be about a person, (patient or healthcare practitioner), a device (I.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Group",
+					"parent": "DocumentReference.subject",
+					"path": "DocumentReference.subject.Group",
+					"short": "Who|what is the subject of the document",
+					"formal": "Who or what the document is about. The document can be about a person, (patient or healthcare practitioner), a device (I.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Group"
+				},
+				{
+					"name": "Device",
+					"parent": "DocumentReference.subject",
+					"path": "DocumentReference.subject.Device",
+					"short": "Who|what is the subject of the document",
+					"formal": "Who or what the document is about. The document can be about a person, (patient or healthcare practitioner), a device (I.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				}
+			]
+		},
+		{
+			"name": "type",
+			"path": "DocumentReference.type",
+			"parent": "DocumentReference",
+			"short": "What kind of document this is (LOINC if possible)",
+			"formal": "Specifies the particular kind of document (e.g. Patient Summary, Discharge Summary, Prescription, etc.).",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "DocumentType",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/doc-codes"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "class",
+			"path": "DocumentReference.class",
+			"parent": "DocumentReference",
+			"short": "Categorization of Document",
+			"formal": "A categorization for the type of the document. This may be implied by or derived from the code specified in the Document Type.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "DocumentClass",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/xds-typecodes"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "author",
+			"path": "DocumentReference.author",
+			"parent": "DocumentReference",
+			"short": "Who and/or what authored the document",
+			"formal": "Identifies who is responsible for adding the information to the document.",
+			"min": 1,
+			"max": "*",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "DocumentReference.author",
+					"path": "DocumentReference.author.Practitioner",
+					"short": "Who and/or what authored the document",
+					"formal": "Identifies who is responsible for adding the information to the document.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Device",
+					"parent": "DocumentReference.author",
+					"path": "DocumentReference.author.Device",
+					"short": "Who and/or what authored the document",
+					"formal": "Identifies who is responsible for adding the information to the document.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "Patient",
+					"parent": "DocumentReference.author",
+					"path": "DocumentReference.author.Patient",
+					"short": "Who and/or what authored the document",
+					"formal": "Identifies who is responsible for adding the information to the document.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "RelatedPerson",
+					"parent": "DocumentReference.author",
+					"path": "DocumentReference.author.RelatedPerson",
+					"short": "Who and/or what authored the document",
+					"formal": "Identifies who is responsible for adding the information to the document.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "RelatedPerson"
+				}
+			]
+		},
+		{
+			"name": "custodian",
+			"path": "DocumentReference.custodian",
+			"parent": "DocumentReference",
+			"short": "Org which maintains the document",
+			"formal": "Identifies the organization or group who is responsible for ongoing maintenance of and access to the document.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Organization"
+		},
+		{
+			"name": "policyManager",
+			"path": "DocumentReference.policyManager",
+			"parent": "DocumentReference",
+			"short": "Manages access policies for the document",
+			"formal": "A reference to a domain or server that manages policies under which the document is accessed and/or made available.",
+			"min": 0,
+			"max": "1",
+			"type": "uri",
+			"leaf": true
+		},
+		{
+			"name": "authenticator",
+			"path": "DocumentReference.authenticator",
+			"parent": "DocumentReference",
+			"short": "Who/What authenticated the document",
+			"formal": "Which person or organization authenticates that this document is valid.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "DocumentReference.authenticator",
+					"path": "DocumentReference.authenticator.Practitioner",
+					"short": "Who/What authenticated the document",
+					"formal": "Which person or organization authenticates that this document is valid.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Organization",
+					"parent": "DocumentReference.authenticator",
+					"path": "DocumentReference.authenticator.Organization",
+					"short": "Who/What authenticated the document",
+					"formal": "Which person or organization authenticates that this document is valid.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Organization"
+				}
+			]
+		},
+		{
+			"name": "created",
+			"path": "DocumentReference.created",
+			"parent": "DocumentReference",
+			"short": "Document creation time",
+			"formal": "When the document was created.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "indexed",
+			"path": "DocumentReference.indexed",
+			"parent": "DocumentReference",
+			"short": "When this document reference created",
+			"formal": "When the document reference was created.",
+			"min": 1,
+			"max": "1",
+			"type": "instant",
+			"leaf": true
+		},
+		{
+			"name": "status",
+			"path": "DocumentReference.status",
+			"parent": "DocumentReference",
+			"short": "current | superceded | entered in error",
+			"formal": "The status of this document reference.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "DocumentReferenceStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/document-reference-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "docStatus",
+			"path": "DocumentReference.docStatus",
+			"parent": "DocumentReference",
+			"short": "preliminary | final | appended | amended | entered in error",
+			"formal": "The status of the underlying document.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ReferredDocumentStatus",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/composition-status"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "relatesTo",
+			"path": "DocumentReference.relatesTo",
+			"parent": "DocumentReference",
+			"short": "Relationships to other documents",
+			"formal": "Relationships that this document has with other document references that already exist.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "code",
+					"path": "DocumentReference.relatesTo.code",
+					"parent": "DocumentReference.relatesTo",
+					"short": "replaces | transforms | signs | appends",
+					"formal": "The type of relationship that this document has with anther document.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "DocumentRelationshipType",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/document-relationship-type"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "target",
+					"path": "DocumentReference.relatesTo.target",
+					"parent": "DocumentReference.relatesTo",
+					"short": "Target of the relationship",
+					"formal": "The target document of this relationship.",
+					"min": 1,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "DocumentReference"
+				}
+			]
+		},
+		{
+			"name": "description",
+			"path": "DocumentReference.description",
+			"parent": "DocumentReference",
+			"short": "Human-readable description (title)",
+			"formal": "Human-readable description of the source document. This is sometimes known as the \"title\".",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "confidentiality",
+			"path": "DocumentReference.confidentiality",
+			"parent": "DocumentReference",
+			"short": "Sensitivity of source document",
+			"formal": "A code specifying the level of confidentiality of the XDS Document.",
+			"min": 0,
+			"max": "*",
+			"binding": {
+				"name": "DocumentConfidentiality",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/v3/vs/Confidentiality"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "primaryLanguage",
+			"path": "DocumentReference.primaryLanguage",
+			"parent": "DocumentReference",
+			"short": "The marked primary language for the document",
+			"formal": "The primary language in which the source document is written.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "Language",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceUri": "http://tools.ietf.org/html/bcp47"
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "mimeType",
+			"path": "DocumentReference.mimeType",
+			"parent": "DocumentReference",
+			"short": "Mime type, + maybe character encoding",
+			"formal": "The mime type of the source document.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "MimeType",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceUri": "http://www.rfc-editor.org/bcp/bcp13.txt"
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "format",
+			"path": "DocumentReference.format",
+			"parent": "DocumentReference",
+			"short": "Format/content rules for the document",
+			"formal": "An identifier that identifies that the format and content of the document conforms to additional rules beyond the base format indicated in the mimeType.",
+			"min": 0,
+			"max": "*",
+			"type": "uri",
+			"leaf": true
+		},
+		{
+			"name": "size",
+			"path": "DocumentReference.size",
+			"parent": "DocumentReference",
+			"short": "Size of the document in bytes",
+			"formal": "The size of the source document this reference refers to in bytes.",
+			"min": 0,
+			"max": "1",
+			"type": "integer",
+			"leaf": true
+		},
+		{
+			"name": "hash",
+			"path": "DocumentReference.hash",
+			"parent": "DocumentReference",
+			"short": "HexBinary representation of SHA1",
+			"formal": "A hash of the source document to ensure that changes have not occurred.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "location",
+			"path": "DocumentReference.location",
+			"parent": "DocumentReference",
+			"short": "Where to access the document",
+			"formal": "A url at which the document can be accessed.",
+			"min": 0,
+			"max": "1",
+			"type": "uri",
+			"leaf": true
+		},
+		{
+			"name": "service",
+			"path": "DocumentReference.service",
+			"parent": "DocumentReference",
+			"short": "If access is not fully described by location",
+			"formal": "A description of a service call that can be used to retrieve the document.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "type",
+					"path": "DocumentReference.service.type",
+					"parent": "DocumentReference.service",
+					"short": "Type of service (i.e. XDS.b)",
+					"formal": "The type of the service that can be used to access the documents.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "DocumentServiceType",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/documentreference-service-types"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "address",
+					"path": "DocumentReference.service.address",
+					"parent": "DocumentReference.service",
+					"short": "Where service is located (usually a URL)",
+					"formal": "Where the service end-point is located.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "parameter",
+					"path": "DocumentReference.service.parameter",
+					"parent": "DocumentReference.service",
+					"short": "Service call parameters",
+					"formal": "A list of named parameters that is used in the service call.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "name",
+							"path": "DocumentReference.service.parameter.name",
+							"parent": "DocumentReference.service.parameter",
+							"short": "Parameter name in service call",
+							"formal": "The name of a parameter.",
+							"min": 1,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "value",
+							"path": "DocumentReference.service.parameter.value",
+							"parent": "DocumentReference.service.parameter",
+							"short": "Parameter value for the name",
+							"formal": "The value of the named parameter.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "context",
+			"path": "DocumentReference.context",
+			"parent": "DocumentReference",
+			"short": "Clinical context of document",
+			"formal": "The clinical context in which the document was prepared.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "event",
+					"path": "DocumentReference.context.event",
+					"parent": "DocumentReference.context",
+					"short": "Main Clinical Acts Documented",
+					"formal": "This list of codes represents the main clinical acts, such as a colonoscopy or an appendectomy, being documented. In some cases, the event is inherent in the typeCode, such as a \"History and Physical Report\" in which the procedure being documented is necessarily a \"History and Physical\" act.",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "DocumentEventType",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/v3/vs/ActCode"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "period",
+					"path": "DocumentReference.context.period",
+					"parent": "DocumentReference.context",
+					"short": "Time of service that is being documented",
+					"formal": "The time period over which the service that is described by the document was provided.",
+					"min": 0,
+					"max": "1",
+					"type": "Period"
+				},
+				{
+					"name": "facilityType",
+					"path": "DocumentReference.context.facilityType",
+					"parent": "DocumentReference.context",
+					"short": "Kind of facility where patient was seen",
+					"formal": "The kind of facility where the patient was seen.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "DocumentFacilityType",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/xds-facilitycodes"
+						}
+					},
+					"type": "CodeableConcept"
+				}
+			]
+		}
+	],
+	"success": true
+}

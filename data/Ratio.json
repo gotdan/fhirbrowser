@@ -1,0 +1,155 @@
+{
+	"children": [
+		{
+			"name": "numerator",
+			"path": "Ratio.numerator",
+			"parent": "Ratio",
+			"short": "Numerator value",
+			"formal": "The value of the numerator.",
+			"min": 0,
+			"max": "1",
+			"type": "Quantity",
+			"children": [
+				{
+					"name": "value",
+					"path": "Quantity.value",
+					"parent": "Quantity",
+					"short": "Numerical value (with implicit precision)",
+					"formal": "The value of the measured amount. The value includes an implicit precision in the presentation of the value.",
+					"min": 0,
+					"max": "1",
+					"type": "decimal",
+					"leaf": true
+				},
+				{
+					"name": "comparator",
+					"path": "Quantity.comparator",
+					"parent": "Quantity",
+					"short": "< | <= | >= | > - how to understand the value",
+					"formal": "How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues. E.g. if the comparator is \"<\" , then the real value is < stated value.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "QuantityCompararator",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/quantity-comparator"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "units",
+					"path": "Quantity.units",
+					"parent": "Quantity",
+					"short": "Unit representation",
+					"formal": "A human-readable form of the units.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "system",
+					"path": "Quantity.system",
+					"parent": "Quantity",
+					"short": "System that defines coded unit form",
+					"formal": "The identification of the system that provides the coded form of the unit.",
+					"min": 0,
+					"max": "1",
+					"type": "uri",
+					"leaf": true
+				},
+				{
+					"name": "code",
+					"path": "Quantity.code",
+					"parent": "Quantity",
+					"short": "Coded form of the unit",
+					"formal": "A computer processable form of the units in some unit representation system.",
+					"min": 0,
+					"max": "1",
+					"type": "code",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "denominator",
+			"path": "Ratio.denominator",
+			"parent": "Ratio",
+			"short": "Denominator value",
+			"formal": "The value of the denominator.",
+			"min": 0,
+			"max": "1",
+			"type": "Quantity",
+			"children": [
+				{
+					"name": "value",
+					"path": "Quantity.value",
+					"parent": "Quantity",
+					"short": "Numerical value (with implicit precision)",
+					"formal": "The value of the measured amount. The value includes an implicit precision in the presentation of the value.",
+					"min": 0,
+					"max": "1",
+					"type": "decimal",
+					"leaf": true
+				},
+				{
+					"name": "comparator",
+					"path": "Quantity.comparator",
+					"parent": "Quantity",
+					"short": "< | <= | >= | > - how to understand the value",
+					"formal": "How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues. E.g. if the comparator is \"<\" , then the real value is < stated value.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "QuantityCompararator",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/quantity-comparator"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "units",
+					"path": "Quantity.units",
+					"parent": "Quantity",
+					"short": "Unit representation",
+					"formal": "A human-readable form of the units.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "system",
+					"path": "Quantity.system",
+					"parent": "Quantity",
+					"short": "System that defines coded unit form",
+					"formal": "The identification of the system that provides the coded form of the unit.",
+					"min": 0,
+					"max": "1",
+					"type": "uri",
+					"leaf": true
+				},
+				{
+					"name": "code",
+					"path": "Quantity.code",
+					"parent": "Quantity",
+					"short": "Coded form of the unit",
+					"formal": "A computer processable form of the units in some unit representation system.",
+					"min": 0,
+					"max": "1",
+					"type": "code",
+					"leaf": true
+				}
+			]
+		}
+	],
+	"success": true
+}

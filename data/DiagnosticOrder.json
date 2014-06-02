@@ -1,0 +1,371 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "DiagnosticOrder.text",
+			"parent": "DiagnosticOrder",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "DiagnosticOrder.contained",
+			"parent": "DiagnosticOrder",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "subject",
+			"path": "DiagnosticOrder.subject",
+			"parent": "DiagnosticOrder",
+			"short": "Who and/or what test is about",
+			"formal": "Who or what the investigation is to be performed on. This is usually a human patient, but diagnostic tests can also be requested on animals, groups of humans or animals, devices such as dialysis machines, or even locations (typically for environmental scans).",
+			"min": 1,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "DiagnosticOrder.subject",
+					"path": "DiagnosticOrder.subject.Patient",
+					"short": "Who and/or what test is about",
+					"formal": "Who or what the investigation is to be performed on. This is usually a human patient, but diagnostic tests can also be requested on animals, groups of humans or animals, devices such as dialysis machines, or even locations (typically for environmental scans).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Group",
+					"parent": "DiagnosticOrder.subject",
+					"path": "DiagnosticOrder.subject.Group",
+					"short": "Who and/or what test is about",
+					"formal": "Who or what the investigation is to be performed on. This is usually a human patient, but diagnostic tests can also be requested on animals, groups of humans or animals, devices such as dialysis machines, or even locations (typically for environmental scans).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Group"
+				},
+				{
+					"name": "Location",
+					"parent": "DiagnosticOrder.subject",
+					"path": "DiagnosticOrder.subject.Location",
+					"short": "Who and/or what test is about",
+					"formal": "Who or what the investigation is to be performed on. This is usually a human patient, but diagnostic tests can also be requested on animals, groups of humans or animals, devices such as dialysis machines, or even locations (typically for environmental scans).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Location"
+				},
+				{
+					"name": "Device",
+					"parent": "DiagnosticOrder.subject",
+					"path": "DiagnosticOrder.subject.Device",
+					"short": "Who and/or what test is about",
+					"formal": "Who or what the investigation is to be performed on. This is usually a human patient, but diagnostic tests can also be requested on animals, groups of humans or animals, devices such as dialysis machines, or even locations (typically for environmental scans).",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				}
+			]
+		},
+		{
+			"name": "orderer",
+			"path": "DiagnosticOrder.orderer",
+			"parent": "DiagnosticOrder",
+			"short": "Who ordered the test",
+			"formal": "The practitioner that holds legal responsibility for ordering the investigation.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Practitioner"
+		},
+		{
+			"name": "identifier",
+			"path": "DiagnosticOrder.identifier",
+			"parent": "DiagnosticOrder",
+			"short": "Identifiers assigned to this order",
+			"formal": "Identifiers assigned to this order by the order or by the receiver.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "encounter",
+			"path": "DiagnosticOrder.encounter",
+			"parent": "DiagnosticOrder",
+			"short": "The encounter that this diagnostic order is associated with",
+			"formal": "An encounter that provides additional informaton about the healthcare context in which this request is made.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Encounter"
+		},
+		{
+			"name": "clinicalNotes",
+			"path": "DiagnosticOrder.clinicalNotes",
+			"parent": "DiagnosticOrder",
+			"short": "Explanation/Justification for test",
+			"formal": "An explanation or justification for why this diagnostic investigation is being requested.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "specimen",
+			"path": "DiagnosticOrder.specimen",
+			"parent": "DiagnosticOrder",
+			"short": "If the whole order relates to specific specimens",
+			"formal": "One or more specimens that the diagnostic investigation is about.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "Specimen"
+		},
+		{
+			"name": "status",
+			"path": "DiagnosticOrder.status",
+			"parent": "DiagnosticOrder",
+			"short": "requested | received | accepted | in progress | review | completed | suspended | rejected | failed",
+			"formal": "The status of the order.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "DiagnosticOrderStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/diagnostic-order-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "priority",
+			"path": "DiagnosticOrder.priority",
+			"parent": "DiagnosticOrder",
+			"short": "routine | urgent | stat | asap",
+			"formal": "The clinical priority associated with this order.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "DiagnosticOrderPriority",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/diagnostic-order-priority"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "event",
+			"path": "DiagnosticOrder.event",
+			"parent": "DiagnosticOrder",
+			"short": "A list of events of interest in the lifecycle",
+			"formal": "A summary of the events of interest that have occurred as the request is processed. E.g. when the order was made, various processing steps (specimens received), when it was completed.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "status",
+					"path": "DiagnosticOrder.event.status",
+					"parent": "DiagnosticOrder.event",
+					"short": "requested | received | accepted | in progress | review | completed | suspended | rejected | failed",
+					"formal": "The status for the event.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "DiagnosticOrderStatus",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/diagnostic-order-status"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "description",
+					"path": "DiagnosticOrder.event.description",
+					"parent": "DiagnosticOrder.event",
+					"short": "More information about the event and it's context",
+					"formal": "Additional information about the event that occurred - e.g. if the status remained unchanged.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "DIagnosticOrderEventDescription",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/diagnostic-order-event"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "dateTime",
+					"path": "DiagnosticOrder.event.dateTime",
+					"parent": "DiagnosticOrder.event",
+					"short": "The date at which the event happened",
+					"formal": "The date/time at which the event occurred.",
+					"min": 1,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "actor",
+					"path": "DiagnosticOrder.event.actor",
+					"parent": "DiagnosticOrder.event",
+					"short": "Who recorded or did this",
+					"formal": "The person who was responsible for performing or recording the action.",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"reference": "Practitioner",
+					"children": [
+						{
+							"name": "Practitioner",
+							"parent": "DiagnosticOrder.event.actor",
+							"path": "DiagnosticOrder.event.actor.Practitioner",
+							"short": "Who recorded or did this",
+							"formal": "The person who was responsible for performing or recording the action.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Practitioner"
+						},
+						{
+							"name": "Device",
+							"parent": "DiagnosticOrder.event.actor",
+							"path": "DiagnosticOrder.event.actor.Device",
+							"short": "Who recorded or did this",
+							"formal": "The person who was responsible for performing or recording the action.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Device"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "item",
+			"path": "DiagnosticOrder.item",
+			"parent": "DiagnosticOrder",
+			"short": "The items the orderer requested",
+			"formal": "The specific diagnostic investigations that are requested as part of this request. Sometimes, there can only be one item per request, but in most contexts, more than one investigation can be requested.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "code",
+					"path": "DiagnosticOrder.item.code",
+					"parent": "DiagnosticOrder.item",
+					"short": "Code to indicate the item (test or panel) being ordered",
+					"formal": "A code that identifies a particular diagnostic investigation, or panel of investigations, that have been requested.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "DiagnosticRequests",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/diagnostic-requests"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "specimen",
+					"path": "DiagnosticOrder.item.specimen",
+					"parent": "DiagnosticOrder.item",
+					"short": "If this item relates to specific specimens",
+					"formal": "If the item is related to a specific speciment.",
+					"min": 0,
+					"max": "*",
+					"type": "ResourceReference",
+					"reference": "Specimen"
+				},
+				{
+					"name": "bodySite",
+					"path": "DiagnosticOrder.item.bodySite",
+					"parent": "DiagnosticOrder.item",
+					"short": "Location of requested test (if applicable)",
+					"formal": "Anatomical location where the request test should be performed.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "BodySite",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/body-site"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "status",
+					"path": "DiagnosticOrder.item.status",
+					"parent": "DiagnosticOrder.item",
+					"short": "requested | received | accepted | in progress | review | completed | suspended | rejected | failed",
+					"formal": "The status of this individual item within the order.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "DiagnosticOrderStatus",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/diagnostic-order-status"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "event",
+					"path": "DiagnosticOrder.item.event",
+					"parent": "DiagnosticOrder.item",
+					"short": "Events specific to this item",
+					"formal": "A summary of the events of interest that have occurred as this item of the request is processed.",
+					"min": 0,
+					"max": "*",
+					"type": "none"
+				}
+			]
+		}
+	],
+	"success": true
+}

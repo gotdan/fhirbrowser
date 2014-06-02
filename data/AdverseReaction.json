@@ -1,0 +1,236 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "AdverseReaction.text",
+			"parent": "AdverseReaction",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "AdverseReaction.contained",
+			"parent": "AdverseReaction",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "AdverseReaction.identifier",
+			"parent": "AdverseReaction",
+			"short": "External Ids for this adverse reaction",
+			"formal": "This records identifiers associated with this reaction that are defined by business processed and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "date",
+			"path": "AdverseReaction.date",
+			"parent": "AdverseReaction",
+			"short": "When the reaction occurred",
+			"formal": "The date (and possibly time) when the reaction began.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "subject",
+			"path": "AdverseReaction.subject",
+			"parent": "AdverseReaction",
+			"short": "Who had the reaction",
+			"formal": "The subject of the adverse reaction.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "didNotOccurFlag",
+			"path": "AdverseReaction.didNotOccurFlag",
+			"parent": "AdverseReaction",
+			"short": "Indicates lack of reaction",
+			"formal": "If true, indicates that no reaction occurred.",
+			"min": 1,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "recorder",
+			"path": "AdverseReaction.recorder",
+			"parent": "AdverseReaction",
+			"short": "Who recorded the reaction",
+			"formal": "Identifies the individual responsible for the information in the reaction record.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "AdverseReaction.recorder",
+					"path": "AdverseReaction.recorder.Practitioner",
+					"short": "Who recorded the reaction",
+					"formal": "Identifies the individual responsible for the information in the reaction record.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Patient",
+					"parent": "AdverseReaction.recorder",
+					"path": "AdverseReaction.recorder.Patient",
+					"short": "Who recorded the reaction",
+					"formal": "Identifies the individual responsible for the information in the reaction record.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				}
+			]
+		},
+		{
+			"name": "symptom",
+			"path": "AdverseReaction.symptom",
+			"parent": "AdverseReaction",
+			"short": "What was reaction?",
+			"formal": "The signs and symptoms that were observed as part of the reaction.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "code",
+					"path": "AdverseReaction.symptom.code",
+					"parent": "AdverseReaction.symptom",
+					"short": "E.g. Rash, vomiting",
+					"formal": "Indicates the specific sign or symptom that was observed.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "SymptomType",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceUri": "http://apps.who.int/classifications/icd10/browse/2010/en"
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "severity",
+					"path": "AdverseReaction.symptom.severity",
+					"parent": "AdverseReaction.symptom",
+					"short": "severe | serious | moderate | minor",
+					"formal": "The severity of the sign or symptom.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "ReactionSeverity",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/reactionSeverity"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "exposure",
+			"path": "AdverseReaction.exposure",
+			"parent": "AdverseReaction",
+			"short": "Suspected substance",
+			"formal": "An exposure to a substance that preceded a reaction occurrence.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "date",
+					"path": "AdverseReaction.exposure.date",
+					"parent": "AdverseReaction.exposure",
+					"short": "When the exposure occurred",
+					"formal": "Identifies the initial date of the exposure that is suspected to be related to the reaction.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "type",
+					"path": "AdverseReaction.exposure.type",
+					"parent": "AdverseReaction.exposure",
+					"short": "drugadmin | immuniz | coincidental",
+					"formal": "The type of exposure: Drug Administration, Immunization, Coincidental.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "ExposureType",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/exposureType"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "causalityExpectation",
+					"path": "AdverseReaction.exposure.causalityExpectation",
+					"parent": "AdverseReaction.exposure",
+					"short": "likely | unlikely | confirmed | unknown",
+					"formal": "A statement of how confident that the recorder was that this exposure caused the reaction.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "CausalityExpectation",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/causalityExpectation"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "substance",
+					"path": "AdverseReaction.exposure.substance",
+					"parent": "AdverseReaction.exposure",
+					"short": "Presumed causative substance",
+					"formal": "Substance that is presumed to have caused the adverse reaction.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Substance"
+				}
+			]
+		}
+	],
+	"success": true
+}

@@ -1,0 +1,126 @@
+{
+	"children": [
+		{
+			"name": "use",
+			"path": "Identifier.use",
+			"parent": "Identifier",
+			"short": "usual | official | temp | secondary (If known)",
+			"formal": "The purpose of this identifier.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "IdentifierUse",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/identifier-use"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "label",
+			"path": "Identifier.label",
+			"parent": "Identifier",
+			"short": "Description of identifier",
+			"formal": "A text string for the identifier that can be displayed to a human so they can recognize the identifier.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "system",
+			"path": "Identifier.system",
+			"parent": "Identifier",
+			"short": "The namespace for the identifier",
+			"formal": "Establishes the namespace in which set of possible id values is unique.",
+			"min": 0,
+			"max": "1",
+			"type": "uri",
+			"leaf": true
+		},
+		{
+			"name": "value",
+			"path": "Identifier.value",
+			"parent": "Identifier",
+			"short": "The value that is unique",
+			"formal": "The portion of the identifier typically displayed to the user and which is unique within the context of the system.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "period",
+			"path": "Identifier.period",
+			"parent": "Identifier",
+			"short": "Time period when id is/was valid for use",
+			"formal": "Time period during which identifier is/was valid for use.",
+			"min": 0,
+			"max": "1",
+			"type": "Period",
+			"children": [
+				{
+					"name": "start",
+					"path": "Period.start",
+					"parent": "Period",
+					"short": "Starting time with inclusive boundary",
+					"formal": "The start of the period. The boundary is inclusive.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "end",
+					"path": "Period.end",
+					"parent": "Period",
+					"short": "End time with inclusive boundary, if not ongoing",
+					"formal": "The end of the period. If the end of the period is missing, it means that the period is ongoing.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "assigner",
+			"path": "Identifier.assigner",
+			"parent": "Identifier",
+			"short": "Organization that issued id (may be just text)",
+			"formal": "Organization that issued/manages the identifier.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Organization",
+			"children": [
+				{
+					"name": "reference",
+					"path": "ResourceReference.reference",
+					"parent": "ResourceReference",
+					"short": "Relative, internal or absolute URL reference",
+					"formal": "A reference to a location at which the other resource is found. The reference may a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "display",
+					"path": "ResourceReference.display",
+					"parent": "ResourceReference",
+					"short": "Text alternative for the resource",
+					"formal": "Plain text narrative that identifies the resource in addition to the resource reference.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				}
+			]
+		}
+	],
+	"success": true
+}

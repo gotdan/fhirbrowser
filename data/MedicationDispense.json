@@ -1,0 +1,506 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "MedicationDispense.text",
+			"parent": "MedicationDispense",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "MedicationDispense.contained",
+			"parent": "MedicationDispense",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "MedicationDispense.identifier",
+			"parent": "MedicationDispense",
+			"short": "External identifier",
+			"formal": "Identifier assigned by the dispensing facility - this is an identifier assigned outside FHIR.",
+			"min": 0,
+			"max": "1",
+			"type": "Identifier"
+		},
+		{
+			"name": "status",
+			"path": "MedicationDispense.status",
+			"parent": "MedicationDispense",
+			"short": "in progress | on hold | completed | entered in error | stopped",
+			"formal": "A code specifying the state of the set of dispense events.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "MedicationDispenseStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/medication-dispense-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "patient",
+			"path": "MedicationDispense.patient",
+			"parent": "MedicationDispense",
+			"short": "Who the dispense is for",
+			"formal": "A link to a resource representing the person to whom the medication will be given.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "dispenser",
+			"path": "MedicationDispense.dispenser",
+			"parent": "MedicationDispense",
+			"short": "Practitioner responsible for dispensing medication",
+			"formal": "The individual responsible for dispensing the medication.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Practitioner"
+		},
+		{
+			"name": "authorizingPrescription",
+			"path": "MedicationDispense.authorizingPrescription",
+			"parent": "MedicationDispense",
+			"short": "Medication order that authorizes the dispense",
+			"formal": "Indicates the medication order that is being dispensed against.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "MedicationPrescription"
+		},
+		{
+			"name": "dispense",
+			"path": "MedicationDispense.dispense",
+			"parent": "MedicationDispense",
+			"short": "Details for individual dispensed medicationdetails",
+			"formal": "Indicates the details of the dispense event such as the days supply and quantity of medication dispensed.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "1",
+					"name": "Timing",
+					"severity": "error",
+					"human": "whenHandedOver cannot be before whenPrepared",
+					"xpath": "not(exists(f:whenHandedOver/@value)) or not(exists(f:whenPrepared/@value)) or ( f:whenHandedOver/@value >= f:whenPrepared/@value)"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "identifier",
+					"path": "MedicationDispense.dispense.identifier",
+					"parent": "MedicationDispense.dispense",
+					"short": "External identifier for individual item",
+					"formal": "Identifier assigned by the dispensing facility.   This is an identifier assigned outside FHIR.",
+					"min": 0,
+					"max": "1",
+					"type": "Identifier"
+				},
+				{
+					"name": "status",
+					"path": "MedicationDispense.dispense.status",
+					"parent": "MedicationDispense.dispense",
+					"short": "in progress | on hold | completed | entered in error | stopped",
+					"formal": "A code specifying the state of the dispense event.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "MedicationDispenseStatus",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/medication-dispense-status"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "type",
+					"path": "MedicationDispense.dispense.type",
+					"parent": "MedicationDispense.dispense",
+					"short": "Trial fill, partial fill, emergency fill, etc.",
+					"formal": "Indicates the type of dispensing event that is performed. Examples include: Trial Fill, Completion of Trial, Partial Fill, Emergency Fill, Samples, etc.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "MedicationDispenseType",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/v3/vs/ActPharmacySupplyType"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "quantity",
+					"path": "MedicationDispense.dispense.quantity",
+					"parent": "MedicationDispense.dispense",
+					"short": "Amount dispensed",
+					"formal": "The amount of medication that has been dispensed. Includes unit of measure.",
+					"min": 0,
+					"max": "1",
+					"type": "Quantity"
+				},
+				{
+					"name": "medication",
+					"path": "MedicationDispense.dispense.medication",
+					"parent": "MedicationDispense.dispense",
+					"short": "What medication was supplied",
+					"formal": "Identifies the medication being administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Medication"
+				},
+				{
+					"name": "whenPrepared",
+					"path": "MedicationDispense.dispense.whenPrepared",
+					"parent": "MedicationDispense.dispense",
+					"short": "Dispense processing time",
+					"formal": "The time when the dispensed product was packaged and reviewed.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "whenHandedOver",
+					"path": "MedicationDispense.dispense.whenHandedOver",
+					"parent": "MedicationDispense.dispense",
+					"short": "Handover time",
+					"formal": "The time the dispensed product was provided to the patient or their representative.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "destination",
+					"path": "MedicationDispense.dispense.destination",
+					"parent": "MedicationDispense.dispense",
+					"short": "Where the medication was sent",
+					"formal": "Identification of the facility/location where the medication was shipped to, as part of the dispense event.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Location"
+				},
+				{
+					"name": "receiver",
+					"path": "MedicationDispense.dispense.receiver",
+					"parent": "MedicationDispense.dispense",
+					"short": "Who collected the medication",
+					"formal": "Identifies the person who picked up the medication.  This will usually be a patient or their carer, but some cases exist where it can be a healthcare professional.",
+					"min": 0,
+					"max": "*",
+					"type": "multitype",
+					"reference": "Patient",
+					"children": [
+						{
+							"name": "Patient",
+							"parent": "MedicationDispense.dispense.receiver",
+							"path": "MedicationDispense.dispense.receiver.Patient",
+							"short": "Who collected the medication",
+							"formal": "Identifies the person who picked up the medication.  This will usually be a patient or their carer, but some cases exist where it can be a healthcare professional.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Patient"
+						},
+						{
+							"name": "Practitioner",
+							"parent": "MedicationDispense.dispense.receiver",
+							"path": "MedicationDispense.dispense.receiver.Practitioner",
+							"short": "Who collected the medication",
+							"formal": "Identifies the person who picked up the medication.  This will usually be a patient or their carer, but some cases exist where it can be a healthcare professional.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Practitioner"
+						}
+					]
+				},
+				{
+					"name": "dosage",
+					"path": "MedicationDispense.dispense.dosage",
+					"parent": "MedicationDispense.dispense",
+					"short": "Medicine administration instructions to the patient/carer",
+					"formal": "Indicates how the medication is to be used by the patient.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "additionalInstructions",
+							"path": "MedicationDispense.dispense.dosage.additionalInstructions",
+							"parent": "MedicationDispense.dispense.dosage",
+							"short": "E.g. \"Take with food\"",
+							"formal": "Additional instructions such as \"Swallow with plenty of water\" which may or may not be coded.",
+							"min": 0,
+							"max": "1",
+							"type": "CodeableConcept"
+						},
+						{
+							"name": "timing",
+							"path": "MedicationDispense.dispense.dosage.timing[x]",
+							"parent": "MedicationDispense.dispense.dosage",
+							"short": "When medication should be administered",
+							"formal": "The timing schedule for giving the medication to the patient.  The Schedule data type allows many different expressions, for example.  \"Every  8 hours\"; \"Three times a day\"; \"1/2 an hour before breakfast for 10 days from 23-Dec 2011:\";  \"15 Oct 2013, 17 Oct 2013 and 1 Nov 2013\".",
+							"min": 0,
+							"max": "1",
+							"type": "multitype",
+							"children": [
+								{
+									"name": "timingDateTime",
+									"parent": "MedicationDispense.dispense.dosage.timing[x]",
+									"path": "MedicationDispense.dispense.dosage.timing[x].timingDateTime",
+									"short": "When medication should be administered",
+									"formal": "The timing schedule for giving the medication to the patient.  The Schedule data type allows many different expressions, for example.  \"Every  8 hours\"; \"Three times a day\"; \"1/2 an hour before breakfast for 10 days from 23-Dec 2011:\";  \"15 Oct 2013, 17 Oct 2013 and 1 Nov 2013\".",
+									"min": 0,
+									"max": "1",
+									"type": "dateTime",
+									"leaf": true
+								},
+								{
+									"name": "timingPeriod",
+									"parent": "MedicationDispense.dispense.dosage.timing[x]",
+									"path": "MedicationDispense.dispense.dosage.timing[x].timingPeriod",
+									"short": "When medication should be administered",
+									"formal": "The timing schedule for giving the medication to the patient.  The Schedule data type allows many different expressions, for example.  \"Every  8 hours\"; \"Three times a day\"; \"1/2 an hour before breakfast for 10 days from 23-Dec 2011:\";  \"15 Oct 2013, 17 Oct 2013 and 1 Nov 2013\".",
+									"min": 0,
+									"max": "1",
+									"type": "Period"
+								},
+								{
+									"name": "timingSchedule",
+									"parent": "MedicationDispense.dispense.dosage.timing[x]",
+									"path": "MedicationDispense.dispense.dosage.timing[x].timingSchedule",
+									"short": "When medication should be administered",
+									"formal": "The timing schedule for giving the medication to the patient.  The Schedule data type allows many different expressions, for example.  \"Every  8 hours\"; \"Three times a day\"; \"1/2 an hour before breakfast for 10 days from 23-Dec 2011:\";  \"15 Oct 2013, 17 Oct 2013 and 1 Nov 2013\".",
+									"min": 0,
+									"max": "1",
+									"type": "Schedule"
+								}
+							]
+						},
+						{
+							"name": "asNeeded",
+							"path": "MedicationDispense.dispense.dosage.asNeeded[x]",
+							"parent": "MedicationDispense.dispense.dosage",
+							"short": "Take \"as needed\" f(or x)",
+							"formal": "If set to true or if specified as a CodeableConcept, indicates that the medication is only taken when needed within the specified schedule rather than at every scheduled dose.  If a CodeableConcept is present, it indicates the pre-condition for taking the Medication.",
+							"min": 0,
+							"max": "1",
+							"binding": {
+								"name": "MedicationAsNeededReason",
+								"isExtensible": true,
+								"conformance": "preferred",
+								"description": "A coded concept identifying the pre-condition that should hold prior to consuming a medication dose.  For example \"pain\", \"30 minutes prior to sexual intercourse\", \"on flare-up\", etc."
+							},
+							"type": "multitype",
+							"children": [
+								{
+									"name": "asNeededBoolean",
+									"parent": "MedicationDispense.dispense.dosage.asNeeded[x]",
+									"path": "MedicationDispense.dispense.dosage.asNeeded[x].asNeededBoolean",
+									"short": "Take \"as needed\" f(or x)",
+									"formal": "If set to true or if specified as a CodeableConcept, indicates that the medication is only taken when needed within the specified schedule rather than at every scheduled dose.  If a CodeableConcept is present, it indicates the pre-condition for taking the Medication.",
+									"min": 0,
+									"max": "1",
+									"type": "boolean",
+									"leaf": true
+								},
+								{
+									"name": "asNeededCodeableConcept",
+									"parent": "MedicationDispense.dispense.dosage.asNeeded[x]",
+									"path": "MedicationDispense.dispense.dosage.asNeeded[x].asNeededCodeableConcept",
+									"short": "Take \"as needed\" f(or x)",
+									"formal": "If set to true or if specified as a CodeableConcept, indicates that the medication is only taken when needed within the specified schedule rather than at every scheduled dose.  If a CodeableConcept is present, it indicates the pre-condition for taking the Medication.",
+									"min": 0,
+									"max": "1",
+									"type": "CodeableConcept"
+								}
+							]
+						},
+						{
+							"name": "site",
+							"path": "MedicationDispense.dispense.dosage.site",
+							"parent": "MedicationDispense.dispense.dosage",
+							"short": "Body site to administer to",
+							"formal": "A coded specification of the anatomic site where the medication first enters the body.",
+							"min": 0,
+							"max": "1",
+							"binding": {
+								"name": "MedicationAdministrationSite",
+								"isExtensible": true,
+								"conformance": "example",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/approach-site-codes"
+								}
+							},
+							"type": "CodeableConcept"
+						},
+						{
+							"name": "route",
+							"path": "MedicationDispense.dispense.dosage.route",
+							"parent": "MedicationDispense.dispense.dosage",
+							"short": "How drug should enter body",
+							"formal": "A code specifying the route or physiological path of administration of a therapeutic agent into or onto a subject.",
+							"min": 0,
+							"max": "1",
+							"binding": {
+								"name": "RouteOfAdministration",
+								"isExtensible": true,
+								"conformance": "example",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/route-codes"
+								}
+							},
+							"type": "CodeableConcept"
+						},
+						{
+							"name": "method",
+							"path": "MedicationDispense.dispense.dosage.method",
+							"parent": "MedicationDispense.dispense.dosage",
+							"short": "Technique for administering medication",
+							"formal": "A coded value indicating the method by which the medication is introduced into or onto the body. Most commonly used for injections.  Examples:  Slow Push; Deep IV.\n\nTerminologies used often pre-coordinate this term with the route and or form of administration.",
+							"min": 0,
+							"max": "1",
+							"binding": {
+								"name": "MedicationAdministrationMethod",
+								"isExtensible": true,
+								"conformance": "example",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/administration-method-codes"
+								}
+							},
+							"type": "CodeableConcept"
+						},
+						{
+							"name": "quantity",
+							"path": "MedicationDispense.dispense.dosage.quantity",
+							"parent": "MedicationDispense.dispense.dosage",
+							"short": "Amount of medication per dose",
+							"formal": "The amount of therapeutic or other substance given at one administration event.",
+							"min": 0,
+							"max": "1",
+							"type": "Quantity"
+						},
+						{
+							"name": "rate",
+							"path": "MedicationDispense.dispense.dosage.rate",
+							"parent": "MedicationDispense.dispense.dosage",
+							"short": "Amount of medication per unit of time",
+							"formal": "Identifies the speed with which the substance is introduced into the subject. Typically the rate for an infusion. 200ml in 2 hours.",
+							"min": 0,
+							"max": "1",
+							"type": "Ratio"
+						},
+						{
+							"name": "maxDosePerPeriod",
+							"path": "MedicationDispense.dispense.dosage.maxDosePerPeriod",
+							"parent": "MedicationDispense.dispense.dosage",
+							"short": "Upper limit on medication per unit of time",
+							"formal": "The maximum total quantity of a therapeutic substance that may be administered to a subject over the period of time,  e.g. 1000mg in 24 hours.",
+							"min": 0,
+							"max": "1",
+							"type": "Ratio"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "substitution",
+			"path": "MedicationDispense.substitution",
+			"parent": "MedicationDispense",
+			"short": "Deals with substitution of one medicine for another",
+			"formal": "Indicates whether or not substitution was made as part of the dispense.  In some cases substitution will be expected but doesn't happen, in other cases substitution is not expected but does happen.  This block explains what substitition did or did not happen and why.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "type",
+					"path": "MedicationDispense.substitution.type",
+					"parent": "MedicationDispense.substitution",
+					"short": "Type of substitiution",
+					"formal": "A code signifying whether a different drug was dispensed from what was prescribed.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "MedicationIntendedSubstitutionType",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/v3/vs/ActSubstanceAdminSubstitutionCode"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "reason",
+					"path": "MedicationDispense.substitution.reason",
+					"parent": "MedicationDispense.substitution",
+					"short": "Why was substitution made",
+					"formal": "Indicates the reason for the substitution of (or lack of substitution) from what was prescribed.",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "MedicationIntendedSubstitutionReason",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/v3/vs/SubstanceAdminSubstitutionReason"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "responsibleParty",
+					"path": "MedicationDispense.substitution.responsibleParty",
+					"parent": "MedicationDispense.substitution",
+					"short": "Who is responsible for the substitution",
+					"formal": "The person or organization that has primary responsibility for the substitution.",
+					"min": 0,
+					"max": "*",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				}
+			]
+		}
+	],
+	"success": true
+}

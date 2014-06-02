@@ -1,0 +1,1031 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Conformance.text",
+			"parent": "Conformance",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Conformance.contained",
+			"parent": "Conformance",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Conformance.identifier",
+			"parent": "Conformance",
+			"short": "Logical id to reference this statement",
+			"formal": "The identifier that is used to identify this conformance statement when it is referenced in a specification, model, design or an instance (should be globally unique OID, UUID, or URI).",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "version",
+			"path": "Conformance.version",
+			"parent": "Conformance",
+			"short": "Logical id for this version of the statement",
+			"formal": "The identifier that is used to identify this version of the conformance statement when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the profile author manually and the value should be a timestamp.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "name",
+			"path": "Conformance.name",
+			"parent": "Conformance",
+			"short": "Informal name for this conformance statement",
+			"formal": "A free text natural language name identifying the conformance statement.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "publisher",
+			"path": "Conformance.publisher",
+			"parent": "Conformance",
+			"short": "Publishing Organization",
+			"formal": "Name of Organization publishing this conformance statement.",
+			"min": 1,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "telecom",
+			"path": "Conformance.telecom",
+			"parent": "Conformance",
+			"short": "Contacts for Organization",
+			"formal": "Contacts for Organization relevant to this conformance statement.  The contacts may be a website, email, phone numbers, etc.",
+			"min": 0,
+			"max": "*",
+			"type": "Contact"
+		},
+		{
+			"name": "description",
+			"path": "Conformance.description",
+			"parent": "Conformance",
+			"short": "Human description of the conformance statement",
+			"formal": "A free text natural language description of the conformance statement and its use. Typically, this is used when the profile describes a desired rather than an actual solution, for example as a formal expression of requirements as part of an RFP.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "status",
+			"path": "Conformance.status",
+			"parent": "Conformance",
+			"short": "draft | active | retired",
+			"formal": "The status of this conformance statement.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ConformanceStatementStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/conformance-statement-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "experimental",
+			"path": "Conformance.experimental",
+			"parent": "Conformance",
+			"short": "If for testing purposes, not real usage",
+			"formal": "A flag to indicate that this conformance statement is authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.",
+			"min": 0,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "date",
+			"path": "Conformance.date",
+			"parent": "Conformance",
+			"short": "Publication Date",
+			"formal": "The date when the conformance statement was published.",
+			"min": 1,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "software",
+			"path": "Conformance.software",
+			"parent": "Conformance",
+			"short": "Software that is covered by this conformance statement",
+			"formal": "Software that is covered by this conformance statement.  It is used when the profile describes the capabilities of a particular software version, independent of an installation.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "name",
+					"path": "Conformance.software.name",
+					"parent": "Conformance.software",
+					"short": "A name the software is known by",
+					"formal": "Name software is known by.",
+					"min": 1,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "version",
+					"path": "Conformance.software.version",
+					"parent": "Conformance.software",
+					"short": "Version covered by this statement",
+					"formal": "The version identifier for the software covered by this statement.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "releaseDate",
+					"path": "Conformance.software.releaseDate",
+					"parent": "Conformance.software",
+					"short": "Date this version released",
+					"formal": "Date this version of the software released.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "implementation",
+			"path": "Conformance.implementation",
+			"parent": "Conformance",
+			"short": "If this describes a specific instance",
+			"formal": "Identifies a specific implementation instance that is described by the conformance statement - i.e. a particular installation, rather than the capabilities of a software program.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "description",
+					"path": "Conformance.implementation.description",
+					"parent": "Conformance.implementation",
+					"short": "Describes this specific instance",
+					"formal": "Information about the specific installation that this conformance statement relates to.",
+					"min": 1,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "url",
+					"path": "Conformance.implementation.url",
+					"parent": "Conformance.implementation",
+					"short": "Base URL for the installation",
+					"formal": "A base URL for the implementation.  This forms the base for REST interfaces as well as the mailbox and document interfaces.",
+					"min": 0,
+					"max": "1",
+					"type": "uri",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "fhirVersion",
+			"path": "Conformance.fhirVersion",
+			"parent": "Conformance",
+			"short": "FHIR Version",
+			"formal": "The version of the FHIR specification on which this conformance statement is based.",
+			"min": 1,
+			"max": "1",
+			"type": "id",
+			"leaf": true
+		},
+		{
+			"name": "acceptUnknown",
+			"path": "Conformance.acceptUnknown",
+			"parent": "Conformance",
+			"short": "True if application accepts unknown elements",
+			"formal": "A flag that indicates whether the application accepts unknown elements as part of a resource.",
+			"min": 1,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "format",
+			"path": "Conformance.format",
+			"parent": "Conformance",
+			"short": "formats supported (xml | json | mime type)",
+			"formal": "A list of the formats supported by this implementation.",
+			"min": 1,
+			"max": "*",
+			"binding": {
+				"name": "MimeType",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceUri": "http://www.rfc-editor.org/bcp/bcp13.txt"
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "profile",
+			"path": "Conformance.profile",
+			"parent": "Conformance",
+			"short": "Profiles supported by the system",
+			"formal": "A list of profiles supported by the system. For a server, \"supported by the system\" means the system hosts/produces a set of recourses, conformant to a particular profile, and allows its clients to search using this profile and to find appropriate data. For a client, it means the system will search by this profile and process data according to the guidance implicit in the profile.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "Profile"
+		},
+		{
+			"name": "rest",
+			"path": "Conformance.rest",
+			"parent": "Conformance",
+			"short": "If the endpoint is a RESTful one",
+			"formal": "A definition of the restful capabilities of the solution, if any.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "10",
+					"name": "Query unique in rest mode",
+					"severity": "error",
+					"human": "A given query can only be described once per RESTful mode",
+					"xpath": "count(f:query)=count(distinct-values(f:query/f:name/@value))"
+				},
+				{
+					"key": "9",
+					"name": "Resource unique in rest mode",
+					"severity": "error",
+					"human": "A given resource can only be described once per RESTful mode",
+					"xpath": "count(f:resource)=count(distinct-values(f:resource/f:type/@value))"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "mode",
+					"path": "Conformance.rest.mode",
+					"parent": "Conformance.rest",
+					"short": "client | server",
+					"formal": "Identifies whether this portion of the statement is describing ability to initiate or receive restful operations.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "RestfulConformanceMode",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/restful-conformance-mode"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "documentation",
+					"path": "Conformance.rest.documentation",
+					"parent": "Conformance.rest",
+					"short": "General description of implementation",
+					"formal": "Information about the system's restful capabilities that apply across all applications, such as security.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "security",
+					"path": "Conformance.rest.security",
+					"parent": "Conformance.rest",
+					"short": "Information about security of implementation",
+					"formal": "Information about security of implementation.",
+					"min": 0,
+					"max": "1",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "cors",
+							"path": "Conformance.rest.security.cors",
+							"parent": "Conformance.rest.security",
+							"short": "Adds CORS Headers (http://enable-cors.org/)",
+							"formal": "Server adds CORS headers when responding to requests - this enables javascript applications to yuse the server.",
+							"min": 0,
+							"max": "1",
+							"type": "boolean",
+							"leaf": true
+						},
+						{
+							"name": "service",
+							"path": "Conformance.rest.security.service",
+							"parent": "Conformance.rest.security",
+							"short": "OAuth | OAuth2 | NTLM | Basic | Kerberos",
+							"formal": "Types of security services are supported/required by the system.",
+							"min": 0,
+							"max": "*",
+							"binding": {
+								"name": "RestfulSecurityService",
+								"isExtensible": true,
+								"conformance": "preferred",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/restful-security-service"
+								}
+							},
+							"type": "CodeableConcept"
+						},
+						{
+							"name": "description",
+							"path": "Conformance.rest.security.description",
+							"parent": "Conformance.rest.security",
+							"short": "General description of how security works",
+							"formal": "General description of how security works.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "certificate",
+							"path": "Conformance.rest.security.certificate",
+							"parent": "Conformance.rest.security",
+							"short": "Certificates associated with security profiles",
+							"formal": "Certificates associated with security profiles.",
+							"min": 0,
+							"max": "*",
+							"type": "none",
+							"extendable": true,
+							"children": [
+								{
+									"name": "type",
+									"path": "Conformance.rest.security.certificate.type",
+									"parent": "Conformance.rest.security.certificate",
+									"short": "Mime type for certificate",
+									"formal": "Mime type for certificate.",
+									"min": 0,
+									"max": "1",
+									"binding": {
+										"name": "MimeType",
+										"isExtensible": false,
+										"conformance": "required",
+										"referenceUri": "http://www.rfc-editor.org/bcp/bcp13.txt"
+									},
+									"type": "code",
+									"leaf": true
+								},
+								{
+									"name": "blob",
+									"path": "Conformance.rest.security.certificate.blob",
+									"parent": "Conformance.rest.security.certificate",
+									"short": "Actual certificate",
+									"formal": "Actual certificate.",
+									"min": 0,
+									"max": "1",
+									"type": "base64Binary",
+									"leaf": true
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "resource",
+					"path": "Conformance.rest.resource",
+					"parent": "Conformance.rest",
+					"short": "Resource served on the REST interface",
+					"formal": "A specification of the restful capabilities of the solution for a specific resource type.",
+					"min": 1,
+					"max": "*",
+					"constraint": [
+						{
+							"key": "11",
+							"name": "Operation unique in resource",
+							"severity": "error",
+							"human": "Operation codes must be unique in the context of a resource",
+							"xpath": "count(f:operation)=count(distinct-values(f:operation/f:code/@value))"
+						},
+						{
+							"key": "12",
+							"name": "SearchParam unique in resource",
+							"severity": "error",
+							"human": "Search parameter names must be unique in the context of a resource",
+							"xpath": "count(f:searchParam)=count(distinct-values(f:searchParam/f:name/@value))"
+						}
+					],
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "type",
+							"path": "Conformance.rest.resource.type",
+							"parent": "Conformance.rest.resource",
+							"short": "A resource type that is supported",
+							"formal": "A type of resource exposed via the restful interface.",
+							"min": 1,
+							"max": "1",
+							"binding": {
+								"name": "ResourceType",
+								"isExtensible": false,
+								"conformance": "required",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/resource-types"
+								}
+							},
+							"type": "code",
+							"leaf": true
+						},
+						{
+							"name": "profile",
+							"path": "Conformance.rest.resource.profile",
+							"parent": "Conformance.rest.resource",
+							"short": "What structural features are supported",
+							"formal": "A specification of the profile that describes the solution's support for the resource, including any constraints on cardinality, bindings, lengths or other limitations.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Profile"
+						},
+						{
+							"name": "operation",
+							"path": "Conformance.rest.resource.operation",
+							"parent": "Conformance.rest.resource",
+							"short": "What operations are supported?",
+							"formal": "Identifies a restful operation supported by the solution.",
+							"min": 1,
+							"max": "*",
+							"type": "none",
+							"extendable": true,
+							"children": [
+								{
+									"name": "code",
+									"path": "Conformance.rest.resource.operation.code",
+									"parent": "Conformance.rest.resource.operation",
+									"short": "read | vread | update | delete | history-instance | validate | history-type | create | search-type",
+									"formal": "Coded identifier of the operation, supported by the system resource.",
+									"min": 1,
+									"max": "1",
+									"binding": {
+										"name": "RestfulOperationType",
+										"isExtensible": false,
+										"conformance": "required",
+										"referenceResource": {
+											"reference": "http://hl7.org/fhir/vs/type-restful-operation"
+										}
+									},
+									"type": "code",
+									"leaf": true
+								},
+								{
+									"name": "documentation",
+									"path": "Conformance.rest.resource.operation.documentation",
+									"parent": "Conformance.rest.resource.operation",
+									"short": "Anything special about operation behavior",
+									"formal": "Guidance specific to the implementation of this operation, such as 'delete is a logical delete' or 'updates are only allowed with version id' or 'creates permitted from pre-authorized certificates only'.",
+									"min": 0,
+									"max": "1",
+									"type": "string",
+									"leaf": true
+								}
+							]
+						},
+						{
+							"name": "readHistory",
+							"path": "Conformance.rest.resource.readHistory",
+							"parent": "Conformance.rest.resource",
+							"short": "Whether vRead can return past versions",
+							"formal": "A flag for whether the server is able to return past versions as part of the vRead operation.",
+							"min": 0,
+							"max": "1",
+							"type": "boolean",
+							"leaf": true
+						},
+						{
+							"name": "updateCreate",
+							"path": "Conformance.rest.resource.updateCreate",
+							"parent": "Conformance.rest.resource",
+							"short": "If allows/uses update to a new location",
+							"formal": "A flag to indicate that the server allows the client to create new identities on the server. If the update operation is used (client) or allowed (server) to a new location where a resource doesn't already exist. This means that the server allows the client to create new identities on the server.",
+							"min": 0,
+							"max": "1",
+							"type": "boolean",
+							"leaf": true
+						},
+						{
+							"name": "searchInclude",
+							"path": "Conformance.rest.resource.searchInclude",
+							"parent": "Conformance.rest.resource",
+							"short": "_include values supported by the server",
+							"formal": "A list of _include values supported by the server.",
+							"min": 0,
+							"max": "*",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "searchParam",
+							"path": "Conformance.rest.resource.searchParam",
+							"parent": "Conformance.rest.resource",
+							"short": "Additional search params defined",
+							"formal": "Additional search parameters for implementations to support and/or make use of.",
+							"min": 0,
+							"max": "*",
+							"type": "none",
+							"extendable": true,
+							"children": [
+								{
+									"name": "name",
+									"path": "Conformance.rest.resource.searchParam.name",
+									"parent": "Conformance.rest.resource.searchParam",
+									"short": "Name of search parameter",
+									"formal": "The name of the search parameter used in the interface.",
+									"min": 1,
+									"max": "1",
+									"type": "string",
+									"leaf": true
+								},
+								{
+									"name": "definition",
+									"path": "Conformance.rest.resource.searchParam.definition",
+									"parent": "Conformance.rest.resource.searchParam",
+									"short": "Source of definition for parameter",
+									"formal": "A formal reference to where this parameter was first defined, so that a client can be confident of the meaning of the search parameter.",
+									"min": 0,
+									"max": "1",
+									"type": "uri",
+									"leaf": true
+								},
+								{
+									"name": "type",
+									"path": "Conformance.rest.resource.searchParam.type",
+									"parent": "Conformance.rest.resource.searchParam",
+									"short": "number | date | string | token | reference | composite | quantity",
+									"formal": "The type of value a search parameter refers to, and how the content is interpreted.",
+									"min": 1,
+									"max": "1",
+									"binding": {
+										"name": "SearchParamType",
+										"isExtensible": false,
+										"conformance": "required",
+										"referenceResource": {
+											"reference": "http://hl7.org/fhir/vs/search-param-type"
+										}
+									},
+									"type": "code",
+									"leaf": true
+								},
+								{
+									"name": "documentation",
+									"path": "Conformance.rest.resource.searchParam.documentation",
+									"parent": "Conformance.rest.resource.searchParam",
+									"short": "Server-specific usage",
+									"formal": "This allows documentation of any distinct behaviors about how the search parameter is used.  For example, text matching algorithms.",
+									"min": 0,
+									"max": "1",
+									"type": "string",
+									"leaf": true
+								},
+								{
+									"name": "target",
+									"path": "Conformance.rest.resource.searchParam.target",
+									"parent": "Conformance.rest.resource.searchParam",
+									"short": "Types of resource (if a resource reference)",
+									"formal": "Types of resource (if a resource is referenced).",
+									"min": 0,
+									"max": "*",
+									"binding": {
+										"name": "ResourceType",
+										"isExtensible": false,
+										"conformance": "required",
+										"referenceResource": {
+											"reference": "http://hl7.org/fhir/resource-types"
+										}
+									},
+									"type": "code",
+									"leaf": true
+								},
+								{
+									"name": "chain",
+									"path": "Conformance.rest.resource.searchParam.chain",
+									"parent": "Conformance.rest.resource.searchParam",
+									"short": "Chained names supported",
+									"formal": "Chained names supported.",
+									"min": 0,
+									"max": "*",
+									"type": "string",
+									"leaf": true
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "operation",
+					"path": "Conformance.rest.operation",
+					"parent": "Conformance.rest",
+					"short": "What operations are supported?",
+					"formal": "A specification of restful operations supported by the system.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "code",
+							"path": "Conformance.rest.operation.code",
+							"parent": "Conformance.rest.operation",
+							"short": "transaction | search-system | history-system",
+							"formal": "A coded identifier of the operation, supported by the system.",
+							"min": 1,
+							"max": "1",
+							"binding": {
+								"name": "RestfulOperationSystem",
+								"isExtensible": false,
+								"conformance": "required",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/system-restful-operation"
+								}
+							},
+							"type": "code",
+							"leaf": true
+						},
+						{
+							"name": "documentation",
+							"path": "Conformance.rest.operation.documentation",
+							"parent": "Conformance.rest.operation",
+							"short": "Anything special about operation behavior",
+							"formal": "Guidance specific to the implementation of this operation, such as limitations on the kind of transactions allowed, or information about system wide search is implemented.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						}
+					]
+				},
+				{
+					"name": "query",
+					"path": "Conformance.rest.query",
+					"parent": "Conformance.rest",
+					"short": "Definition of a named query",
+					"formal": "Definition of a named query and its parameters and their meaning.",
+					"min": 0,
+					"max": "*",
+					"constraint": [
+						{
+							"key": "13",
+							"name": "SearchParam unique in query",
+							"severity": "error",
+							"human": "Search parameter names must be unique in the context of a query",
+							"xpath": "count(f:parameter)=count(distinct-values(f:parameter/f:name/@value))"
+						}
+					],
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "name",
+							"path": "Conformance.rest.query.name",
+							"parent": "Conformance.rest.query",
+							"short": "Special named queries (_query=)",
+							"formal": "The name of a query, which is used in the _query parameter when the query is called.",
+							"min": 1,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "definition",
+							"path": "Conformance.rest.query.definition",
+							"parent": "Conformance.rest.query",
+							"short": "Where query is defined",
+							"formal": "Identifies the custom query, defined either in FHIR core or another profile.",
+							"min": 1,
+							"max": "1",
+							"type": "uri",
+							"leaf": true
+						},
+						{
+							"name": "documentation",
+							"path": "Conformance.rest.query.documentation",
+							"parent": "Conformance.rest.query",
+							"short": "Additional usage guidance",
+							"formal": "Additional information about how the query functions in this particular implementation.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "parameter",
+							"path": "Conformance.rest.query.parameter",
+							"parent": "Conformance.rest.query",
+							"short": "Parameter for the named query",
+							"formal": "Identifies which of the parameters for the named query are supported.",
+							"min": 0,
+							"max": "*",
+							"type": "none"
+						}
+					]
+				},
+				{
+					"name": "documentMailbox",
+					"path": "Conformance.rest.documentMailbox",
+					"parent": "Conformance.rest",
+					"short": "How documents are accepted in /Mailbox",
+					"formal": "A list of profiles that this server implements for accepting documents in the mailbox. If this list is empty, then documents are not accepted. The base specification has the profile identifier \"http://hl7.org/fhir/documents/mailbox\". Other specifications can declare their own identifier for this purpose.",
+					"min": 0,
+					"max": "*",
+					"type": "uri",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "messaging",
+			"path": "Conformance.messaging",
+			"parent": "Conformance",
+			"short": "If messaging is supported",
+			"formal": "A description of the messaging capabilities of the solution.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "3",
+					"name": "End points for Implementations",
+					"severity": "error",
+					"human": "Messaging end point is required (and is only permitted) when statement is for an implementation",
+					"xpath": "exists(f:endpoint) = exists(parent::f:Conformance/f:implementation)"
+				},
+				{
+					"key": "6",
+					"name": "Event unique",
+					"severity": "error",
+					"human": "The set of events per messaging endpoint must be unique by the combination of code & mode",
+					"xpath": "count(f:event[f:mode='sender'])=count(distinct-values(f:event[f:mode='sender']/f:code/@value)) and count(f:event[f:mode='receiver'])=count(distinct-values(f:event[f:mode='receiver']/f:code/@value))"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "endpoint",
+					"path": "Conformance.messaging.endpoint",
+					"parent": "Conformance.messaging",
+					"short": "Actual endpoint being described",
+					"formal": "An address to which messages and/or replies are to be sent.",
+					"min": 0,
+					"max": "1",
+					"type": "uri",
+					"leaf": true
+				},
+				{
+					"name": "reliableCache",
+					"path": "Conformance.messaging.reliableCache",
+					"parent": "Conformance.messaging",
+					"short": "Reliable Message Cache Length",
+					"formal": "Length if the receiver's reliable messaging cache (if a receiver) or how long the cache length on the receiver should be (if a sender).",
+					"min": 0,
+					"max": "1",
+					"type": "integer",
+					"leaf": true
+				},
+				{
+					"name": "documentation",
+					"path": "Conformance.messaging.documentation",
+					"parent": "Conformance.messaging",
+					"short": "Messaging interface behavior details",
+					"formal": "Documentation about the system's messaging capabilities for this endpoint not otherwise documented by the conformance statement.  For example, process for becoming an authorized messaging exchange partner.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "event",
+					"path": "Conformance.messaging.event",
+					"parent": "Conformance.messaging",
+					"short": "Declare support for this event",
+					"formal": "A description of the solution's support for an event at this end point.",
+					"min": 1,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "code",
+							"path": "Conformance.messaging.event.code",
+							"parent": "Conformance.messaging.event",
+							"short": "Event type",
+							"formal": "A coded identifier of a supported messaging event.",
+							"min": 1,
+							"max": "1",
+							"binding": {
+								"name": "MessageEvent",
+								"isExtensible": true,
+								"conformance": "preferred",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/message-events"
+								}
+							},
+							"type": "Coding"
+						},
+						{
+							"name": "category",
+							"path": "Conformance.messaging.event.category",
+							"parent": "Conformance.messaging.event",
+							"short": "Consequence | Currency | Notification",
+							"formal": "The impact of the content of the message.",
+							"min": 0,
+							"max": "1",
+							"binding": {
+								"name": "MessageSignificanceCategory",
+								"isExtensible": false,
+								"conformance": "required",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/message-significance-category"
+								}
+							},
+							"type": "code",
+							"leaf": true
+						},
+						{
+							"name": "mode",
+							"path": "Conformance.messaging.event.mode",
+							"parent": "Conformance.messaging.event",
+							"short": "sender | receiver",
+							"formal": "The mode of this event declaration - whether application is sender or receiver.",
+							"min": 1,
+							"max": "1",
+							"binding": {
+								"name": "ConformanceEventMode",
+								"isExtensible": false,
+								"conformance": "required",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/message-conformance-event-mode"
+								}
+							},
+							"type": "code",
+							"leaf": true
+						},
+						{
+							"name": "protocol",
+							"path": "Conformance.messaging.event.protocol",
+							"parent": "Conformance.messaging.event",
+							"short": "http | ftp | mllp +",
+							"formal": "A list of the messaging transport protocol(s) identifiers, supported by this endpoint.",
+							"min": 0,
+							"max": "*",
+							"binding": {
+								"name": "MessageTransport",
+								"isExtensible": true,
+								"conformance": "preferred",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/message-transport"
+								}
+							},
+							"type": "Coding"
+						},
+						{
+							"name": "focus",
+							"path": "Conformance.messaging.event.focus",
+							"parent": "Conformance.messaging.event",
+							"short": "Resource that's focus of message",
+							"formal": "A resource associated with the event.  This is the resource that defines the event.",
+							"min": 1,
+							"max": "1",
+							"binding": {
+								"name": "ResourceType",
+								"isExtensible": false,
+								"conformance": "required",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/resource-types"
+								}
+							},
+							"type": "code",
+							"leaf": true
+						},
+						{
+							"name": "request",
+							"path": "Conformance.messaging.event.request",
+							"parent": "Conformance.messaging.event",
+							"short": "Profile that describes the request",
+							"formal": "Information about the request for this event.",
+							"min": 1,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Profile"
+						},
+						{
+							"name": "response",
+							"path": "Conformance.messaging.event.response",
+							"parent": "Conformance.messaging.event",
+							"short": "Profile that describes the response",
+							"formal": "Information about the response for this event.",
+							"min": 1,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Profile"
+						},
+						{
+							"name": "documentation",
+							"path": "Conformance.messaging.event.documentation",
+							"parent": "Conformance.messaging.event",
+							"short": "Endpoint-specific event documentation",
+							"formal": "Guidance on how this event is handled, such as internal system trigger points, business rules, etc.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "document",
+			"path": "Conformance.document",
+			"parent": "Conformance",
+			"short": "Document definition",
+			"formal": "A document definition.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "mode",
+					"path": "Conformance.document.mode",
+					"parent": "Conformance.document",
+					"short": "producer | consumer",
+					"formal": "Mode of this document declaration - whether application is producer or consumer.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "DocumentMode",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/document-mode"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "documentation",
+					"path": "Conformance.document.documentation",
+					"parent": "Conformance.document",
+					"short": "Description of document support",
+					"formal": "A description of how the application supports or uses the specified document profile.  For example, when are documents created, what action is taken with consumed documents, etc.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "profile",
+					"path": "Conformance.document.profile",
+					"parent": "Conformance.document",
+					"short": "Constraint on a resource used in the document",
+					"formal": "A constraint on a resource used in the document.",
+					"min": 1,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Profile"
+				}
+			]
+		}
+	],
+	"success": true
+}

@@ -1,0 +1,27 @@
+{
+	"children": [
+		{
+			"name": "start",
+			"path": "Period.start",
+			"parent": "Period",
+			"short": "Starting time with inclusive boundary",
+			"formal": "The start of the period. The boundary is inclusive.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "end",
+			"path": "Period.end",
+			"parent": "Period",
+			"short": "End time with inclusive boundary, if not ongoing",
+			"formal": "The end of the period. If the end of the period is missing, it means that the period is ongoing.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		}
+	],
+	"success": true
+}

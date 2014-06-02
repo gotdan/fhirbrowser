@@ -1,0 +1,532 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "ValueSet.text",
+			"parent": "ValueSet",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "ValueSet.contained",
+			"parent": "ValueSet",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "ValueSet.identifier",
+			"parent": "ValueSet",
+			"short": "Logical id to reference this value set",
+			"formal": "The identifier that is used to identify this value set when it is referenced in a specification, model, design or an instance (should be globally unique OID, UUID, or URI).",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "version",
+			"path": "ValueSet.version",
+			"parent": "ValueSet",
+			"short": "Logical id for this version of the value set",
+			"formal": "The identifier that is used to identify this version of the value set when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the profile author manually and the value should be a timestamp.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "name",
+			"path": "ValueSet.name",
+			"parent": "ValueSet",
+			"short": "Informal name for this value set",
+			"formal": "A free text natural language name describing the value set.",
+			"min": 1,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "publisher",
+			"path": "ValueSet.publisher",
+			"parent": "ValueSet",
+			"short": "Name of the publisher (Organization or individual)",
+			"formal": "The name of the individual or organization that published the value set.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "telecom",
+			"path": "ValueSet.telecom",
+			"parent": "ValueSet",
+			"short": "Contact information of the publisher",
+			"formal": "Contacts of the publisher to assist a user in finding and communicating with the publisher.",
+			"min": 0,
+			"max": "*",
+			"type": "Contact"
+		},
+		{
+			"name": "description",
+			"path": "ValueSet.description",
+			"parent": "ValueSet",
+			"short": "Human language description of the value set",
+			"formal": "A free text natural language description of the use of the value set - reason for definition, conditions of use, etc.",
+			"min": 1,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "copyright",
+			"path": "ValueSet.copyright",
+			"parent": "ValueSet",
+			"short": "About the value set or its content",
+			"formal": "A copyright statement relating to the value set and/or its contents.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "status",
+			"path": "ValueSet.status",
+			"parent": "ValueSet",
+			"short": "draft | active | retired",
+			"formal": "The status of the value set.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "ValueSetStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/valueset-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "experimental",
+			"path": "ValueSet.experimental",
+			"parent": "ValueSet",
+			"short": "If for testing purposes, not real usage",
+			"formal": "This valueset was authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.",
+			"min": 0,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "extensible",
+			"path": "ValueSet.extensible",
+			"parent": "ValueSet",
+			"short": "Whether this is intended to be used with an extensible binding",
+			"formal": "Whether this is intended to be used with an extensible binding or not.",
+			"min": 0,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "date",
+			"path": "ValueSet.date",
+			"parent": "ValueSet",
+			"short": "Date for given status",
+			"formal": "The date that the value set status was last changed.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "define",
+			"path": "ValueSet.define",
+			"parent": "ValueSet",
+			"short": "When value set defines its own codes",
+			"formal": "When value set defines its own codes.",
+			"min": 0,
+			"max": "1",
+			"constraint": [
+				{
+					"key": "3",
+					"severity": "error",
+					"human": "Within a code system definition, all the codes SHALL be unique",
+					"xpath": "count(distinct-values(descendant::f:concept/f:code/@value))=count(descendant::f:concept)"
+				},
+				{
+					"key": "8",
+					"severity": "error",
+					"human": "Codes must be unique",
+					"xpath": "count(descendant::f:concept)=count(distinct-values(descendant::f:concept/f:code/@value))"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "system",
+					"path": "ValueSet.define.system",
+					"parent": "ValueSet.define",
+					"short": "URI to identify the code system",
+					"formal": "URI to identify the code system.",
+					"min": 1,
+					"max": "1",
+					"type": "uri",
+					"leaf": true
+				},
+				{
+					"name": "version",
+					"path": "ValueSet.define.version",
+					"parent": "ValueSet.define",
+					"short": "Version of this system",
+					"formal": "The version of this code system that defines the codes. Note that the version is optional because a well maintained code system does not suffer from versioning, and therefore the version does not need to be maintained. However many code systems are not well maintained, and the version needs to be defined and tracked.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "caseSensitive",
+					"path": "ValueSet.define.caseSensitive",
+					"parent": "ValueSet.define",
+					"short": "If code comparison is case sensitive",
+					"formal": "If code comparison is case sensitive when codes within this system are compared to each other.",
+					"min": 0,
+					"max": "1",
+					"type": "boolean",
+					"leaf": true
+				},
+				{
+					"name": "concept",
+					"path": "ValueSet.define.concept",
+					"parent": "ValueSet.define",
+					"short": "Concepts in the code system",
+					"formal": "Concepts in the code system.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "code",
+							"path": "ValueSet.define.concept.code",
+							"parent": "ValueSet.define.concept",
+							"short": "Code that identifies concept",
+							"formal": "Code that identifies concept.",
+							"min": 1,
+							"max": "1",
+							"type": "code",
+							"leaf": true
+						},
+						{
+							"name": "abstract",
+							"path": "ValueSet.define.concept.abstract",
+							"parent": "ValueSet.define.concept",
+							"short": "If this code is not for use as a real concept",
+							"formal": "If this code is not for use as a real concept.",
+							"min": 0,
+							"max": "1",
+							"type": "boolean",
+							"leaf": true
+						},
+						{
+							"name": "display",
+							"path": "ValueSet.define.concept.display",
+							"parent": "ValueSet.define.concept",
+							"short": "Text to Display to the user",
+							"formal": "Text to Display to the user.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "definition",
+							"path": "ValueSet.define.concept.definition",
+							"parent": "ValueSet.define.concept",
+							"short": "Formal Definition",
+							"formal": "The formal definition of the concept. Formal definitions are not required, because of the prevalence of legacy systems without them, but they are highly recommended, as without them there is no formal meaning associated with the concept.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "concept",
+							"path": "ValueSet.define.concept.concept",
+							"parent": "ValueSet.define.concept",
+							"short": "Child Concepts (is-a / contains)",
+							"formal": "Child Concepts (is-a / contains).",
+							"min": 0,
+							"max": "*",
+							"type": "none"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "compose",
+			"path": "ValueSet.compose",
+			"parent": "ValueSet",
+			"short": "When value set includes codes from elsewhere",
+			"formal": "When value set includes codes from elsewhere.",
+			"min": 0,
+			"max": "1",
+			"constraint": [
+				{
+					"key": "1",
+					"severity": "error",
+					"human": "A value set composition SHALL have an include or an import",
+					"xpath": "exists(f:include) or exists(f:import)"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "import",
+					"path": "ValueSet.compose.import",
+					"parent": "ValueSet.compose",
+					"short": "Import the contents of another value set",
+					"formal": "Includes the contents of the referenced value set as a part of the contents of this value set.",
+					"min": 0,
+					"max": "*",
+					"type": "uri",
+					"leaf": true
+				},
+				{
+					"name": "include",
+					"path": "ValueSet.compose.include",
+					"parent": "ValueSet.compose",
+					"short": "Include one or more codes from a code system",
+					"formal": "Include one or more codes from a code system.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "system",
+							"path": "ValueSet.compose.include.system",
+							"parent": "ValueSet.compose.include",
+							"short": "The system the codes come from",
+							"formal": "The code system from which the selected codes come from.",
+							"min": 1,
+							"max": "1",
+							"type": "uri",
+							"leaf": true
+						},
+						{
+							"name": "version",
+							"path": "ValueSet.compose.include.version",
+							"parent": "ValueSet.compose.include",
+							"short": "Specific version of the code system referred to",
+							"formal": "The version of the code system that the codes are selected from.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "code",
+							"path": "ValueSet.compose.include.code",
+							"parent": "ValueSet.compose.include",
+							"short": "Code or concept from system",
+							"formal": "Specifies a code or concept to be included or excluded. The list of codes is considered ordered, though the order may not have any particular significance.",
+							"min": 0,
+							"max": "*",
+							"type": "code",
+							"leaf": true
+						},
+						{
+							"name": "filter",
+							"path": "ValueSet.compose.include.filter",
+							"parent": "ValueSet.compose.include",
+							"short": "Select codes/concepts by their properties (including relationships)",
+							"formal": "Select concepts by specify a matching criteria based on the properties (including relationships) defined by the system. If multiple filters are specified, they SHALL all be true.",
+							"min": 0,
+							"max": "*",
+							"type": "none",
+							"extendable": true,
+							"children": [
+								{
+									"name": "property",
+									"path": "ValueSet.compose.include.filter.property",
+									"parent": "ValueSet.compose.include.filter",
+									"short": "A property defined by the code system",
+									"formal": "A code that identifies a property defined in the code system.",
+									"min": 1,
+									"max": "1",
+									"type": "code",
+									"leaf": true
+								},
+								{
+									"name": "op",
+									"path": "ValueSet.compose.include.filter.op",
+									"parent": "ValueSet.compose.include.filter",
+									"short": "= | is-a | is-not-a | regex | in | not in",
+									"formal": "The kind of operation to perform as a part of the filter criteria.",
+									"min": 1,
+									"max": "1",
+									"binding": {
+										"name": "FilterOperator",
+										"isExtensible": false,
+										"conformance": "required",
+										"referenceResource": {
+											"reference": "http://hl7.org/fhir/vs/filter-operator"
+										}
+									},
+									"type": "code",
+									"leaf": true
+								},
+								{
+									"name": "value",
+									"path": "ValueSet.compose.include.filter.value",
+									"parent": "ValueSet.compose.include.filter",
+									"short": "Code from the system, or regex criteria",
+									"formal": "The match value may be either a code defined by the system, or a string value which is used a regex match on the literal string of the property value.",
+									"min": 1,
+									"max": "1",
+									"type": "code",
+									"leaf": true
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "exclude",
+					"path": "ValueSet.compose.exclude",
+					"parent": "ValueSet.compose",
+					"short": "Explicitly exclude codes",
+					"formal": "Exclude one or more codes from the value set.",
+					"min": 0,
+					"max": "*",
+					"type": "none"
+				}
+			]
+		},
+		{
+			"name": "expansion",
+			"path": "ValueSet.expansion",
+			"parent": "ValueSet",
+			"short": "When value set is an expansion",
+			"formal": "When value set is an expansion.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "identifier",
+					"path": "ValueSet.expansion.identifier",
+					"parent": "ValueSet.expansion",
+					"short": "Uniquely identifies this expansion",
+					"formal": "An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so.",
+					"min": 0,
+					"max": "1",
+					"type": "Identifier"
+				},
+				{
+					"name": "timestamp",
+					"path": "ValueSet.expansion.timestamp",
+					"parent": "ValueSet.expansion",
+					"short": "Time valueset expansion happened",
+					"formal": "Time valueset expansion happened.",
+					"min": 1,
+					"max": "1",
+					"type": "instant",
+					"leaf": true
+				},
+				{
+					"name": "contains",
+					"path": "ValueSet.expansion.contains",
+					"parent": "ValueSet.expansion",
+					"short": "Codes in the value set",
+					"formal": "Codes in the value set.",
+					"min": 0,
+					"max": "*",
+					"constraint": [
+						{
+							"key": "6",
+							"severity": "error",
+							"human": "SHALL have a code or a display",
+							"xpath": "exists(f:code) or exists(f:display)"
+						}
+					],
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "system",
+							"path": "ValueSet.expansion.contains.system",
+							"parent": "ValueSet.expansion.contains",
+							"short": "System value for the code",
+							"formal": "System value for the code.",
+							"min": 0,
+							"max": "1",
+							"type": "uri",
+							"leaf": true
+						},
+						{
+							"name": "code",
+							"path": "ValueSet.expansion.contains.code",
+							"parent": "ValueSet.expansion.contains",
+							"short": "Code - if blank, this is not a choosable code",
+							"formal": "Code - if blank, this is not a choosable code.",
+							"min": 0,
+							"max": "1",
+							"type": "code",
+							"leaf": true
+						},
+						{
+							"name": "display",
+							"path": "ValueSet.expansion.contains.display",
+							"parent": "ValueSet.expansion.contains",
+							"short": "User display for the concept",
+							"formal": "User display for the concept.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "contains",
+							"path": "ValueSet.expansion.contains.contains",
+							"parent": "ValueSet.expansion.contains",
+							"short": "Codes contained in this concept",
+							"formal": "Codes contained in this concept.",
+							"min": 0,
+							"max": "*",
+							"type": "none"
+						}
+					]
+				}
+			]
+		}
+	],
+	"success": true
+}

@@ -1,0 +1,462 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Immunization.text",
+			"parent": "Immunization",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Immunization.contained",
+			"parent": "Immunization",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Immunization.identifier",
+			"parent": "Immunization",
+			"short": "Business identifier",
+			"formal": "A unique identifier assigned to this adverse reaction record.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "date",
+			"path": "Immunization.date",
+			"parent": "Immunization",
+			"short": "Vaccination administration date",
+			"formal": "Date vaccine administered or was to be administered.",
+			"min": 1,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "vaccineType",
+			"path": "Immunization.vaccineType",
+			"parent": "Immunization",
+			"short": "Vaccine product administered",
+			"formal": "Vaccine that was administered or was to be administered.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "VaccineType",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/v3/vs/VaccineType"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "subject",
+			"path": "Immunization.subject",
+			"parent": "Immunization",
+			"short": "Who was immunized?",
+			"formal": "The patient to whom the vaccine was to be administered.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "refusedIndicator",
+			"path": "Immunization.refusedIndicator",
+			"parent": "Immunization",
+			"short": "Was immunization refused?",
+			"formal": "Indicates if the vaccination was refused.",
+			"min": 1,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "reported",
+			"path": "Immunization.reported",
+			"parent": "Immunization",
+			"short": "Is this a self-reported record?",
+			"formal": "True if this administration was reported rather than directly administered.",
+			"min": 1,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "performer",
+			"path": "Immunization.performer",
+			"parent": "Immunization",
+			"short": "Who administered vaccine?",
+			"formal": "Clinician who administered the vaccine.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Practitioner"
+		},
+		{
+			"name": "requester",
+			"path": "Immunization.requester",
+			"parent": "Immunization",
+			"short": "Who ordered vaccination?",
+			"formal": "Clinician who ordered the vaccination.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Practitioner"
+		},
+		{
+			"name": "manufacturer",
+			"path": "Immunization.manufacturer",
+			"parent": "Immunization",
+			"short": "Vaccine manufacturer",
+			"formal": "Name of vaccine manufacturer.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Organization"
+		},
+		{
+			"name": "location",
+			"path": "Immunization.location",
+			"parent": "Immunization",
+			"short": "Where did vaccination occur?",
+			"formal": "The service delivery location where the vaccine administration occurred.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Location"
+		},
+		{
+			"name": "lotNumber",
+			"path": "Immunization.lotNumber",
+			"parent": "Immunization",
+			"short": "Vaccine lot number",
+			"formal": "Lot number of the  vaccine product.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "expirationDate",
+			"path": "Immunization.expirationDate",
+			"parent": "Immunization",
+			"short": "Vaccine expiration date",
+			"formal": "Date vaccine batch expires.",
+			"min": 0,
+			"max": "1",
+			"type": "date",
+			"leaf": true
+		},
+		{
+			"name": "site",
+			"path": "Immunization.site",
+			"parent": "Immunization",
+			"short": "Body site vaccine  was administered",
+			"formal": "Body site where vaccine was administered.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ImmunizationSite",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/immunization-site"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "route",
+			"path": "Immunization.route",
+			"parent": "Immunization",
+			"short": "How vaccine entered body",
+			"formal": "The path by which the vaccine product is taken into the body.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ImmunizationRoute",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/immunization-route"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "doseQuantity",
+			"path": "Immunization.doseQuantity",
+			"parent": "Immunization",
+			"short": "Amount of vaccine administered",
+			"formal": "The quantity of vaccine product that was administered.",
+			"min": 0,
+			"max": "1",
+			"type": "Quantity"
+		},
+		{
+			"name": "explanation",
+			"path": "Immunization.explanation",
+			"parent": "Immunization",
+			"short": "Administration / refusal reasons",
+			"formal": "Reasons why a vaccine was administered or refused.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "reason",
+					"path": "Immunization.explanation.reason",
+					"parent": "Immunization.explanation",
+					"short": "Why immunization occurred",
+					"formal": "Reasons why a vaccine was administered.",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "ImmunizationReason",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/immunization-reason"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "refusalReason",
+					"path": "Immunization.explanation.refusalReason",
+					"parent": "Immunization.explanation",
+					"short": "Why immunization did not occur",
+					"formal": "Refusal or exemption reasons.",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "NoImmunizationReason",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/no-immunization-reason"
+						}
+					},
+					"type": "CodeableConcept"
+				}
+			]
+		},
+		{
+			"name": "reaction",
+			"path": "Immunization.reaction",
+			"parent": "Immunization",
+			"short": "Details of a reaction that follows immunization",
+			"formal": "Categorical data indicating that an adverse event is associated in time to an immunization.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "date",
+					"path": "Immunization.reaction.date",
+					"parent": "Immunization.reaction",
+					"short": "When did reaction start?",
+					"formal": "Date of reaction to the immunization.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "detail",
+					"path": "Immunization.reaction.detail",
+					"parent": "Immunization.reaction",
+					"short": "Additional information on reaction",
+					"formal": "Details of the reaction.",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"reference": "AdverseReaction",
+					"children": [
+						{
+							"name": "AdverseReaction",
+							"parent": "Immunization.reaction.detail",
+							"path": "Immunization.reaction.detail.AdverseReaction",
+							"short": "Additional information on reaction",
+							"formal": "Details of the reaction.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "AdverseReaction"
+						},
+						{
+							"name": "Observation",
+							"parent": "Immunization.reaction.detail",
+							"path": "Immunization.reaction.detail.Observation",
+							"short": "Additional information on reaction",
+							"formal": "Details of the reaction.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Observation"
+						}
+					]
+				},
+				{
+					"name": "reported",
+					"path": "Immunization.reaction.reported",
+					"parent": "Immunization.reaction",
+					"short": "Was reaction self-reported?",
+					"formal": "Self-reported indicator.",
+					"min": 0,
+					"max": "1",
+					"type": "boolean",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "vaccinationProtocol",
+			"path": "Immunization.vaccinationProtocol",
+			"parent": "Immunization",
+			"short": "What protocol was followed",
+			"formal": "Contains information about the protocol(s) under which the vaccine was administered.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "doseSequence",
+					"path": "Immunization.vaccinationProtocol.doseSequence",
+					"parent": "Immunization.vaccinationProtocol",
+					"short": "What dose number within series?",
+					"formal": "Nominal position in a series.",
+					"min": 1,
+					"max": "1",
+					"type": "integer",
+					"leaf": true
+				},
+				{
+					"name": "description",
+					"path": "Immunization.vaccinationProtocol.description",
+					"parent": "Immunization.vaccinationProtocol",
+					"short": "Details of vaccine protocol",
+					"formal": "Contains the description about the protocol under which the vaccine was administered.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "authority",
+					"path": "Immunization.vaccinationProtocol.authority",
+					"parent": "Immunization.vaccinationProtocol",
+					"short": "Who is responsible for protocol",
+					"formal": "Indicates the authority who published the protocol?  E.g. ACIP.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Organization"
+				},
+				{
+					"name": "series",
+					"path": "Immunization.vaccinationProtocol.series",
+					"parent": "Immunization.vaccinationProtocol",
+					"short": "Name of vaccine series",
+					"formal": "One possible path to achieve presumed immunity against a disease - within the context of an authority.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "seriesDoses",
+					"path": "Immunization.vaccinationProtocol.seriesDoses",
+					"parent": "Immunization.vaccinationProtocol",
+					"short": "Recommended number of doses for immunity",
+					"formal": "The recommended number of doses to achieve immunity.",
+					"min": 0,
+					"max": "1",
+					"type": "integer",
+					"leaf": true
+				},
+				{
+					"name": "doseTarget",
+					"path": "Immunization.vaccinationProtocol.doseTarget",
+					"parent": "Immunization.vaccinationProtocol",
+					"short": "Disease immunized against",
+					"formal": "The targeted disease.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "VaccinationProtocolDoseTarget",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/vaccination-protocol-dose-target"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "doseStatus",
+					"path": "Immunization.vaccinationProtocol.doseStatus",
+					"parent": "Immunization.vaccinationProtocol",
+					"short": "Does dose count towards immunity?",
+					"formal": "Indicates if the immunization event should \"count\" against  the protocol.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "VaccinationProtocolDoseStatus",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/vaccination-protocol-dose-status"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "doseStatusReason",
+					"path": "Immunization.vaccinationProtocol.doseStatusReason",
+					"parent": "Immunization.vaccinationProtocol",
+					"short": "Why does does count/not count?",
+					"formal": "Provides an explanation as to why a immunization event should or should not count against the protocol.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "VaccinationProtocolDoseStatusReason",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/vaccination-protocol-dose-status-reason"
+						}
+					},
+					"type": "CodeableConcept"
+				}
+			]
+		}
+	],
+	"success": true
+}

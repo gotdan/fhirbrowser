@@ -1,0 +1,134 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "RelatedPerson.text",
+			"parent": "RelatedPerson",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "RelatedPerson.contained",
+			"parent": "RelatedPerson",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "RelatedPerson.identifier",
+			"parent": "RelatedPerson",
+			"short": "A Human identifier for this person",
+			"formal": "Identifier for a person within a particular scope.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "patient",
+			"path": "RelatedPerson.patient",
+			"parent": "RelatedPerson",
+			"short": "The patient this person is related to",
+			"formal": "The patient this person is related to.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "relationship",
+			"path": "RelatedPerson.relationship",
+			"parent": "RelatedPerson",
+			"short": "The nature of the relationship",
+			"formal": "The nature of the relationship between a patient and the related person.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "PatientRelationshipType",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/relatedperson-relationshiptype"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "name",
+			"path": "RelatedPerson.name",
+			"parent": "RelatedPerson",
+			"short": "A name associated with the person",
+			"formal": "A name associated with the person.",
+			"min": 0,
+			"max": "1",
+			"type": "HumanName"
+		},
+		{
+			"name": "telecom",
+			"path": "RelatedPerson.telecom",
+			"parent": "RelatedPerson",
+			"short": "A contact detail for the person",
+			"formal": "A contact detail for the person, e.g. a telephone number or an email address.",
+			"min": 0,
+			"max": "*",
+			"type": "Contact"
+		},
+		{
+			"name": "gender",
+			"path": "RelatedPerson.gender",
+			"parent": "RelatedPerson",
+			"short": "Gender for administrative purposes",
+			"formal": "Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "AdministrativeGender",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/administrative-gender"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "address",
+			"path": "RelatedPerson.address",
+			"parent": "RelatedPerson",
+			"short": "Address where the related person can be contacted or visited",
+			"formal": "Address where the related person can be contacted or visited.",
+			"min": 0,
+			"max": "1",
+			"type": "Address"
+		},
+		{
+			"name": "photo",
+			"path": "RelatedPerson.photo",
+			"parent": "RelatedPerson",
+			"short": "Image of the person",
+			"formal": "Image of the person.",
+			"min": 0,
+			"max": "*",
+			"type": "Attachment"
+		}
+	],
+	"success": true
+}

@@ -1,0 +1,484 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Patient.text",
+			"parent": "Patient",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Patient.contained",
+			"parent": "Patient",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Patient.identifier",
+			"parent": "Patient",
+			"short": "An identifier for the person as this patient",
+			"formal": "An identifier that applies to this person as a patient.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "name",
+			"path": "Patient.name",
+			"parent": "Patient",
+			"short": "A name associated with the patient",
+			"formal": "A name associated with the individual.",
+			"min": 0,
+			"max": "*",
+			"type": "HumanName"
+		},
+		{
+			"name": "telecom",
+			"path": "Patient.telecom",
+			"parent": "Patient",
+			"short": "A contact detail for the individual",
+			"formal": "A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted.",
+			"min": 0,
+			"max": "*",
+			"type": "Contact"
+		},
+		{
+			"name": "gender",
+			"path": "Patient.gender",
+			"parent": "Patient",
+			"short": "Gender for administrative purposes",
+			"formal": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "AdministrativeGender",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/administrative-gender"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "birthDate",
+			"path": "Patient.birthDate",
+			"parent": "Patient",
+			"short": "The date and time of birth for the individual",
+			"formal": "The date and time of birth for the individual.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "deceased",
+			"path": "Patient.deceased[x]",
+			"parent": "Patient",
+			"short": "Indicates if the individual is deceased or not",
+			"formal": "Indicates if the individual is deceased or not.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"children": [
+				{
+					"name": "deceasedBoolean",
+					"parent": "Patient.deceased[x]",
+					"path": "Patient.deceased[x].deceasedBoolean",
+					"short": "Indicates if the individual is deceased or not",
+					"formal": "Indicates if the individual is deceased or not.",
+					"min": 0,
+					"max": "1",
+					"type": "boolean",
+					"leaf": true
+				},
+				{
+					"name": "deceasedDateTime",
+					"parent": "Patient.deceased[x]",
+					"path": "Patient.deceased[x].deceasedDateTime",
+					"short": "Indicates if the individual is deceased or not",
+					"formal": "Indicates if the individual is deceased or not.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "address",
+			"path": "Patient.address",
+			"parent": "Patient",
+			"short": "Addresses for the individual",
+			"formal": "Addresses for the individual.",
+			"min": 0,
+			"max": "*",
+			"type": "Address"
+		},
+		{
+			"name": "maritalStatus",
+			"path": "Patient.maritalStatus",
+			"parent": "Patient",
+			"short": "Marital (civil) status of a person",
+			"formal": "This field contains a patient's most recent marital (civil) status.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "MaritalStatus",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/marital-status"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "multipleBirth",
+			"path": "Patient.multipleBirth[x]",
+			"parent": "Patient",
+			"short": "Whether patient is part of a multiple birth",
+			"formal": "Indicates whether the patient is part of a multiple or indicates the actual birth order.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"children": [
+				{
+					"name": "multipleBirthBoolean",
+					"parent": "Patient.multipleBirth[x]",
+					"path": "Patient.multipleBirth[x].multipleBirthBoolean",
+					"short": "Whether patient is part of a multiple birth",
+					"formal": "Indicates whether the patient is part of a multiple or indicates the actual birth order.",
+					"min": 0,
+					"max": "1",
+					"type": "boolean",
+					"leaf": true
+				},
+				{
+					"name": "multipleBirthInteger",
+					"parent": "Patient.multipleBirth[x]",
+					"path": "Patient.multipleBirth[x].multipleBirthInteger",
+					"short": "Whether patient is part of a multiple birth",
+					"formal": "Indicates whether the patient is part of a multiple or indicates the actual birth order.",
+					"min": 0,
+					"max": "1",
+					"type": "integer",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "photo",
+			"path": "Patient.photo",
+			"parent": "Patient",
+			"short": "Image of the person",
+			"formal": "Image of the person.",
+			"min": 0,
+			"max": "*",
+			"type": "Attachment"
+		},
+		{
+			"name": "contact",
+			"path": "Patient.contact",
+			"parent": "Patient",
+			"short": "A contact party (e.g. guardian, partner, friend) for the patient",
+			"formal": "A contact party (e.g. guardian, partner, friend) for the patient.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "1",
+					"name": "ContactNeedsDetails",
+					"severity": "error",
+					"human": "SHALL at least contain a contact's details or a reference to an organization",
+					"xpath": "f:name or f:telecom or f:address or f:organization"
+				}
+			],
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "relationship",
+					"path": "Patient.contact.relationship",
+					"parent": "Patient.contact",
+					"short": "The kind of relationship",
+					"formal": "The nature of the relationship between the patient and the contact person.",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "ContactRelationship",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/patient-contact-relationship"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "name",
+					"path": "Patient.contact.name",
+					"parent": "Patient.contact",
+					"short": "A name associated with the person",
+					"formal": "A name associated with the person.",
+					"min": 0,
+					"max": "1",
+					"type": "HumanName"
+				},
+				{
+					"name": "telecom",
+					"path": "Patient.contact.telecom",
+					"parent": "Patient.contact",
+					"short": "A contact detail for the person",
+					"formal": "A contact detail for the person, e.g. a telephone number or an email address.",
+					"min": 0,
+					"max": "*",
+					"type": "Contact"
+				},
+				{
+					"name": "address",
+					"path": "Patient.contact.address",
+					"parent": "Patient.contact",
+					"short": "Address for the contact person",
+					"formal": "Address for the contact person.",
+					"min": 0,
+					"max": "1",
+					"type": "Address"
+				},
+				{
+					"name": "gender",
+					"path": "Patient.contact.gender",
+					"parent": "Patient.contact",
+					"short": "Gender for administrative purposes",
+					"formal": "Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "AdministrativeGender",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/administrative-gender"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "organization",
+					"path": "Patient.contact.organization",
+					"parent": "Patient.contact",
+					"short": "Organization that is associated with the contact",
+					"formal": "Organization on behalf of which the contact is acting or for which the contact is working.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Organization"
+				}
+			]
+		},
+		{
+			"name": "animal",
+			"path": "Patient.animal",
+			"parent": "Patient",
+			"short": "If this patient is an animal (non-human)",
+			"formal": "This element has a value if the patient is an animal.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "species",
+					"path": "Patient.animal.species",
+					"parent": "Patient.animal",
+					"short": "E.g. Dog, Cow",
+					"formal": "Identifies the high level categorization of the kind of animal.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "AnimalSpecies",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/animal-species"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "breed",
+					"path": "Patient.animal.breed",
+					"parent": "Patient.animal",
+					"short": "E.g. Poodle, Angus",
+					"formal": "Identifies the detailed categorization of the kind of animal.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "AnimalBreed",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/animal-breeds"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "genderStatus",
+					"path": "Patient.animal.genderStatus",
+					"parent": "Patient.animal",
+					"short": "E.g. Neutered, Intact",
+					"formal": "Indicates the current state of the animal's reproductive organs.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "AnimalGenderStatus",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/animal-genderstatus"
+						}
+					},
+					"type": "CodeableConcept"
+				}
+			]
+		},
+		{
+			"name": "communication",
+			"path": "Patient.communication",
+			"parent": "Patient",
+			"short": "Languages which may be used to communicate with the patient about his or her health",
+			"formal": "Languages which may be used to communicate with the patient about his or her health.",
+			"min": 0,
+			"max": "*",
+			"binding": {
+				"name": "Language",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceUri": "http://tools.ietf.org/html/bcp47"
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "careProvider",
+			"path": "Patient.careProvider",
+			"parent": "Patient",
+			"short": "Patient's nominated care provider",
+			"formal": "Patient's nominated care provider.",
+			"min": 0,
+			"max": "*",
+			"type": "multitype",
+			"reference": "Organization",
+			"children": [
+				{
+					"name": "Organization",
+					"parent": "Patient.careProvider",
+					"path": "Patient.careProvider.Organization",
+					"short": "Patient's nominated care provider",
+					"formal": "Patient's nominated care provider.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Organization"
+				},
+				{
+					"name": "Practitioner",
+					"parent": "Patient.careProvider",
+					"path": "Patient.careProvider.Practitioner",
+					"short": "Patient's nominated care provider",
+					"formal": "Patient's nominated care provider.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				}
+			]
+		},
+		{
+			"name": "managingOrganization",
+			"path": "Patient.managingOrganization",
+			"parent": "Patient",
+			"short": "Organization that is the custodian of the patient record",
+			"formal": "Organization that is the custodian of the patient record.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Organization"
+		},
+		{
+			"name": "link",
+			"path": "Patient.link",
+			"parent": "Patient",
+			"short": "Link to another patient resource that concerns the same actual person",
+			"formal": "Link to another patient resource that concerns the same actual person.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "other",
+					"path": "Patient.link.other",
+					"parent": "Patient.link",
+					"short": "The other patient resource that the link refers to",
+					"formal": "The other patient resource that the link refers to.",
+					"min": 1,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "type",
+					"path": "Patient.link.type",
+					"parent": "Patient.link",
+					"short": "replace | refer | seealso - type of link",
+					"formal": "The type of link between this patient resource and another patient resource.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "LinkType",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/link-type"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "active",
+			"path": "Patient.active",
+			"parent": "Patient",
+			"short": "Whether this patient's record is in active use",
+			"formal": "Whether this patient record is in active use.",
+			"min": 0,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		}
+	],
+	"success": true
+}

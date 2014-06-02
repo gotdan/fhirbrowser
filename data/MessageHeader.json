@@ -1,0 +1,365 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "MessageHeader.text",
+			"parent": "MessageHeader",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "MessageHeader.contained",
+			"parent": "MessageHeader",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "MessageHeader.identifier",
+			"parent": "MessageHeader",
+			"short": "Id of this message",
+			"formal": "The identifier of this message.",
+			"min": 1,
+			"max": "1",
+			"type": "id",
+			"leaf": true
+		},
+		{
+			"name": "timestamp",
+			"path": "MessageHeader.timestamp",
+			"parent": "MessageHeader",
+			"short": "Time that the message was sent",
+			"formal": "The time that the message was sent.",
+			"min": 1,
+			"max": "1",
+			"type": "instant",
+			"leaf": true
+		},
+		{
+			"name": "event",
+			"path": "MessageHeader.event",
+			"parent": "MessageHeader",
+			"short": "Code for the event this message represents",
+			"formal": "Code that identifies the event this message represents and connects it with it's definition. Events defined as part of the FHIR specification have the system value \"http://hl7.org/fhir/message-type\".",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "MessageEvent",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/message-events"
+				}
+			},
+			"type": "Coding"
+		},
+		{
+			"name": "response",
+			"path": "MessageHeader.response",
+			"parent": "MessageHeader",
+			"short": "If this is a reply to prior message",
+			"formal": "Information about the message that this message is a response to.  Only present if this message is a response.",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "identifier",
+					"path": "MessageHeader.response.identifier",
+					"parent": "MessageHeader.response",
+					"short": "Id of original message",
+					"formal": "The id of the message that this message is a response to.",
+					"min": 1,
+					"max": "1",
+					"type": "id",
+					"leaf": true
+				},
+				{
+					"name": "code",
+					"path": "MessageHeader.response.code",
+					"parent": "MessageHeader.response",
+					"short": "ok | transient-error | fatal-error",
+					"formal": "Code that identifies the type of response to the message - whether it was successful or not, and whether it should be resent or not.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "ResponseType",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/response-code"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "details",
+					"path": "MessageHeader.response.details",
+					"parent": "MessageHeader.response",
+					"short": "Specific list of hints/warnings/errors",
+					"formal": "Full details of any issues found in the message.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "OperationOutcome"
+				}
+			]
+		},
+		{
+			"name": "source",
+			"path": "MessageHeader.source",
+			"parent": "MessageHeader",
+			"short": "Message Source Application",
+			"formal": "The source application from which this message originated.",
+			"min": 1,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "name",
+					"path": "MessageHeader.source.name",
+					"parent": "MessageHeader.source",
+					"short": "Name of system",
+					"formal": "Human-readable name for the target system.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "software",
+					"path": "MessageHeader.source.software",
+					"parent": "MessageHeader.source",
+					"short": "Name of software running the system",
+					"formal": "May include configuration or other information useful in debugging.",
+					"min": 1,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "version",
+					"path": "MessageHeader.source.version",
+					"parent": "MessageHeader.source",
+					"short": "Version of software running",
+					"formal": "Can convey versions of multiple systems in situations where a message passes through multiple hands.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "contact",
+					"path": "MessageHeader.source.contact",
+					"parent": "MessageHeader.source",
+					"short": "Human contact for problems",
+					"formal": "An e-mail, phone, website or other contact point to use to resolve issues with message communications.",
+					"min": 0,
+					"max": "1",
+					"type": "Contact"
+				},
+				{
+					"name": "endpoint",
+					"path": "MessageHeader.source.endpoint",
+					"parent": "MessageHeader.source",
+					"short": "Actual message source address or id",
+					"formal": "Identifies the routing target to send acknowledgements to.",
+					"min": 1,
+					"max": "1",
+					"type": "uri",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "destination",
+			"path": "MessageHeader.destination",
+			"parent": "MessageHeader",
+			"short": "Message Destination Application(s)",
+			"formal": "The destination application which the message is intended for.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "name",
+					"path": "MessageHeader.destination.name",
+					"parent": "MessageHeader.destination",
+					"short": "Name of system",
+					"formal": "Human-readable name for the source system.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "target",
+					"path": "MessageHeader.destination.target",
+					"parent": "MessageHeader.destination",
+					"short": "Particular delivery destination within the destination",
+					"formal": "Identifies the target end system in situations where the initial message transmission is to an intermediary system.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "endpoint",
+					"path": "MessageHeader.destination.endpoint",
+					"parent": "MessageHeader.destination",
+					"short": "Actual destination address or id",
+					"formal": "Indicates where the message should be routed to.",
+					"min": 1,
+					"max": "1",
+					"type": "uri",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "enterer",
+			"path": "MessageHeader.enterer",
+			"parent": "MessageHeader",
+			"short": "The source of the data entry",
+			"formal": "The person or device that performed the data entry leading to this message. Where there is more than one candidate, pick the most proximal to the message. Can provide other enterers in extensions.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Practitioner"
+		},
+		{
+			"name": "author",
+			"path": "MessageHeader.author",
+			"parent": "MessageHeader",
+			"short": "The source of the decision",
+			"formal": "The logical author of the message - the person or device that decided the described event should happen. Where there is more than one candidate, pick the most proximal to the MessageHeader. Can provide other authors in extensions.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Practitioner"
+		},
+		{
+			"name": "receiver",
+			"path": "MessageHeader.receiver",
+			"parent": "MessageHeader",
+			"short": "Intended \"real-world\" recipient for the data",
+			"formal": "Allows data conveyed by a message to be addressed to a particular person or department when routing to a specific application isn't sufficient.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "MessageHeader.receiver",
+					"path": "MessageHeader.receiver.Practitioner",
+					"short": "Intended \"real-world\" recipient for the data",
+					"formal": "Allows data conveyed by a message to be addressed to a particular person or department when routing to a specific application isn't sufficient.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Organization",
+					"parent": "MessageHeader.receiver",
+					"path": "MessageHeader.receiver.Organization",
+					"short": "Intended \"real-world\" recipient for the data",
+					"formal": "Allows data conveyed by a message to be addressed to a particular person or department when routing to a specific application isn't sufficient.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Organization"
+				}
+			]
+		},
+		{
+			"name": "responsible",
+			"path": "MessageHeader.responsible",
+			"parent": "MessageHeader",
+			"short": "Final responsibility for event",
+			"formal": "The person or organization that accepts overall responsibility for the contents of the message. The implication is that the message event happened under the policies of the responsible party.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "MessageHeader.responsible",
+					"path": "MessageHeader.responsible.Practitioner",
+					"short": "Final responsibility for event",
+					"formal": "The person or organization that accepts overall responsibility for the contents of the message. The implication is that the message event happened under the policies of the responsible party.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Organization",
+					"parent": "MessageHeader.responsible",
+					"path": "MessageHeader.responsible.Organization",
+					"short": "Final responsibility for event",
+					"formal": "The person or organization that accepts overall responsibility for the contents of the message. The implication is that the message event happened under the policies of the responsible party.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Organization"
+				}
+			]
+		},
+		{
+			"name": "reason",
+			"path": "MessageHeader.reason",
+			"parent": "MessageHeader",
+			"short": "Cause of event",
+			"formal": "Coded indication of the cause for the event - indicates  a reason for the occurance of the event that is a focus of this message.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "EventReason",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/message-reason-encounter"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "data",
+			"path": "MessageHeader.data",
+			"parent": "MessageHeader",
+			"short": "The actual content of the message",
+			"formal": "The actual data of the message - a reference to the root/focus class of the event.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "Any"
+		}
+	],
+	"success": true
+}

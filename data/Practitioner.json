@@ -1,0 +1,252 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Practitioner.text",
+			"parent": "Practitioner",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Practitioner.contained",
+			"parent": "Practitioner",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Practitioner.identifier",
+			"parent": "Practitioner",
+			"short": "A identifier for the person as this agent",
+			"formal": "An identifier that applies to this person in this role.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "name",
+			"path": "Practitioner.name",
+			"parent": "Practitioner",
+			"short": "A name associated with the person",
+			"formal": "A name associated with the person.",
+			"min": 0,
+			"max": "1",
+			"type": "HumanName"
+		},
+		{
+			"name": "telecom",
+			"path": "Practitioner.telecom",
+			"parent": "Practitioner",
+			"short": "A contact detail for the practitioner",
+			"formal": "A contact detail for the practitioner, e.g. a telephone number or an email address.",
+			"min": 0,
+			"max": "*",
+			"type": "Contact"
+		},
+		{
+			"name": "address",
+			"path": "Practitioner.address",
+			"parent": "Practitioner",
+			"short": "Where practitioner can be found/visited",
+			"formal": "The postal address where the practitioner can be found or visited or to which mail can be delivered.",
+			"min": 0,
+			"max": "1",
+			"type": "Address"
+		},
+		{
+			"name": "gender",
+			"path": "Practitioner.gender",
+			"parent": "Practitioner",
+			"short": "Gender for administrative purposes",
+			"formal": "Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "AdministrativeGender",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/administrative-gender"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "birthDate",
+			"path": "Practitioner.birthDate",
+			"parent": "Practitioner",
+			"short": "The date and time of birth for the practitioner",
+			"formal": "The date and time of birth for the practitioner.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "photo",
+			"path": "Practitioner.photo",
+			"parent": "Practitioner",
+			"short": "Image of the person",
+			"formal": "Image of the person.",
+			"min": 0,
+			"max": "*",
+			"type": "Attachment"
+		},
+		{
+			"name": "organization",
+			"path": "Practitioner.organization",
+			"parent": "Practitioner",
+			"short": "The represented organization",
+			"formal": "The organization that the practitioner represents.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Organization"
+		},
+		{
+			"name": "role",
+			"path": "Practitioner.role",
+			"parent": "Practitioner",
+			"short": "Roles which this practitioner may perform",
+			"formal": "Roles which this practitioner is authorized to perform for the organization.",
+			"min": 0,
+			"max": "*",
+			"binding": {
+				"name": "PractitionerRole",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/practitioner-role"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "specialty",
+			"path": "Practitioner.specialty",
+			"parent": "Practitioner",
+			"short": "Specific specialty of the practitioner",
+			"formal": "Specific specialty of the practitioner.",
+			"min": 0,
+			"max": "*",
+			"binding": {
+				"name": "PractitionerSpecialty",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/practitioner-specialty"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "period",
+			"path": "Practitioner.period",
+			"parent": "Practitioner",
+			"short": "The period during which the practitioner is authorized to perform in these role(s)",
+			"formal": "The period during which the person is authorized to act as a practitioner in these role(s) for the organization.",
+			"min": 0,
+			"max": "1",
+			"type": "Period"
+		},
+		{
+			"name": "location",
+			"path": "Practitioner.location",
+			"parent": "Practitioner",
+			"short": "The location(s) at which this practitioner provides care",
+			"formal": "The location(s) at which this practitioner provides care.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "Location"
+		},
+		{
+			"name": "qualification",
+			"path": "Practitioner.qualification",
+			"parent": "Practitioner",
+			"short": "Qualifications obtained by training and certification",
+			"formal": "Qualifications obtained by training and certification.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "code",
+					"path": "Practitioner.qualification.code",
+					"parent": "Practitioner.qualification",
+					"short": "Coded representation of the qualification",
+					"formal": "Coded representation of the qualification.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "Qualification",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/anzsco-occupations"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "period",
+					"path": "Practitioner.qualification.period",
+					"parent": "Practitioner.qualification",
+					"short": "Period during which the qualification is valid",
+					"formal": "Period during which the qualification is valid.",
+					"min": 0,
+					"max": "1",
+					"type": "Period"
+				},
+				{
+					"name": "issuer",
+					"path": "Practitioner.qualification.issuer",
+					"parent": "Practitioner.qualification",
+					"short": "Organization that regulates and issues the qualification",
+					"formal": "Organization that regulates and issues the qualification.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Organization"
+				}
+			]
+		},
+		{
+			"name": "communication",
+			"path": "Practitioner.communication",
+			"parent": "Practitioner",
+			"short": "A language the practitioner is able to use in patient communication",
+			"formal": "A language the practitioner is able to use in patient communication.",
+			"min": 0,
+			"max": "*",
+			"binding": {
+				"name": "Language",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceUri": "http://tools.ietf.org/html/bcp47"
+			},
+			"type": "CodeableConcept"
+		}
+	],
+	"success": true
+}

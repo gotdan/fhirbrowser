@@ -1,0 +1,197 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "DeviceObservationReport.text",
+			"parent": "DeviceObservationReport",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "DeviceObservationReport.contained",
+			"parent": "DeviceObservationReport",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "instant",
+			"path": "DeviceObservationReport.instant",
+			"parent": "DeviceObservationReport",
+			"short": "When the data values are reported",
+			"formal": "The point in time that the values are reported.",
+			"min": 1,
+			"max": "1",
+			"type": "instant",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "DeviceObservationReport.identifier",
+			"parent": "DeviceObservationReport",
+			"short": "As assigned by the source device",
+			"formal": "An identifier assigned to this observation bu the source device that made the observation.",
+			"min": 0,
+			"max": "1",
+			"type": "Identifier"
+		},
+		{
+			"name": "source",
+			"path": "DeviceObservationReport.source",
+			"parent": "DeviceObservationReport",
+			"short": "Identifies/describes where the data came from",
+			"formal": "Identification information for the device that is the source of the data.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Device"
+		},
+		{
+			"name": "subject",
+			"path": "DeviceObservationReport.subject",
+			"parent": "DeviceObservationReport",
+			"short": "Subject of the measurement",
+			"formal": "The subject of the measurement.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "DeviceObservationReport.subject",
+					"path": "DeviceObservationReport.subject.Patient",
+					"short": "Subject of the measurement",
+					"formal": "The subject of the measurement.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Device",
+					"parent": "DeviceObservationReport.subject",
+					"path": "DeviceObservationReport.subject.Device",
+					"short": "Subject of the measurement",
+					"formal": "The subject of the measurement.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "Location",
+					"parent": "DeviceObservationReport.subject",
+					"path": "DeviceObservationReport.subject.Location",
+					"short": "Subject of the measurement",
+					"formal": "The subject of the measurement.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Location"
+				}
+			]
+		},
+		{
+			"name": "virtualDevice",
+			"path": "DeviceObservationReport.virtualDevice",
+			"parent": "DeviceObservationReport",
+			"short": "A medical-related subsystem of a medical device",
+			"formal": "A medical-related subsystem of a medical device.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "code",
+					"path": "DeviceObservationReport.virtualDevice.code",
+					"parent": "DeviceObservationReport.virtualDevice",
+					"short": "Describes the compartment",
+					"formal": "Describes the compartment.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "VirtalDeviceKind",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceUri": "http://hit-testing.nist.gov:13110/rtmms/index.htm"
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "channel",
+					"path": "DeviceObservationReport.virtualDevice.channel",
+					"parent": "DeviceObservationReport.virtualDevice",
+					"short": "Groups related data items",
+					"formal": "Groups together physiological measurement data and derived data.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "code",
+							"path": "DeviceObservationReport.virtualDevice.channel.code",
+							"parent": "DeviceObservationReport.virtualDevice.channel",
+							"short": "Describes the channel",
+							"formal": "Describes the channel.",
+							"min": 0,
+							"max": "1",
+							"binding": {
+								"name": "DeviceChannelKind1",
+								"isExtensible": true,
+								"conformance": "preferred",
+								"referenceUri": "http://hit-testing.nist.gov:13110/rtmms/index.htm"
+							},
+							"type": "CodeableConcept"
+						},
+						{
+							"name": "metric",
+							"path": "DeviceObservationReport.virtualDevice.channel.metric",
+							"parent": "DeviceObservationReport.virtualDevice.channel",
+							"short": "Piece of data reported by device",
+							"formal": "A piece of measured or derived data that is reported by the machine.",
+							"min": 0,
+							"max": "*",
+							"type": "none",
+							"extendable": true,
+							"children": [
+								{
+									"name": "observation",
+									"path": "DeviceObservationReport.virtualDevice.channel.metric.observation",
+									"parent": "DeviceObservationReport.virtualDevice.channel.metric",
+									"short": "The data for the metric",
+									"formal": "The data for the metric.",
+									"min": 1,
+									"max": "1",
+									"type": "ResourceReference",
+									"reference": "Observation"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"success": true
+}

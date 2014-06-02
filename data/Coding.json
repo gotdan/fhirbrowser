@@ -1,0 +1,95 @@
+{
+	"children": [
+		{
+			"name": "system",
+			"path": "Coding.system",
+			"parent": "Coding",
+			"short": "Identity of the terminology system",
+			"formal": "The identification of the code system that defines the meaning of the symbol in the code.",
+			"min": 0,
+			"max": "1",
+			"type": "uri",
+			"leaf": true
+		},
+		{
+			"name": "version",
+			"path": "Coding.version",
+			"parent": "Coding",
+			"short": "Version of the system - if relevant",
+			"formal": "The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured. and When the meaning is not guaranteed to be consistent, the version SHOULD be exchanged.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "code",
+			"path": "Coding.code",
+			"parent": "Coding",
+			"short": "Symbol in syntax defined by the system",
+			"formal": "A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).",
+			"min": 0,
+			"max": "1",
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "display",
+			"path": "Coding.display",
+			"parent": "Coding",
+			"short": "Representation defined by the system",
+			"formal": "A representation of the meaning of the code in the system, following the rules of the system.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "primary",
+			"path": "Coding.primary",
+			"parent": "Coding",
+			"short": "If this code was chosen directly by the user",
+			"formal": "Indicates that this code was chosen by a user directly - i.e. off a pick list of available items (codes or displays).",
+			"min": 0,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "valueSet",
+			"path": "Coding.valueSet",
+			"parent": "Coding",
+			"short": "Set this coding was chosen from",
+			"formal": "The set of possible coded values this coding was chosen from or constrained by.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "ValueSet",
+			"children": [
+				{
+					"name": "reference",
+					"path": "ResourceReference.reference",
+					"parent": "ResourceReference",
+					"short": "Relative, internal or absolute URL reference",
+					"formal": "A reference to a location at which the other resource is found. The reference may a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "display",
+					"path": "ResourceReference.display",
+					"parent": "ResourceReference",
+					"short": "Text alternative for the resource",
+					"formal": "Plain text narrative that identifies the resource in addition to the resource reference.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				}
+			]
+		}
+	],
+	"success": true
+}

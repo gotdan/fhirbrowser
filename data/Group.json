@@ -1,0 +1,291 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Group.text",
+			"parent": "Group",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Group.contained",
+			"parent": "Group",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "Group.identifier",
+			"parent": "Group",
+			"short": "Unique id",
+			"formal": "A unique business identifier for this group.",
+			"min": 0,
+			"max": "1",
+			"type": "Identifier"
+		},
+		{
+			"name": "type",
+			"path": "Group.type",
+			"parent": "Group",
+			"short": "person | animal | practitioner | device | medication | substance",
+			"formal": "Identifies the broad classification of the kind of resources the group includes.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "GroupType",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/group-type"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "actual",
+			"path": "Group.actual",
+			"parent": "Group",
+			"short": "Descriptive or actual",
+			"formal": "If true, indicates that the resource refers to a specific group of real individuals.  If false, the group defines a set of intended individuals.",
+			"min": 1,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "code",
+			"path": "Group.code",
+			"parent": "Group",
+			"short": "Kind of Group members",
+			"formal": "Provides a specific type of resource the group includes.  E.g. \"cow\", \"syringe\", etc.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "GroupKind",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"description": "Kind of particular resource.  E.g. cow, syringe, lake, etc."
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "name",
+			"path": "Group.name",
+			"parent": "Group",
+			"short": "Label for Group",
+			"formal": "A label assigned to the group for human identification and communication.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "quantity",
+			"path": "Group.quantity",
+			"parent": "Group",
+			"short": "Number of members",
+			"formal": "A count of the number of resource instances that are part of the group.",
+			"min": 0,
+			"max": "1",
+			"type": "integer",
+			"leaf": true
+		},
+		{
+			"name": "characteristic",
+			"path": "Group.characteristic",
+			"parent": "Group",
+			"short": "Trait of group members",
+			"formal": "Identifies the traits shared by members of the group.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "code",
+					"path": "Group.characteristic.code",
+					"parent": "Group.characteristic",
+					"short": "Kind of characteristic",
+					"formal": "A code that identifies the kind of trait being asserted.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "GroupCharacteristicKind",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"description": "List of characteristics used to describe group members.  E.g. gender, age, owner, location, etc."
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "value",
+					"path": "Group.characteristic.value[x]",
+					"parent": "Group.characteristic",
+					"short": "Value held by characteristic",
+					"formal": "The value of the trait that holds (or does not hold - see 'exclude') for members of the group.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "GroupCharacteristicValue",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"description": "Value of descriptive member characteristic.  E.g. red, male, pneumonia, caucasian, etc."
+					},
+					"type": "multitype",
+					"children": [
+						{
+							"name": "valueCodeableConcept",
+							"parent": "Group.characteristic.value[x]",
+							"path": "Group.characteristic.value[x].valueCodeableConcept",
+							"short": "Value held by characteristic",
+							"formal": "The value of the trait that holds (or does not hold - see 'exclude') for members of the group.",
+							"min": 0,
+							"max": "1",
+							"type": "CodeableConcept"
+						},
+						{
+							"name": "valueBoolean",
+							"parent": "Group.characteristic.value[x]",
+							"path": "Group.characteristic.value[x].valueBoolean",
+							"short": "Value held by characteristic",
+							"formal": "The value of the trait that holds (or does not hold - see 'exclude') for members of the group.",
+							"min": 0,
+							"max": "1",
+							"type": "boolean",
+							"leaf": true
+						},
+						{
+							"name": "valueQuantity",
+							"parent": "Group.characteristic.value[x]",
+							"path": "Group.characteristic.value[x].valueQuantity",
+							"short": "Value held by characteristic",
+							"formal": "The value of the trait that holds (or does not hold - see 'exclude') for members of the group.",
+							"min": 0,
+							"max": "1",
+							"type": "Quantity"
+						},
+						{
+							"name": "valueRange",
+							"parent": "Group.characteristic.value[x]",
+							"path": "Group.characteristic.value[x].valueRange",
+							"short": "Value held by characteristic",
+							"formal": "The value of the trait that holds (or does not hold - see 'exclude') for members of the group.",
+							"min": 0,
+							"max": "1",
+							"type": "Range"
+						}
+					]
+				},
+				{
+					"name": "exclude",
+					"path": "Group.characteristic.exclude",
+					"parent": "Group.characteristic",
+					"short": "Group includes or excludes",
+					"formal": "If true, indicates the characteristic is one that is NOT held by members of the group.",
+					"min": 1,
+					"max": "1",
+					"type": "boolean",
+					"leaf": true
+				}
+			]
+		},
+		{
+			"name": "member",
+			"path": "Group.member",
+			"parent": "Group",
+			"short": "Who is in group",
+			"formal": "Identifies the resource instances that are members of the group.",
+			"min": 0,
+			"max": "*",
+			"constraint": [
+				{
+					"key": "3",
+					"name": "Group member type agreement",
+					"severity": "error",
+					"human": "Member resource types SHALL agree with group type",
+					"xpath": "lower-case(f:type/@value)=parent::f:Group/f:type/@value or (f:type/@value='Patient' and parent::f:Group/f:type/@value=('animal','person'))"
+				}
+			],
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "Group.member",
+					"path": "Group.member.Patient",
+					"short": "Who is in group",
+					"formal": "Identifies the resource instances that are members of the group.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Practitioner",
+					"parent": "Group.member",
+					"path": "Group.member.Practitioner",
+					"short": "Who is in group",
+					"formal": "Identifies the resource instances that are members of the group.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Device",
+					"parent": "Group.member",
+					"path": "Group.member.Device",
+					"short": "Who is in group",
+					"formal": "Identifies the resource instances that are members of the group.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "Medication",
+					"parent": "Group.member",
+					"path": "Group.member.Medication",
+					"short": "Who is in group",
+					"formal": "Identifies the resource instances that are members of the group.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Medication"
+				},
+				{
+					"name": "Substance",
+					"parent": "Group.member",
+					"path": "Group.member.Substance",
+					"short": "Who is in group",
+					"formal": "Identifies the resource instances that are members of the group.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Substance"
+				}
+			]
+		}
+	],
+	"success": true
+}

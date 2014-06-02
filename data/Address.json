@@ -1,0 +1,124 @@
+{
+	"children": [
+		{
+			"name": "use",
+			"path": "Address.use",
+			"parent": "Address",
+			"short": "home | work | temp | old - purpose of this address",
+			"formal": "The purpose of this address.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "AddressUse",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/address-use"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "text",
+			"path": "Address.text",
+			"parent": "Address",
+			"short": "Text representation of the address",
+			"formal": "A full text representation of the address.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "line",
+			"path": "Address.line",
+			"parent": "Address",
+			"short": "Street name, number, direction & P.O. Box etc",
+			"formal": "This component contains the house number, apartment number, street name, street direction, \nP.O. Box number, delivery hints, and similar address information.",
+			"min": 0,
+			"max": "*",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "city",
+			"path": "Address.city",
+			"parent": "Address",
+			"short": "Name of city, town etc.",
+			"formal": "The name of the city, town, village or other community or delivery center.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "state",
+			"path": "Address.state",
+			"parent": "Address",
+			"short": "Sub-unit of country (abreviations ok)",
+			"formal": "Sub-unit of a country with limited sovereignty in a federally organized country. A code may be used if codes are in common use (i.e. US 2 letter state codes).",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "zip",
+			"path": "Address.zip",
+			"parent": "Address",
+			"short": "Postal code for area",
+			"formal": "A postal code designating a region defined by the postal service.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "country",
+			"path": "Address.country",
+			"parent": "Address",
+			"short": "Country (can be ISO 3166 3 letter code)",
+			"formal": "Country - a nation as commonly understood or generally accepted.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "period",
+			"path": "Address.period",
+			"parent": "Address",
+			"short": "Time period when address was/is in use",
+			"formal": "Time period when address was/is in use.",
+			"min": 0,
+			"max": "1",
+			"type": "Period",
+			"children": [
+				{
+					"name": "start",
+					"path": "Period.start",
+					"parent": "Period",
+					"short": "Starting time with inclusive boundary",
+					"formal": "The start of the period. The boundary is inclusive.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "end",
+					"path": "Period.end",
+					"parent": "Period",
+					"short": "End time with inclusive boundary, if not ongoing",
+					"formal": "The end of the period. If the end of the period is missing, it means that the period is ongoing.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				}
+			]
+		}
+	],
+	"success": true
+}

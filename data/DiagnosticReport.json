@@ -1,0 +1,356 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "DiagnosticReport.text",
+			"parent": "DiagnosticReport",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "DiagnosticReport.contained",
+			"parent": "DiagnosticReport",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "name",
+			"path": "DiagnosticReport.name",
+			"parent": "DiagnosticReport",
+			"short": "Name/Code for this diagnostic report",
+			"formal": "A code or name that describes this diagnostic report.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "DiagnosticReportNames",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/report-names"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "status",
+			"path": "DiagnosticReport.status",
+			"parent": "DiagnosticReport",
+			"short": "registered | partial | final | corrected +",
+			"formal": "The status of the diagnostic report as a whole.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "DiagnosticReportStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/diagnostic-report-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "issued",
+			"path": "DiagnosticReport.issued",
+			"parent": "DiagnosticReport",
+			"short": "Date this version was released",
+			"formal": "The date and/or time that this version of the report was released from the source diagnostic service.",
+			"min": 1,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "subject",
+			"path": "DiagnosticReport.subject",
+			"parent": "DiagnosticReport",
+			"short": "The subject of the report, usually, but not always, the patient",
+			"formal": "The subject of the report. Usually, but not always, this is a patient. However diagnostic services also perform analyses on specimens collected from a variety of other sources.",
+			"min": 1,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "DiagnosticReport.subject",
+					"path": "DiagnosticReport.subject.Patient",
+					"short": "The subject of the report, usually, but not always, the patient",
+					"formal": "The subject of the report. Usually, but not always, this is a patient. However diagnostic services also perform analyses on specimens collected from a variety of other sources.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Group",
+					"parent": "DiagnosticReport.subject",
+					"path": "DiagnosticReport.subject.Group",
+					"short": "The subject of the report, usually, but not always, the patient",
+					"formal": "The subject of the report. Usually, but not always, this is a patient. However diagnostic services also perform analyses on specimens collected from a variety of other sources.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Group"
+				},
+				{
+					"name": "Device",
+					"parent": "DiagnosticReport.subject",
+					"path": "DiagnosticReport.subject.Device",
+					"short": "The subject of the report, usually, but not always, the patient",
+					"formal": "The subject of the report. Usually, but not always, this is a patient. However diagnostic services also perform analyses on specimens collected from a variety of other sources.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "Location",
+					"parent": "DiagnosticReport.subject",
+					"path": "DiagnosticReport.subject.Location",
+					"short": "The subject of the report, usually, but not always, the patient",
+					"formal": "The subject of the report. Usually, but not always, this is a patient. However diagnostic services also perform analyses on specimens collected from a variety of other sources.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Location"
+				}
+			]
+		},
+		{
+			"name": "performer",
+			"path": "DiagnosticReport.performer",
+			"parent": "DiagnosticReport",
+			"short": "Responsible Diagnostic Service",
+			"formal": "The diagnostic service that is responsible for issuing the report.",
+			"min": 1,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "DiagnosticReport.performer",
+					"path": "DiagnosticReport.performer.Practitioner",
+					"short": "Responsible Diagnostic Service",
+					"formal": "The diagnostic service that is responsible for issuing the report.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Organization",
+					"parent": "DiagnosticReport.performer",
+					"path": "DiagnosticReport.performer.Organization",
+					"short": "Responsible Diagnostic Service",
+					"formal": "The diagnostic service that is responsible for issuing the report.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Organization"
+				}
+			]
+		},
+		{
+			"name": "identifier",
+			"path": "DiagnosticReport.identifier",
+			"parent": "DiagnosticReport",
+			"short": "Id for external references to this report",
+			"formal": "The local ID assigned to the report by the order filler, usually by the Information System of the diagnostic service provider.",
+			"min": 0,
+			"max": "1",
+			"type": "Identifier"
+		},
+		{
+			"name": "requestDetail",
+			"path": "DiagnosticReport.requestDetail",
+			"parent": "DiagnosticReport",
+			"short": "What was requested",
+			"formal": "Details concerning a test requested.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "DiagnosticOrder"
+		},
+		{
+			"name": "serviceCategory",
+			"path": "DiagnosticReport.serviceCategory",
+			"parent": "DiagnosticReport",
+			"short": "Biochemistry, Hematology etc.",
+			"formal": "The section of the diagnostic service that performs the examination e.g. biochemistry, hematology, MRI.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "DiagnosticServiceSection",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/diagnostic-service-sections"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "diagnostic",
+			"path": "DiagnosticReport.diagnostic[x]",
+			"parent": "DiagnosticReport",
+			"short": "Physiologically Relevant time/time-period for report",
+			"formal": "The time or time-period the observed values are related to. This is usually either the time of the procedure or of specimen collection(s), but very often the source of the date/time is not known, only the date/time itself.",
+			"min": 1,
+			"max": "1",
+			"type": "multitype",
+			"children": [
+				{
+					"name": "diagnosticDateTime",
+					"parent": "DiagnosticReport.diagnostic[x]",
+					"path": "DiagnosticReport.diagnostic[x].diagnosticDateTime",
+					"short": "Physiologically Relevant time/time-period for report",
+					"formal": "The time or time-period the observed values are related to. This is usually either the time of the procedure or of specimen collection(s), but very often the source of the date/time is not known, only the date/time itself.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "diagnosticPeriod",
+					"parent": "DiagnosticReport.diagnostic[x]",
+					"path": "DiagnosticReport.diagnostic[x].diagnosticPeriod",
+					"short": "Physiologically Relevant time/time-period for report",
+					"formal": "The time or time-period the observed values are related to. This is usually either the time of the procedure or of specimen collection(s), but very often the source of the date/time is not known, only the date/time itself.",
+					"min": 0,
+					"max": "1",
+					"type": "Period"
+				}
+			]
+		},
+		{
+			"name": "specimen",
+			"path": "DiagnosticReport.specimen",
+			"parent": "DiagnosticReport",
+			"short": "Specimens this report is based on",
+			"formal": "Details about the specimens on which this Disagnostic report is based.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "Specimen"
+		},
+		{
+			"name": "result",
+			"path": "DiagnosticReport.result",
+			"parent": "DiagnosticReport",
+			"short": "Observations - simple, or complex nested groups",
+			"formal": "Observations that are part of this diagnostic report. Observations can be simple name/value pairs (e.g. \"atomic\" results), or they can be grouping observations that include references to other members of the group (e.g. \"panels\").",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "Observation"
+		},
+		{
+			"name": "imagingStudy",
+			"path": "DiagnosticReport.imagingStudy",
+			"parent": "DiagnosticReport",
+			"short": "Reference to full details of imaging associated with the diagnostic report",
+			"formal": "One or more links to full details of any imaging performed during the diagnostic investigation. Typically, this is imaging performed by DICOM enabled modalities, but this is not required. A fully enabled PACS viewer can use this information to provide views of the source images.",
+			"min": 0,
+			"max": "*",
+			"type": "ResourceReference",
+			"reference": "ImagingStudy"
+		},
+		{
+			"name": "image",
+			"path": "DiagnosticReport.image",
+			"parent": "DiagnosticReport",
+			"short": "Key images associated with this report",
+			"formal": "A list of key images associated with this report. The images are generally created during the diagnostic process, and may be directly of the patient, or of treated specimens (i.e. slides of interest).",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "comment",
+					"path": "DiagnosticReport.image.comment",
+					"parent": "DiagnosticReport.image",
+					"short": "Comment about the image (e.g. explanation)",
+					"formal": "A comment about the image. Typically, this is used to provide an explanation for why the image is included, or to draw the viewer's attention to important features.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "link",
+					"path": "DiagnosticReport.image.link",
+					"parent": "DiagnosticReport.image",
+					"short": "Reference to the image source",
+					"formal": "Reference to the image source.",
+					"min": 1,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Media"
+				}
+			]
+		},
+		{
+			"name": "conclusion",
+			"path": "DiagnosticReport.conclusion",
+			"parent": "DiagnosticReport",
+			"short": "Clinical Interpretation of test results",
+			"formal": "Concise and clinically contextualized narrative interpretation of the diagnostic report.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "codedDiagnosis",
+			"path": "DiagnosticReport.codedDiagnosis",
+			"parent": "DiagnosticReport",
+			"short": "Codes for the conclusion",
+			"formal": "Codes for the conclusion.",
+			"min": 0,
+			"max": "*",
+			"binding": {
+				"name": "AdjunctDiagnosis",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/clinical-findings"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "presentedForm",
+			"path": "DiagnosticReport.presentedForm",
+			"parent": "DiagnosticReport",
+			"short": "Entire Report as issued",
+			"formal": "Rich text representation of the entire result as issued by the diagnostic service. Multiple formats are allowed but they SHALL be semantically equivalent.",
+			"min": 0,
+			"max": "*",
+			"type": "Attachment"
+		}
+	],
+	"success": true
+}

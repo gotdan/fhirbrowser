@@ -1,0 +1,310 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Supply.text",
+			"parent": "Supply",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Supply.contained",
+			"parent": "Supply",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "kind",
+			"path": "Supply.kind",
+			"parent": "Supply",
+			"short": "The kind of supply (central, non-stock, etc)",
+			"formal": "Category of supply, e.g.  central, non-stock, etc. This is used to support work flows associated with the supply process.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "SupplyType",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/supply-type"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "identifier",
+			"path": "Supply.identifier",
+			"parent": "Supply",
+			"short": "Unique identifier",
+			"formal": "Unique identifier for this supply request.",
+			"min": 0,
+			"max": "1",
+			"type": "Identifier"
+		},
+		{
+			"name": "status",
+			"path": "Supply.status",
+			"parent": "Supply",
+			"short": "requested | dispensed | received | failed | cancelled",
+			"formal": "Status of the supply request.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "SupplyStatus",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/valueset-supply-status"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "orderedItem",
+			"path": "Supply.orderedItem",
+			"parent": "Supply",
+			"short": "Medication, Substance, or Device requested to be supplied",
+			"formal": "The item that is requested to be supplied.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Medication",
+			"children": [
+				{
+					"name": "Medication",
+					"parent": "Supply.orderedItem",
+					"path": "Supply.orderedItem.Medication",
+					"short": "Medication, Substance, or Device requested to be supplied",
+					"formal": "The item that is requested to be supplied.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Medication"
+				},
+				{
+					"name": "Substance",
+					"parent": "Supply.orderedItem",
+					"path": "Supply.orderedItem.Substance",
+					"short": "Medication, Substance, or Device requested to be supplied",
+					"formal": "The item that is requested to be supplied.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Substance"
+				},
+				{
+					"name": "Device",
+					"parent": "Supply.orderedItem",
+					"path": "Supply.orderedItem.Device",
+					"short": "Medication, Substance, or Device requested to be supplied",
+					"formal": "The item that is requested to be supplied.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				}
+			]
+		},
+		{
+			"name": "patient",
+			"path": "Supply.patient",
+			"parent": "Supply",
+			"short": "Patient for whom the item is supplied",
+			"formal": "A link to a resource representing the person whom the ordered item is for.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "dispense",
+			"path": "Supply.dispense",
+			"parent": "Supply",
+			"short": "Supply details",
+			"formal": "Indicates the details of the dispense event such as the days supply and quantity of a supply dispensed.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "identifier",
+					"path": "Supply.dispense.identifier",
+					"parent": "Supply.dispense",
+					"short": "External identifier",
+					"formal": "Identifier assigned by the dispensing facility when the dispense occurs.",
+					"min": 0,
+					"max": "1",
+					"type": "Identifier"
+				},
+				{
+					"name": "status",
+					"path": "Supply.dispense.status",
+					"parent": "Supply.dispense",
+					"short": "in progress | dispensed | abandoned",
+					"formal": "A code specifying the state of the dispense event.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "SupplyDispenseStatus",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/valueset-supply-dispense-status"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "type",
+					"path": "Supply.dispense.type",
+					"parent": "Supply.dispense",
+					"short": "Category of dispense event",
+					"formal": "Indicates the type of dispensing event that is performed. Examples include: Trial Fill, Completion of Trial, Partial Fill, Emergency Fill, Samples, etc.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "SupplyItemType",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/supply-item"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "quantity",
+					"path": "Supply.dispense.quantity",
+					"parent": "Supply.dispense",
+					"short": "Amount dispensed",
+					"formal": "The amount of supply that has been dispensed. Includes unit of measure.",
+					"min": 0,
+					"max": "1",
+					"type": "Quantity"
+				},
+				{
+					"name": "suppliedItem",
+					"path": "Supply.dispense.suppliedItem",
+					"parent": "Supply.dispense",
+					"short": "Medication, Substance, or Device supplied",
+					"formal": "Identifies the medication or substance being dispensed. This is either a link to a resource representing the details of the medication or substance or a simple attribute carrying a code that identifies the medication from a known list of medications.",
+					"min": 0,
+					"max": "1",
+					"type": "multitype",
+					"reference": "Medication",
+					"children": [
+						{
+							"name": "Medication",
+							"parent": "Supply.dispense.suppliedItem",
+							"path": "Supply.dispense.suppliedItem.Medication",
+							"short": "Medication, Substance, or Device supplied",
+							"formal": "Identifies the medication or substance being dispensed. This is either a link to a resource representing the details of the medication or substance or a simple attribute carrying a code that identifies the medication from a known list of medications.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Medication"
+						},
+						{
+							"name": "Substance",
+							"parent": "Supply.dispense.suppliedItem",
+							"path": "Supply.dispense.suppliedItem.Substance",
+							"short": "Medication, Substance, or Device supplied",
+							"formal": "Identifies the medication or substance being dispensed. This is either a link to a resource representing the details of the medication or substance or a simple attribute carrying a code that identifies the medication from a known list of medications.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Substance"
+						},
+						{
+							"name": "Device",
+							"parent": "Supply.dispense.suppliedItem",
+							"path": "Supply.dispense.suppliedItem.Device",
+							"short": "Medication, Substance, or Device supplied",
+							"formal": "Identifies the medication or substance being dispensed. This is either a link to a resource representing the details of the medication or substance or a simple attribute carrying a code that identifies the medication from a known list of medications.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Device"
+						}
+					]
+				},
+				{
+					"name": "supplier",
+					"path": "Supply.dispense.supplier",
+					"parent": "Supply.dispense",
+					"short": "Dispenser",
+					"formal": "The individual responsible for dispensing the medication.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "whenPrepared",
+					"path": "Supply.dispense.whenPrepared",
+					"parent": "Supply.dispense",
+					"short": "Dispensing time",
+					"formal": "The time the dispense event occurred.",
+					"min": 0,
+					"max": "1",
+					"type": "Period"
+				},
+				{
+					"name": "whenHandedOver",
+					"path": "Supply.dispense.whenHandedOver",
+					"parent": "Supply.dispense",
+					"short": "Handover time",
+					"formal": "The time the dispensed item was sent or handed to the patient (or agent).",
+					"min": 0,
+					"max": "1",
+					"type": "Period"
+				},
+				{
+					"name": "destination",
+					"path": "Supply.dispense.destination",
+					"parent": "Supply.dispense",
+					"short": "Where the Supply was sent",
+					"formal": "Identification of the facility/location where the Supply was shipped to, as part of the dispense event.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Location"
+				},
+				{
+					"name": "receiver",
+					"path": "Supply.dispense.receiver",
+					"parent": "Supply.dispense",
+					"short": "Who collected the Supply",
+					"formal": "Identifies the person who picked up the Supply.",
+					"min": 0,
+					"max": "*",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				}
+			]
+		}
+	],
+	"success": true
+}

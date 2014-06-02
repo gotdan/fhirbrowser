@@ -1,0 +1,261 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "Medication.text",
+			"parent": "Medication",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "Medication.contained",
+			"parent": "Medication",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "name",
+			"path": "Medication.name",
+			"parent": "Medication",
+			"short": "Common / Commercial name",
+			"formal": "The common/commercial name of the medication absent information such as strength, form, etc.  E.g. Acetaminophen, Tylenol 3, etc.  The fully coordinated name is communicated as the display of Medication.code.",
+			"min": 0,
+			"max": "1",
+			"type": "string",
+			"leaf": true
+		},
+		{
+			"name": "code",
+			"path": "Medication.code",
+			"parent": "Medication",
+			"short": "Codes that identify this medication",
+			"formal": "A code (or set of codes) that identify this medication.   Usage note: This could be a standard drug code such as a drug regulator code, RxNorm code, SNOMED CT code, etc. It could also be a local formulary code, optionally with translations to the standard drug codes.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "MedicationFormalRepresentation",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/medication-codes"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "isBrand",
+			"path": "Medication.isBrand",
+			"parent": "Medication",
+			"short": "True if a brand",
+			"formal": "Set to true if the item is attributable to a specific manufacturer (even if we don't know who that is).",
+			"min": 0,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "manufacturer",
+			"path": "Medication.manufacturer",
+			"parent": "Medication",
+			"short": "Manufacturer of the item",
+			"formal": "Describes the details of the manufacturer.",
+			"min": 0,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Organization"
+		},
+		{
+			"name": "kind",
+			"path": "Medication.kind",
+			"parent": "Medication",
+			"short": "product | package",
+			"formal": "Medications are either a single administrable product or a package that contains one or more products.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "MedicationKind",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/medication-kind"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "product",
+			"path": "Medication.product",
+			"parent": "Medication",
+			"short": "Administrable medication details",
+			"formal": "Information that only applies to products (not packages).",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "form",
+					"path": "Medication.product.form",
+					"parent": "Medication.product",
+					"short": "powder | tablets | carton +",
+					"formal": "Describes the form of the item.  Powder; tables; carton.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "MedicationForm",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/medication-form-codes"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "ingredient",
+					"path": "Medication.product.ingredient",
+					"parent": "Medication.product",
+					"short": "Active or inactive ingredient",
+					"formal": "Identifies a particular constituent of interest in the product.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "item",
+							"path": "Medication.product.ingredient.item",
+							"parent": "Medication.product.ingredient",
+							"short": "The product contained",
+							"formal": "The actual ingredient - either a substance (simple ingredient) or another medication.",
+							"min": 1,
+							"max": "1",
+							"type": "multitype",
+							"reference": "Substance",
+							"children": [
+								{
+									"name": "Substance",
+									"parent": "Medication.product.ingredient.item",
+									"path": "Medication.product.ingredient.item.Substance",
+									"short": "The product contained",
+									"formal": "The actual ingredient - either a substance (simple ingredient) or another medication.",
+									"min": 0,
+									"max": "1",
+									"type": "ResourceReference",
+									"reference": "Substance"
+								},
+								{
+									"name": "Medication",
+									"parent": "Medication.product.ingredient.item",
+									"path": "Medication.product.ingredient.item.Medication",
+									"short": "The product contained",
+									"formal": "The actual ingredient - either a substance (simple ingredient) or another medication.",
+									"min": 0,
+									"max": "1",
+									"type": "ResourceReference",
+									"reference": "Medication"
+								}
+							]
+						},
+						{
+							"name": "amount",
+							"path": "Medication.product.ingredient.amount",
+							"parent": "Medication.product.ingredient",
+							"short": "How much ingredient in product",
+							"formal": "Specifies how many (or how much) of the items there are in this Medication.  E.g. 250 mg per tablet.",
+							"min": 0,
+							"max": "1",
+							"type": "Ratio"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "package",
+			"path": "Medication.package",
+			"parent": "Medication",
+			"short": "Details about packaged medications",
+			"formal": "Information that only applies to packages (not products).",
+			"min": 0,
+			"max": "1",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "container",
+					"path": "Medication.package.container",
+					"parent": "Medication.package",
+					"short": "E.g. box, vial, blister-pack",
+					"formal": "The kind of container that this package comes as.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "MedicationContainer",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/medication-package-form-codes"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "content",
+					"path": "Medication.package.content",
+					"parent": "Medication.package",
+					"short": "What is  in the package?",
+					"formal": "A set of components that go to make up the described item.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "item",
+							"path": "Medication.package.content.item",
+							"parent": "Medication.package.content",
+							"short": "A product in the package",
+							"formal": "Identifies one of the items in the package.",
+							"min": 1,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Medication"
+						},
+						{
+							"name": "amount",
+							"path": "Medication.package.content.amount",
+							"parent": "Medication.package.content",
+							"short": "How many are in the package?",
+							"formal": "The amount of the product that is in the package.",
+							"min": 0,
+							"max": "1",
+							"type": "Quantity"
+						}
+					]
+				}
+			]
+		}
+	],
+	"success": true
+}

@@ -1,0 +1,109 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "OperationOutcome.text",
+			"parent": "OperationOutcome",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "OperationOutcome.contained",
+			"parent": "OperationOutcome",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "issue",
+			"path": "OperationOutcome.issue",
+			"parent": "OperationOutcome",
+			"short": "A single issue associated with the action",
+			"formal": "An error, warning or information message that results from a system action.",
+			"min": 1,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "severity",
+					"path": "OperationOutcome.issue.severity",
+					"parent": "OperationOutcome.issue",
+					"short": "fatal | error | warning | information",
+					"formal": "Indicates whether the issue indicates a variation from successful processing.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "IssueSeverity",
+						"isExtensible": false,
+						"conformance": "required",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/issue-severity"
+						}
+					},
+					"type": "code",
+					"leaf": true
+				},
+				{
+					"name": "type",
+					"path": "OperationOutcome.issue.type",
+					"parent": "OperationOutcome.issue",
+					"short": "Error or warning code",
+					"formal": "A code indicating the type of error, warning or information message.",
+					"min": 0,
+					"max": "1",
+					"binding": {
+						"name": "IssueType",
+						"isExtensible": true,
+						"conformance": "preferred",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/issue-type"
+						}
+					},
+					"type": "Coding"
+				},
+				{
+					"name": "details",
+					"path": "OperationOutcome.issue.details",
+					"parent": "OperationOutcome.issue",
+					"short": "Additional description of the issue",
+					"formal": "Additional description of the issue.",
+					"min": 0,
+					"max": "1",
+					"type": "string",
+					"leaf": true
+				},
+				{
+					"name": "location",
+					"path": "OperationOutcome.issue.location",
+					"parent": "OperationOutcome.issue",
+					"short": "XPath of element(s) related to issue",
+					"formal": "A simple XPath limited to element names, repetition indicators and the default child access that identifies one of the elements in the resource that caused this issue to be raised.",
+					"min": 0,
+					"max": "*",
+					"type": "string",
+					"leaf": true
+				}
+			]
+		}
+	],
+	"success": true
+}

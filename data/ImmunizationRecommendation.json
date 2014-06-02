@@ -1,0 +1,285 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "ImmunizationRecommendation.text",
+			"parent": "ImmunizationRecommendation",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "ImmunizationRecommendation.contained",
+			"parent": "ImmunizationRecommendation",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "ImmunizationRecommendation.identifier",
+			"parent": "ImmunizationRecommendation",
+			"short": "Business identifier",
+			"formal": "A unique identifier assigned to this particular recommendation record.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "subject",
+			"path": "ImmunizationRecommendation.subject",
+			"parent": "ImmunizationRecommendation",
+			"short": "Who this profile is for",
+			"formal": "The patient who is the subject of the profile.",
+			"min": 1,
+			"max": "1",
+			"type": "ResourceReference",
+			"reference": "Patient"
+		},
+		{
+			"name": "recommendation",
+			"path": "ImmunizationRecommendation.recommendation",
+			"parent": "ImmunizationRecommendation",
+			"short": "Vaccine administration recommendations",
+			"formal": "Vaccine administration recommendations.",
+			"min": 1,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "date",
+					"path": "ImmunizationRecommendation.recommendation.date",
+					"parent": "ImmunizationRecommendation.recommendation",
+					"short": "Date recommendation created",
+					"formal": "The date the immunization recommendation was created.",
+					"min": 1,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "vaccineType",
+					"path": "ImmunizationRecommendation.recommendation.vaccineType",
+					"parent": "ImmunizationRecommendation.recommendation",
+					"short": "Vaccine recommendation applies to",
+					"formal": "Vaccine that pertains to the recommendation.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "VaccineType",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/v3/vs/VaccineType"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "doseNumber",
+					"path": "ImmunizationRecommendation.recommendation.doseNumber",
+					"parent": "ImmunizationRecommendation.recommendation",
+					"short": "Recommended dose number",
+					"formal": "This indicates the next recommended dose number (e.g. dose 2 is the next recommended dose).",
+					"min": 0,
+					"max": "1",
+					"type": "integer",
+					"leaf": true
+				},
+				{
+					"name": "forecastStatus",
+					"path": "ImmunizationRecommendation.recommendation.forecastStatus",
+					"parent": "ImmunizationRecommendation.recommendation",
+					"short": "Vaccine administration status",
+					"formal": "Vaccine administration status.",
+					"min": 1,
+					"max": "1",
+					"binding": {
+						"name": "ImmunizationRecommendationStatus",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/immunization-recommendation-status"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "dateCriterion",
+					"path": "ImmunizationRecommendation.recommendation.dateCriterion",
+					"parent": "ImmunizationRecommendation.recommendation",
+					"short": "Dates governing proposed immunization",
+					"formal": "Vaccine date recommendations - e.g. earliest date to administer, latest date to administer, etc.",
+					"min": 0,
+					"max": "*",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "code",
+							"path": "ImmunizationRecommendation.recommendation.dateCriterion.code",
+							"parent": "ImmunizationRecommendation.recommendation.dateCriterion",
+							"short": "Type of date",
+							"formal": "Date classification of recommendation - e.g. earliest date to give, latest date to give, etc.",
+							"min": 1,
+							"max": "1",
+							"binding": {
+								"name": "ImmunizationRecommendationDateCriterion",
+								"isExtensible": true,
+								"conformance": "example",
+								"referenceResource": {
+									"reference": "http://hl7.org/fhir/vs/immunization-recommendation-date-criterion"
+								}
+							},
+							"type": "CodeableConcept"
+						},
+						{
+							"name": "value",
+							"path": "ImmunizationRecommendation.recommendation.dateCriterion.value",
+							"parent": "ImmunizationRecommendation.recommendation.dateCriterion",
+							"short": "Recommended date",
+							"formal": "Date recommendation.",
+							"min": 1,
+							"max": "1",
+							"type": "dateTime",
+							"leaf": true
+						}
+					]
+				},
+				{
+					"name": "protocol",
+					"path": "ImmunizationRecommendation.recommendation.protocol",
+					"parent": "ImmunizationRecommendation.recommendation",
+					"short": "Protocol used by recommendation",
+					"formal": "Contains information about the protocol under which the vaccine was administered.",
+					"min": 0,
+					"max": "1",
+					"type": "none",
+					"extendable": true,
+					"children": [
+						{
+							"name": "doseSequence",
+							"path": "ImmunizationRecommendation.recommendation.protocol.doseSequence",
+							"parent": "ImmunizationRecommendation.recommendation.protocol",
+							"short": "Number of dose within sequence",
+							"formal": "Indicates the nominal position in a series of the next dose.  This is the recommended dose number as per a specified protocol.",
+							"min": 0,
+							"max": "1",
+							"type": "integer",
+							"leaf": true
+						},
+						{
+							"name": "description",
+							"path": "ImmunizationRecommendation.recommendation.protocol.description",
+							"parent": "ImmunizationRecommendation.recommendation.protocol",
+							"short": "Protocol details",
+							"formal": "Contains the description about the protocol under which the vaccine was administered.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						},
+						{
+							"name": "authority",
+							"path": "ImmunizationRecommendation.recommendation.protocol.authority",
+							"parent": "ImmunizationRecommendation.recommendation.protocol",
+							"short": "Who is responsible for protocol",
+							"formal": "Indicates the authority who published the protocol?  E.g. ACIP.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Organization"
+						},
+						{
+							"name": "series",
+							"path": "ImmunizationRecommendation.recommendation.protocol.series",
+							"parent": "ImmunizationRecommendation.recommendation.protocol",
+							"short": "Name of vaccination series",
+							"formal": "One possible path to achieve presumed immunity against a disease - within the context of an authority.",
+							"min": 0,
+							"max": "1",
+							"type": "string",
+							"leaf": true
+						}
+					]
+				},
+				{
+					"name": "supportingImmunization",
+					"path": "ImmunizationRecommendation.recommendation.supportingImmunization",
+					"parent": "ImmunizationRecommendation.recommendation",
+					"short": "Past immunizations supporting recommendation",
+					"formal": "Immunization event history that supports the status and recommendation.",
+					"min": 0,
+					"max": "*",
+					"type": "ResourceReference",
+					"reference": "Immunization"
+				},
+				{
+					"name": "supportingPatientInformation",
+					"path": "ImmunizationRecommendation.recommendation.supportingPatientInformation",
+					"parent": "ImmunizationRecommendation.recommendation",
+					"short": "Patient observations supporting recommendation",
+					"formal": "Patient Information that supports the status and recommendation.  This includes patient observations, adverse reactions and allergy/intolerance information.",
+					"min": 0,
+					"max": "*",
+					"type": "multitype",
+					"reference": "Observation",
+					"children": [
+						{
+							"name": "Observation",
+							"parent": "ImmunizationRecommendation.recommendation.supportingPatientInformation",
+							"path": "ImmunizationRecommendation.recommendation.supportingPatientInformation.Observation",
+							"short": "Patient observations supporting recommendation",
+							"formal": "Patient Information that supports the status and recommendation.  This includes patient observations, adverse reactions and allergy/intolerance information.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "Observation"
+						},
+						{
+							"name": "AdverseReaction",
+							"parent": "ImmunizationRecommendation.recommendation.supportingPatientInformation",
+							"path": "ImmunizationRecommendation.recommendation.supportingPatientInformation.AdverseReaction",
+							"short": "Patient observations supporting recommendation",
+							"formal": "Patient Information that supports the status and recommendation.  This includes patient observations, adverse reactions and allergy/intolerance information.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "AdverseReaction"
+						},
+						{
+							"name": "AllergyIntolerance",
+							"parent": "ImmunizationRecommendation.recommendation.supportingPatientInformation",
+							"path": "ImmunizationRecommendation.recommendation.supportingPatientInformation.AllergyIntolerance",
+							"short": "Patient observations supporting recommendation",
+							"formal": "Patient Information that supports the status and recommendation.  This includes patient observations, adverse reactions and allergy/intolerance information.",
+							"min": 0,
+							"max": "1",
+							"type": "ResourceReference",
+							"reference": "AllergyIntolerance"
+						}
+					]
+				}
+			]
+		}
+	],
+	"success": true
+}

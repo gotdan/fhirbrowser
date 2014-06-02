@@ -1,0 +1,291 @@
+{
+	"children": [
+		{
+			"name": "text",
+			"path": "List.text",
+			"parent": "List",
+			"short": "Text summary of the resource, for human interpretation",
+			"formal": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
+			"min": 0,
+			"max": "1",
+			"synonym": [
+				"narrative",
+				"html",
+				"xhtml",
+				"display"
+			],
+			"type": "Narrative"
+		},
+		{
+			"name": "contained",
+			"path": "List.contained",
+			"parent": "List",
+			"short": "Contained, inline Resources",
+			"formal": "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.",
+			"min": 0,
+			"max": "*",
+			"synonym": [
+				"inline resources",
+				"anonymous resources",
+				"contained resources"
+			],
+			"type": "Resource",
+			"leaf": true
+		},
+		{
+			"name": "identifier",
+			"path": "List.identifier",
+			"parent": "List",
+			"short": "Business identifier",
+			"formal": "Identifier for the List assigned for business purposes outside the context of FHIR.",
+			"min": 0,
+			"max": "*",
+			"type": "Identifier"
+		},
+		{
+			"name": "code",
+			"path": "List.code",
+			"parent": "List",
+			"short": "What the purpose of this list is",
+			"formal": "This code defines the purpose of the list - why it was created.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ListPurpose",
+				"isExtensible": true,
+				"conformance": "example",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/list-example-codes"
+				}
+			},
+			"type": "CodeableConcept"
+		},
+		{
+			"name": "subject",
+			"path": "List.subject",
+			"parent": "List",
+			"short": "If all resources have the same subject",
+			"formal": "The common subject (or patient) of the resources that are in the list, if there is one.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Patient",
+			"children": [
+				{
+					"name": "Patient",
+					"parent": "List.subject",
+					"path": "List.subject.Patient",
+					"short": "If all resources have the same subject",
+					"formal": "The common subject (or patient) of the resources that are in the list, if there is one.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Group",
+					"parent": "List.subject",
+					"path": "List.subject.Group",
+					"short": "If all resources have the same subject",
+					"formal": "The common subject (or patient) of the resources that are in the list, if there is one.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Group"
+				},
+				{
+					"name": "Device",
+					"parent": "List.subject",
+					"path": "List.subject.Device",
+					"short": "If all resources have the same subject",
+					"formal": "The common subject (or patient) of the resources that are in the list, if there is one.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				},
+				{
+					"name": "Location",
+					"parent": "List.subject",
+					"path": "List.subject.Location",
+					"short": "If all resources have the same subject",
+					"formal": "The common subject (or patient) of the resources that are in the list, if there is one.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Location"
+				}
+			]
+		},
+		{
+			"name": "source",
+			"path": "List.source",
+			"parent": "List",
+			"short": "Who and/or what defined the list contents",
+			"formal": "The entity responsible for deciding what the contents of the list were.",
+			"min": 0,
+			"max": "1",
+			"type": "multitype",
+			"reference": "Practitioner",
+			"children": [
+				{
+					"name": "Practitioner",
+					"parent": "List.source",
+					"path": "List.source.Practitioner",
+					"short": "Who and/or what defined the list contents",
+					"formal": "The entity responsible for deciding what the contents of the list were.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Practitioner"
+				},
+				{
+					"name": "Patient",
+					"parent": "List.source",
+					"path": "List.source.Patient",
+					"short": "Who and/or what defined the list contents",
+					"formal": "The entity responsible for deciding what the contents of the list were.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Patient"
+				},
+				{
+					"name": "Device",
+					"parent": "List.source",
+					"path": "List.source.Device",
+					"short": "Who and/or what defined the list contents",
+					"formal": "The entity responsible for deciding what the contents of the list were.",
+					"min": 0,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Device"
+				}
+			]
+		},
+		{
+			"name": "date",
+			"path": "List.date",
+			"parent": "List",
+			"short": "When the list was prepared",
+			"formal": "The date that the list was prepared.",
+			"min": 0,
+			"max": "1",
+			"type": "dateTime",
+			"leaf": true
+		},
+		{
+			"name": "ordered",
+			"path": "List.ordered",
+			"parent": "List",
+			"short": "Whether items in the list have a meaningful order",
+			"formal": "Whether items in the list have a meaningful order.",
+			"min": 0,
+			"max": "1",
+			"type": "boolean",
+			"leaf": true
+		},
+		{
+			"name": "mode",
+			"path": "List.mode",
+			"parent": "List",
+			"short": "working | snapshot | changes",
+			"formal": "How this list was prepared - whether it is a working list that is suitable for being maintained on an ongoing basis, or if it represents a snapshot of a list of items from another source, or whether it is a prepared list where items may be marked as added, modified or deleted.",
+			"min": 1,
+			"max": "1",
+			"binding": {
+				"name": "ListMode",
+				"isExtensible": false,
+				"conformance": "required",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/list-mode"
+				}
+			},
+			"type": "code",
+			"leaf": true
+		},
+		{
+			"name": "entry",
+			"path": "List.entry",
+			"parent": "List",
+			"short": "Entries in the list",
+			"formal": "Entries in this list.",
+			"min": 0,
+			"max": "*",
+			"type": "none",
+			"extendable": true,
+			"children": [
+				{
+					"name": "flag",
+					"path": "List.entry.flag",
+					"parent": "List.entry",
+					"short": "Workflow information about this item",
+					"formal": "The flag allows the system constructing the list to make one or more statements about the role and significance of the item in the list.",
+					"min": 0,
+					"max": "*",
+					"binding": {
+						"name": "ListItemFlag",
+						"isExtensible": true,
+						"conformance": "example",
+						"referenceResource": {
+							"reference": "http://hl7.org/fhir/vs/list-item-flag"
+						}
+					},
+					"type": "CodeableConcept"
+				},
+				{
+					"name": "deleted",
+					"path": "List.entry.deleted",
+					"parent": "List.entry",
+					"short": "If this item is actually marked as deleted",
+					"formal": "True if this item is marked as deleted in the list.",
+					"min": 0,
+					"max": "1",
+					"type": "boolean",
+					"leaf": true
+				},
+				{
+					"name": "date",
+					"path": "List.entry.date",
+					"parent": "List.entry",
+					"short": "When item added to list",
+					"formal": "When this item was added to the list.",
+					"min": 0,
+					"max": "1",
+					"type": "dateTime",
+					"leaf": true
+				},
+				{
+					"name": "item",
+					"path": "List.entry.item",
+					"parent": "List.entry",
+					"short": "Actual entry",
+					"formal": "A reference to the actual resource from which data was derived.",
+					"min": 1,
+					"max": "1",
+					"type": "ResourceReference",
+					"reference": "Any"
+				}
+			]
+		},
+		{
+			"name": "emptyReason",
+			"path": "List.emptyReason",
+			"parent": "List",
+			"short": "Why list is empty",
+			"formal": "If the list is empty, why the list is empty.",
+			"min": 0,
+			"max": "1",
+			"binding": {
+				"name": "ListEmptyReason",
+				"isExtensible": true,
+				"conformance": "preferred",
+				"referenceResource": {
+					"reference": "http://hl7.org/fhir/vs/list-empty-reason"
+				}
+			},
+			"type": "CodeableConcept"
+		}
+	],
+	"success": true
+}
