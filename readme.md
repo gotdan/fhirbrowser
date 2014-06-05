@@ -40,6 +40,9 @@ FHIR Browser code consists of two components, a JSON pre-processing script writt
 
 ```coffee index.coffee```
 
+### Contributors
+FHIR Browser was created by [Dan Gottlieb](http://www.gotdan.org)
+
 
 ### License
 The code is released under the GPLv3 license. Note that third party libraries may be under a different license.
